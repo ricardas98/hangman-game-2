@@ -1,4 +1,3 @@
-import exp from "constants";
 import GameWord from "./gameWord"
 
 describe("GameWord entity", () => {
@@ -10,7 +9,7 @@ describe("GameWord entity", () => {
 
     beforeEach(() => createGameWord());
 
-    it("is be created", () => {
+    it("is created", () => {
         expect(gameWord).toBeDefined();
     })
 
