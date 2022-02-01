@@ -1,42 +1,66 @@
 export default class GameWord {
-    word: string;
-    misses: string[];
-    matches: string[];
+    private word: string;
+    private matches: string[];
+    private misses: string[];
 
-    constructor(word: string){
+    constructor(word: string, matches: string[] = [], misses: string[] = []){
         this.word = word;
-        this.misses = [];
-        this.matches = [];
+        this.matches = matches;
+        this.misses = misses;
     }
 
-    isGuessCorrect(letter: string){
-        return this.word.includes(letter);
+    guess(c: string): GameWord{
+        if(this.isLetterAlreadyGuessed(c)) return this;
+
+        if(this.isGuessCorrect(c)) return this.addMatch(c);
+        else return this.addMiss(c)
     }
 
-    wasLetterAlreadyGuessed(letter: string){
-        const merged = this.mergeMatchesAndMisses();
-        return merged.includes(letter)
-    }
-
-    mergeMatchesAndMisses(): string[] {
-        const merged: string[] = this.misses.concat(this.matches);
-        return merged;
-    }
-
-
-    addMiss(letter: string): void{
-        this.misses.push(letter)
+    getMatches(): string[]{
+        return this.matches
     }
 
     getMisses(): string[]{
         return this.misses
     }
 
-    addMatch(letter: string): void{
-        this.matches.push(letter)
+    getGuessedWord(): string{
+        return this.buildGuessedWord();
     }
 
-    getMatches(): string[]{
-        return this.matches
+    private buildGuessedWord(): string{
+        const wordArr: string[] = [...this.word]
+        let guessedW: string = ""
+        wordArr.forEach(letter => {
+            if(this.matches.includes(letter)){
+                guessedW += letter
+            }else{
+                guessedW += '_'
+            }
+        });
+        return guessedW;
+    }
+
+    private addMatch(c: string): GameWord
+    {
+        return new GameWord(this.word, this.matches.concat(c), this.misses);
+    }
+
+    private addMiss(c: string): GameWord{
+        return new GameWord(this.word, this.matches, this.misses.concat(c));
+    }
+
+    private isGuessCorrect(c: string){
+        return this.word.includes(c);
+    }
+
+    private isLetterAlreadyGuessed(c: string){
+        const merged = this.mergeMatchesAndMisses();
+        return merged.includes(c)
+    }
+
+    private mergeMatchesAndMisses(): string[] {
+        const merged: string[] = this.misses.concat(this.matches);
+        return merged;
     }
 }

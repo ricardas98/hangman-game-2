@@ -1,23 +1,16 @@
+import exp from "constants";
 import GameWord from "./gameWord"
 
 describe("GameWord entity", () => {
     let gameWord: GameWord;
 
     function createGameWord(): void { 
-        gameWord = new GameWord("cat");
-    }
-
-    function populateMissesAndMatchesArray(gameWord: GameWord): void{
-        gameWord.addMatch('c');
-        gameWord.addMatch('a');
-        gameWord.addMiss('x');
-        gameWord.addMiss('y');
-        gameWord.addMiss('z');
+        gameWord = new GameWord('cat');
     }
 
     beforeEach(() => createGameWord());
 
-    it("is created", () => {
+    it("is be created", () => {
         expect(gameWord).toBeDefined();
     })
 
@@ -26,37 +19,20 @@ describe("GameWord entity", () => {
         expect(res).toEqual([]);
     })
 
-    it("adds a missed letter", () => {
-        gameWord.addMiss('x');
-        const res = gameWord.getMisses();
-        expect(res).toEqual(['x'])
-    })
-
     it("gets correctly guessed letters", () => {
         const res = gameWord.getMatches();
         expect(res).toEqual([]);
     })
 
-    it("adds a correctly guessed letter", () => {
-        gameWord.addMatch('c');
-        const res = gameWord.getMatches();
-        expect(res).toEqual(['c'])
+    it("gets formatted guessed word", () => {
+        gameWord = new GameWord('elephant', ['e', 'n', 't'], []);
+        const res  = gameWord.getGuessedWord();
+        expect(res).toEqual("e_e___nt");
     })
 
-    it("guess is correct", () => {
-        const res = gameWord.isGuessCorrect('c');
-        expect(res).toBeTruthy();
-    })
-
-    it("letter was already guessed", () => {
-        populateMissesAndMatchesArray(gameWord)
-        const res = gameWord.wasLetterAlreadyGuessed('c')
-        expect(res).toBeTruthy();
-    })
-   
-    it("joins two string arrays into one", ()=> {
-        populateMissesAndMatchesArray(gameWord)
-        const res = gameWord.mergeMatchesAndMisses();
-        expect(res).toEqual(['x', 'y', 'z', 'c', 'a'])
+    it("handles guessed letter", () => {
+        const res  = gameWord.guess('a');
+        expect(res.getMatches()).toEqual(['a']);
+        expect(res.getMisses()).toEqual([]);
     })
 })
