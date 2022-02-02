@@ -1,4 +1,6 @@
 import Game from "../Game";
+import RunningState from "../game-state/RunningState";
+import State from "../game-state/State";
 
 export default class GameBuilder {
   private readonly word: string;
@@ -11,15 +13,15 @@ export default class GameBuilder {
     this.misses = misses;
   }
 
+  static empty(): GameBuilder {
+    return new GameBuilder("", [], []);
+  }
+
   static from(game: Game): GameBuilder {
     return GameBuilder.empty()
       .setWord(game.getWord())
       .setMatches(game.getMatches())
       .setMisses(game.getMisses());
-  }
-
-  static empty(): GameBuilder {
-    return new GameBuilder("", [], []);
   }
 
   setWord(word: string): GameBuilder {

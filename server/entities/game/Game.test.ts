@@ -1,4 +1,6 @@
+import { GameState } from "../game-state/GameState";
 import Game from "./Game";
+import RunningState from "./game-state/RunningState";
 
 describe("Game entity", () => {
   let game: Game;
@@ -14,27 +16,33 @@ describe("Game entity", () => {
   });
 
   it("gets word", () => {
-    const res = game.getWord();
+    const res: string = game.getWord();
 
     expect(res).toBe("cat");
   });
 
   it("gets missed letters", () => {
-    const res = game.getMisses();
+    const res: string[] = game.getMisses();
 
     expect(res).toEqual([]);
   });
 
   it("gets correctly guessed letters", () => {
-    const res = game.getMatches();
+    const res: string[] = game.getMatches();
 
     expect(res).toEqual([]);
+  });
+
+  it("gets game state", () => {
+    const res = game.getState();
+
+    expect(res).toBe(GameState.Running);
   });
 
   it("gets result word", () => {
     game = new Game("elephant", ["e", "n", "t"], []);
 
-    const res = game.getResultWord();
+    const res: Map<number, string> = game.getResultWord();
 
     expect(res).toEqual(
       new Map<number, string>([
@@ -47,7 +55,7 @@ describe("Game entity", () => {
   });
 
   it("handles guessed letter", () => {
-    const res = game.guess("a");
+    const res: Game = game.guess("a");
 
     expect(res.getMatches()).toEqual(["a"]);
     expect(res.getMisses()).toEqual([]);
