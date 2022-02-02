@@ -1,0 +1,18 @@
+export let Words = [
+  "dog",
+  "cat",
+  "parrot",
+  "hamster",
+  "elephant",
+  "mouse",
+  "fly",
+  "giraffe",
+  "panda",
+  "tiger",
+  "koala",
+  "leopard",
+  "racoon",
+  "mole",
+  "deer",
+  "monkey",
+];
