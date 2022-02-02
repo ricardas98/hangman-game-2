@@ -21,10 +21,28 @@ describe("Game entity", () => {
     expect(res).toBe("cat");
   });
 
-  it("gets missed letters", () => {
+  it("gets missed letters empty (empty)", () => {
     const res: string[] = game.getMisses();
 
     expect(res).toEqual([]);
+  });
+
+  it("gets missed letters", () => {
+    const g1 = game.guess("x");
+    const g2 = g1.guess("y");
+
+    const res: string[] = g2.getMisses();
+
+    expect(res).toEqual(["x", "y"]);
+  });
+
+  it("gets correctly guessed letters (empty)", () => {
+    const g1 = game.guess("c");
+    const g2 = g1.guess("a");
+
+    const res: string[] = g2.getMatches();
+
+    expect(res).toEqual(["c", "a"]);
   });
 
   it("gets correctly guessed letters", () => {

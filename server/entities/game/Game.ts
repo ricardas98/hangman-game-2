@@ -7,7 +7,7 @@ import LostState from "./game-state/LostState";
 import WonState from "./game-state/WonState";
 
 export default class Game {
-  private state: State;
+  private state: GameState;
   private word: string;
   private matches: string[];
   private misses: string[];
@@ -43,7 +43,7 @@ export default class Game {
   }
 
   getState(): GameState {
-    return this.state.getState();
+    return this.state;
   }
 
   getResultWord(): Map<number, string> {
@@ -91,10 +91,10 @@ export default class Game {
     return merged;
   }
 
-  private selectState(): State {
-    if (this.isGameLost()) return new LostState();
-    if (this.isGameWon()) return new WonState();
-    return new RunningState();
+  private selectState(): GameState {
+    if (this.isGameLost()) return GameState.Lost;
+    if (this.isGameWon()) return GameState.Won;
+    return GameState.Running;
   }
 
   private isGameLost(): boolean {
@@ -102,12 +102,6 @@ export default class Game {
   }
 
   private isGameWon(): boolean {
-    let res = true;
-    this.word.split("").forEach((letter) => {
-      if (!this.matches.includes(letter)) {
-        res = false;
-      }
-    });
-    return res;
+    return this.word.split("").every((letter) => this.matches.includes(letter));
   }
 }
