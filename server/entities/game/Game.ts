@@ -56,7 +56,6 @@ export default class Game {
   }
 
   private addMatch(letter: string): Game {
-    //word, matches.concat(letter), misses
     return GameBuilder.from(this)
       .setMatches(this.matches.concat(letter))
       .build();
