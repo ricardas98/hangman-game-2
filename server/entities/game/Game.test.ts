@@ -78,4 +78,54 @@ describe("Game entity", () => {
     expect(res.getMatches()).toEqual(["a"]);
     expect(res.getMisses()).toEqual([]);
   });
+
+  it("handles game state after word has been guessed", () => {
+    game = game.guess("c");
+    game = game.guess("a");
+    game = game.guess("t");
+
+    const resultWord = game.getResultWord();
+
+    expect(game.getState()).toEqual(GameState.Won);
+    expect(game.getMatches()).toEqual(["c", "a", "t"]);
+    expect(game.getMisses()).toEqual([]);
+    expect(resultWord).toEqual(
+      new Map<number, string>([
+        [0, "c"],
+        [1, "a"],
+        [2, "t"],
+      ])
+    );
+  });
+
+  it("handles game state after word has been guessed", () => {
+    game = game.guess("x");
+    game = game.guess("q");
+    game = game.guess("e");
+    game = game.guess("r");
+    game = game.guess("y");
+    game = game.guess("u");
+    game = game.guess("i");
+    game = game.guess("o");
+    game = game.guess("p");
+    game = game.guess("z");
+
+    const resultWord = game.getResultWord();
+
+    expect(game.getState()).toEqual(GameState.Lost);
+    expect(game.getMatches()).toEqual([]);
+    expect(game.getMisses()).toEqual([
+      "x",
+      "q",
+      "e",
+      "r",
+      "y",
+      "u",
+      "i",
+      "o",
+      "p",
+      "z",
+    ]);
+    expect(resultWord).toEqual(new Map<number, string>([]));
+  });
 });
