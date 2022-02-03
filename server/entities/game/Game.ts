@@ -18,8 +18,9 @@ export default class Game {
   guess(letter: string): Game {
     if (this.isLetterAlreadyGuessed(letter)) return this;
 
-    if (this.isGuessCorrect(letter)) return this.addMatch(letter);
-    else return this.addMiss(letter);
+    return this.isGuessCorrect(letter)
+      ? this.addMatch(letter)
+      : this.addMiss(letter);
   }
 
   getWord(): string {
