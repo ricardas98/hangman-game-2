@@ -46,15 +46,10 @@ export default class Game {
   }
 
   private buildResultWord(): Map<number, string> {
-    const wordArr: string[] = [...this.word];
-    let resultArr = wordArr
-      .map((e, i) => {
-        if (this.matches.includes(e)) {
-          return [i, e] as [number, string];
-        }
-      })
-      .filter((e) => e?.length === 2) as [number, string][];
-    let resultMap = new Map<number, string>(resultArr);
+    let resultMap: Map<number, string> = new Map();
+    [...this.word].forEach(
+      (e: string, i: number) => this.matches.includes(e) && resultMap.set(i, e)
+    );
     return resultMap;
   }
 
