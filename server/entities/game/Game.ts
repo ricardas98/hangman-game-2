@@ -46,20 +46,16 @@ export default class Game {
   }
 
   private buildResultWord(): Map<number, string> {
-    let resultWord = new Map<number, string>();
     const wordArr: string[] = [...this.word];
-    wordArr.forEach((e, i) => {
-      this.addLetterToMapIfItsInArray(resultWord, wordArr, i);
-    });
-    return resultWord;
-  }
-
-  private addLetterToMapIfItsInArray(
-    map: Map<number, string>,
-    arr: string[],
-    index: number
-  ) {
-    this.matches.includes(arr[index]) && map.set(index, arr[index]);
+    let resultArr = wordArr
+      .map((e, i) => {
+        if (this.matches.includes(e)) {
+          return [i, e] as [number, string];
+        }
+      })
+      .filter((e) => e?.length === 2) as [number, string][];
+    let resultMap = new Map<number, string>(resultArr);
+    return resultMap;
   }
 
   private addMatch(letter: string): Game {
