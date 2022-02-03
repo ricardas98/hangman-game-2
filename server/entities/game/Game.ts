@@ -1,11 +1,6 @@
 import GameBuilder from "./game-builder/GameBuilder";
 import { GameState } from "../game-state/GameState";
 
-import State from "./game-state/State";
-import RunningState from "./game-state/RunningState";
-import LostState from "./game-state/LostState";
-import WonState from "./game-state/WonState";
-
 export default class Game {
   private state: GameState;
   private word: string;
