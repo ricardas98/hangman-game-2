@@ -1,31 +1,33 @@
 import WordDataGateway from "../../data-gateway/WordDataGateway";
-import { Words } from "../../memory/Words";
 
 export default class WordDataAccessInMemory implements WordDataGateway {
-  private memory;
+  private memory: string[];
 
   constructor() {
-    this.memory = Words;
+    this.memory = [];
   }
 
-  trySave(word: string): string {
+  trySave(word: string): void {
     try {
-      return this.save(word);
-    } catch {
-      return "";
+      this.save(word);
+    } catch (e) {
+      console.log(e);
     }
   }
 
   tryDelete(word: string): void {
     try {
       this.delete(word);
-    } catch {}
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   tryFetchAll(): string[] {
     try {
       return this.fetchAll();
-    } catch {
+    } catch (e) {
+      console.log(e);
       return [];
     }
   }
@@ -33,16 +35,16 @@ export default class WordDataAccessInMemory implements WordDataGateway {
   tryGetRandomWord(): string {
     try {
       return this.getRandomWord();
-    } catch {
+    } catch (e) {
+      console.log(e);
       return "";
     }
   }
 
-  private save(word: string): string {
+  private save(word: string): void {
     this.checkIfWordIsAlreadyInMemory(word);
     this.memory.push(word);
     this.checkIfWordSaved(word);
-    return word;
   }
 
   private delete(word: string): void {
@@ -66,14 +68,14 @@ export default class WordDataAccessInMemory implements WordDataGateway {
     return Math.floor(Math.random() * max);
   }
 
-  private checkIfWordSaved(word: string): void {
-    if (!this.memory.includes(word))
-      throw new Error("Could not save to memory");
-  }
-
   private checkIfWordIsAlreadyInMemory(word: string): void {
     if (this.memory.includes(word))
       throw new Error("The word is already saved in memory");
+  }
+
+  private checkIfWordSaved(word: string): void {
+    if (!this.memory.includes(word))
+      throw new Error("Could not save to memory");
   }
 
   private checkIfWordExistsInMemory(word: string): void {
@@ -83,7 +85,7 @@ export default class WordDataAccessInMemory implements WordDataGateway {
 
   private checkIfWordDeleted(word: string): void {
     if (this.memory.includes(word))
-      throw new Error("Could not delete from memory");
+      throw new Error("Could not delete the word from memory");
   }
 
   private checkIfMemoryEmpty(): void {

@@ -14,21 +14,25 @@ describe("Word data access in memory", () => {
     dataAccess.trySave("dog");
   }
 
-  beforeAll(() => {
+  beforeEach(() => {
     initDataAccess();
     addWords();
   });
 
   it("saves word to memory", () => {
-    const res = dataAccess.trySave("elephant");
+    dataAccess.trySave("elephant");
+    const res = dataAccess.tryFetchAll();
 
-    expect(res).toBe("elephant");
+    expect(res.includes("elephant")).toBeTruthy();
   });
 
   it("does not save already saved word to memory", () => {
-    const res = dataAccess.trySave("elephant");
+    dataAccess.trySave("elephant");
+    dataAccess.trySave("elephant");
+    dataAccess.trySave("elephant");
+    const res = dataAccess.tryFetchAll();
 
-    expect(res).toBe("");
+    expect(res.filter((word) => word === "elephant").length).toBe(1);
   });
 
   it("deletes the word from the memory", () => {
