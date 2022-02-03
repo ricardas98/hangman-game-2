@@ -4,18 +4,18 @@ import Game from "../../entities/game/Game";
 const sessions = require("../../memory/Sessions");
 
 export default class GameDataAccessInMemory implements GameDataGateway {
-  create(): Game {
+  tryCreate(): Game {
     return new Game();
   }
-  delete(): void {}
-  update(): Game {
+  tryDelete(): void {}
+  tryUpdate(): Game {
     return new Game();
   }
-  fetchAll(): Game[] {
+  tryFetchAll(): Game[] {
     let games: Game[] = [];
     return games;
   }
-  findById(): Game {
+  tryFindById(): Game {
     return new Game();
   }
 }

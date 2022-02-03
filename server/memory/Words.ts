@@ -1,5 +1,6 @@
-export let Words = [
-  "dog",
+export let Words: string[] = [];
+
+/*"dog",
   "cat",
   "parrot",
   "hamster",
@@ -14,5 +15,4 @@ export let Words = [
   "racoon",
   "mole",
   "deer",
-  "monkey",
-];
+  "monkey", */
