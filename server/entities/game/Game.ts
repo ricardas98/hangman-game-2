@@ -53,7 +53,7 @@ export default class Game {
   private buildResultWord(): Map<number, string> {
     let resultWord = new Map<number, string>();
     const wordArr: string[] = [...this.word];
-    wordArr.map((e, i) => {
+    wordArr.forEach((e, i) => {
       this.addLetterToMapIfItsInArray(resultWord, wordArr, i);
     });
     return resultWord;
