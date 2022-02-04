@@ -23,8 +23,8 @@ describe("Session entity", () => {
     expect(res).toBe("123");
   });
 
-  it("gets date", () => {
-    const res: number = session.getDate();
+  it("gets timestamp", () => {
+    const res: number = session.getTimestamp();
 
     expect(res).toBe(1643783253144);
   });
