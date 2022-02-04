@@ -37,20 +37,20 @@ export default class WordAccessInMemory implements WordGateway {
   }
 
   private checkIfWordIsAlreadyInMemory(word: string): void {
-    if (this.memory.includes(word)) throw new IdDuplicateException();
+    if (this.memory.includes(word)) throw new IdDuplicateException(word);
   }
 
   private checkIfWordSaved(word: string): void {
     if (!this.memory.includes(word))
-      throw new ActionFailedException(ActionType.Save, word);
+      throw new ActionFailedException(word, ActionType.Save);
   }
 
   private checkIfWordExistsInMemory(word: string): void {
-    if (!this.memory.includes(word)) throw new DoesNotExistException();
+    if (!this.memory.includes(word)) throw new DoesNotExistException(word);
   }
 
   private checkIfWordDeleted(word: string): void {
     if (this.memory.includes(word))
-      throw new ActionFailedException(ActionType.Delete, word);
+      throw new ActionFailedException(word, ActionType.Delete);
   }
 }

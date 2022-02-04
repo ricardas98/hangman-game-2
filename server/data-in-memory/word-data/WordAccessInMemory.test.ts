@@ -32,9 +32,7 @@ describe("Word data access in memory", () => {
   it("does not save already saved word to memory", () => {
     dataAccess.save("elephant");
 
-    expect(() => dataAccess.save("elephant")).toThrow(
-      IdDuplicateException || ActionFailedException
-    );
+    expect(() => dataAccess.save("elephant")).toThrow(IdDuplicateException);
   });
 
   it("deletes the word from the memory", () => {
@@ -45,9 +43,7 @@ describe("Word data access in memory", () => {
   });
 
   it("deletes non existing word from the memory", () => {
-    expect(() => dataAccess.delete("lion")).toThrow(
-      DoesNotExistException || ActionFailedException
-    );
+    expect(() => dataAccess.delete("lion")).toThrow(DoesNotExistException);
   });
 
   it("gets all the words from the memory", () => {

@@ -28,9 +28,11 @@ export default class SessionAccessInMemory implements SessionGateway {
     return this.memory;
   }
 
-  generateSessionId(date: number): string {
+  generateSessionId(timestamp: number): string {
     return String(
-      date.toString() + "x" + Math.floor(Math.random() * 1000000).toString()
+      timestamp.toString() +
+        "x" +
+        Math.floor(Math.random() * 1000000).toString()
     );
   }
 
@@ -40,18 +42,19 @@ export default class SessionAccessInMemory implements SessionGateway {
 
   private checkIfSessionSaved(session: Session): void {
     if (!this.memory.includes(session))
-      throw new ActionFailedException(ActionType.Save, session.getId());
+      throw new ActionFailedException(session.getId(), ActionType.Save);
   }
   private checkIfSessionIsDuplicate(session: Session): void {
-    if (this.findById(session.getId())) throw new IdDuplicateException();
+    if (this.findById(session.getId()))
+      throw new IdDuplicateException(session.getId());
   }
 
   private checkIfSessionExists(id: string): void {
-    if (this.findById(id) === undefined) throw new DoesNotExistException();
+    if (this.findById(id) === undefined) throw new DoesNotExistException(id);
   }
 
   private checkIfSessionDeleted(id: string): void {
     if (this.findById(id))
-      throw new ActionFailedException(ActionType.Delete, id);
+      throw new ActionFailedException(id, ActionType.Delete);
   }
 }

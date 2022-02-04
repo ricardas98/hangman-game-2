@@ -1,5 +1,5 @@
 export default class IdDuplicateException extends Error {
-  constructor(msg: string = "object already exists in memory") {
-    super(msg);
+  constructor(id: string, msg: string = "already exists in memory") {
+    super(`Object (id: ${id})` + msg);
   }
 }
