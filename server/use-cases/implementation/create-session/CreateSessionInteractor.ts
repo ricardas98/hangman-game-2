@@ -4,20 +4,27 @@ import { GameState } from "../../../entities/game-state/GameState";
 import Session from "../../../entities/session/Session";
 import OutputData from "../../../output-data/OutputData";
 import CreateGameUseCase from "../../input-boundary-models/CreateSessionUseCase";
+import SessionGateway from "../../../data-gateway/SessionGateway";
+import WordGateway from ".../../../data-gateway/WordGateway";
 
 export default class CreateSessionInteractor implements CreateGameUseCase {
   create(): OutputData {
-    const sessionGW = new SessionAccessInMemory();
-    const wordGW = new WordAccessInMemory();
+    return new OutputData("", GameState.Running, [], []);
+  }
+  /*
 
+  create(): OutputData {
     const date = Date.now();
 
     const session = new Session(
-      sessionGW.generateSessionId(date),
+      this.sessionGateway.generateSessionId(date),
       date,
-      wordGW.tryGetRandomWord()
+      this.wordGateway.tryGetRandomWord()
     );
 
-    return new OutputData("", GameState.Running, [], []);
+    sessionGW.trySave(session);
+
+    return;
   }
+  */
 }
