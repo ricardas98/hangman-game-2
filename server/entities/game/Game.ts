@@ -1,6 +1,8 @@
 import GameBuilder from "./game-builder/GameBuilder";
+import { GameState } from "../game-state/GameState";
 
 export default class Game {
+  private state: GameState;
   private word: string;
   private matches: string[];
   private misses: string[];
@@ -13,6 +15,7 @@ export default class Game {
     this.word = word;
     this.matches = matches;
     this.misses = misses;
+    this.state = this.selectState();
   }
 
   guess(letter: string): Game {
@@ -35,25 +38,20 @@ export default class Game {
     return this.misses;
   }
 
+  getState(): GameState {
+    return this.state;
+  }
+
   getResultWord(): Map<number, string> {
     return this.buildResultWord();
   }
 
   private buildResultWord(): Map<number, string> {
-    let resultWord = new Map<number, string>();
-    const wordArr: string[] = [...this.word];
-    wordArr.forEach((e, i) => {
-      this.addLetterToMapIfItsInArray(resultWord, wordArr, i);
-    });
-    return resultWord;
-  }
-
-  private addLetterToMapIfItsInArray(
-    map: Map<number, string>,
-    arr: string[],
-    index: number
-  ) {
-    this.matches.includes(arr[index]) && map.set(index, arr[index]);
+    let resultMap: Map<number, string> = new Map();
+    [...this.word].forEach(
+      (e: string, i: number) => this.matches.includes(e) && resultMap.set(i, e)
+    );
+    return resultMap;
   }
 
   private addMatch(letter: string): Game {
@@ -71,12 +69,23 @@ export default class Game {
   }
 
   private isLetterAlreadyGuessed(letter: string) {
-    const merged = this.mergeMatchesAndMisses();
-    return merged.includes(letter);
+    return this.mergeMatchesAndMisses().includes(letter);
   }
 
   private mergeMatchesAndMisses(): string[] {
-    const merged: string[] = this.misses.concat(this.matches);
-    return merged;
+    return this.misses.concat(this.matches);
+  }
+
+  private selectState(): GameState {
+    if (this.isGameLost()) return GameState.Lost;
+    return this.isGameWon() ? GameState.Won : GameState.Running;
+  }
+
+  private isGameLost(): boolean {
+    return this.misses.length >= 10;
+  }
+
+  private isGameWon(): boolean {
+    return this.word.split("").every((letter) => this.matches.includes(letter));
   }
 }
