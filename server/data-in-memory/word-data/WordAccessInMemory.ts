@@ -1,4 +1,8 @@
 import WordGateway from "../../data-gateway/WordGateway";
+import { ActionType } from "../../exceptions/ActionTypes";
+import ActionFailedException from "../../exceptions/ActionFailedException";
+import IdDuplicateException from "../../exceptions/IdDuplicateException";
+import DoesNotExistException from "../../exceptions/DoesNotExistException";
 
 export default class WordAccessInMemory implements WordGateway {
   private memory: string[];
@@ -7,61 +11,25 @@ export default class WordAccessInMemory implements WordGateway {
     this.memory = [];
   }
 
-  trySave(word: string): void {
-    try {
-      this.save(word);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  tryDelete(word: string): void {
-    try {
-      this.delete(word);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  tryFetchAll(): string[] {
-    try {
-      return this.fetchAll();
-    } catch (e) {
-      console.log(e);
-      return [];
-    }
-  }
-
-  tryGetRandomWord(): string {
-    try {
-      return this.getRandomWord();
-    } catch (e) {
-      console.log(e);
-      return "";
-    }
-  }
-
-  private save(word: string): void {
+  save(word: string): void {
     this.checkIfWordIsAlreadyInMemory(word);
     this.memory.push(word);
     this.checkIfWordSaved(word);
   }
 
-  private delete(word: string): void {
+  delete(word: string): void {
     this.checkIfWordExistsInMemory(word);
     this.memory = this.memory.filter((w) => w !== word);
     this.checkIfWordDeleted(word);
   }
 
-  private fetchAll(): string[] {
-    this.checkIfMemoryEmpty();
+  fetchAll(): string[] {
     return this.memory;
   }
 
-  private getRandomWord(): string {
-    const words = this.tryFetchAll();
-    const index = this.getRandomIndexBetweenZeroAndMax(words.length);
-    return words[index];
+  getRandomWord(): string {
+    const index = this.getRandomIndexBetweenZeroAndMax(this.memory.length);
+    return this.memory[index];
   }
 
   private getRandomIndexBetweenZeroAndMax(max: number): number {
@@ -69,28 +37,20 @@ export default class WordAccessInMemory implements WordGateway {
   }
 
   private checkIfWordIsAlreadyInMemory(word: string): void {
-    if (this.memory.includes(word))
-      throw new Error("The word is already saved in memory");
+    if (this.memory.includes(word)) throw new IdDuplicateException(word);
   }
 
   private checkIfWordSaved(word: string): void {
     if (!this.memory.includes(word))
-      throw new Error("Could not save to memory");
+      throw new ActionFailedException(word, ActionType.Save);
   }
 
   private checkIfWordExistsInMemory(word: string): void {
-    if (!this.memory.includes(word))
-      throw new Error("The word does not exist in memory");
+    if (!this.memory.includes(word)) throw new DoesNotExistException(word);
   }
 
   private checkIfWordDeleted(word: string): void {
     if (this.memory.includes(word))
-      throw new Error("Could not delete the word from memory");
-  }
-
-  private checkIfMemoryEmpty(): void {
-    if (this.memory.length === 0) {
-      throw new Error("There are no words in memory");
-    }
+      throw new ActionFailedException(word, ActionType.Delete);
   }
 }
