@@ -8,18 +8,39 @@ import SessionGateway from "../../../data-gateway/SessionGateway";
 import WordGateway from ".../../../data-gateway/WordGateway";
 
 export default class CreateSessionInteractor implements CreateGameUseCase {
+  private sessionGateway: SessionGateway;
+  private wordGateway: WordGateway;
+
+  constructor(sessionGateway: SessionGateway, wordGateway: WordGateway) {
+    this.sessionGateway = sessionGateway;
+    this.wordGateway = wordGateway;
+  }
+
   create(): OutputData {
+    const session: Session = this.createSession();
+
+    this.saveSession(session);
+
     return new OutputData("", GameState.Running, [], []);
   }
+
+  private createSession(): Session {
+    const timestamp = Date.now();
+    return new Session(
+      this.sessionGateway.generateSessionId(timestamp),
+      timestamp,
+      this.wordGateway.getRandomWord()
+    );
+  }
+
+  private saveSession(session: Session): void {}
   /*
 
   create(): OutputData {
     const date = Date.now();
 
     const session = new Session(
-      this.sessionGateway.generateSessionId(date),
-      date,
-      this.wordGateway.tryGetRandomWord()
+
     );
 
     sessionGW.trySave(session);
