@@ -3,12 +3,12 @@ import Game from "../game/Game";
 
 export default class Session {
   private id: string;
-  private date: number;
+  private timestamp: number;
   private game: Game;
 
-  constructor(id: string, date: number, word: string) {
+  constructor(id: string, timestamp: number, word: string) {
     this.id = id;
-    this.date = date;
+    this.timestamp = timestamp;
     this.game = new Game(word);
   }
 
@@ -16,8 +16,8 @@ export default class Session {
     return this.id;
   }
 
-  getDate(): number {
-    return this.date;
+  getTimestamp(): number {
+    return this.timestamp;
   }
 
   getState(): GameState {
