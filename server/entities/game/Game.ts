@@ -21,8 +21,9 @@ export default class Game {
   guess(letter: string): Game {
     if (this.isLetterAlreadyGuessed(letter)) return this;
 
-    if (this.isGuessCorrect(letter)) return this.addMatch(letter);
-    else return this.addMiss(letter);
+    return this.isGuessCorrect(letter)
+      ? this.addMatch(letter)
+      : this.addMiss(letter);
   }
 
   getWord(): string {
@@ -77,8 +78,7 @@ export default class Game {
 
   private selectState(): GameState {
     if (this.isGameLost()) return GameState.Lost;
-    if (this.isGameWon()) return GameState.Won;
-    return GameState.Running;
+    return this.isGameWon() ? GameState.Won : GameState.Running;
   }
 
   private isGameLost(): boolean {
