@@ -1,4 +1,6 @@
 import Session from "../../entities/session/Session";
+import DoesNotExistException from "../../exceptions/DoesNotExistException";
+import IdDuplicateException from "../../exceptions/IdDuplicateException";
 import SessionAccessInMemory from "./SessionAccessInMemory";
 
 describe("Game data access in memory", () => {
@@ -9,9 +11,9 @@ describe("Game data access in memory", () => {
   }
 
   function addSessions() {
-    dataAccess.trySave(new Session("1", 1, "cat"));
-    dataAccess.trySave(new Session("2", 2, "dog"));
-    dataAccess.trySave(new Session("3", 3, "mouse"));
+    dataAccess.save(new Session("1", 1, "cat"));
+    dataAccess.save(new Session("2", 2, "dog"));
+    dataAccess.save(new Session("3", 3, "mouse"));
   }
 
   beforeEach(() => {
@@ -22,8 +24,8 @@ describe("Game data access in memory", () => {
   it("saves new session to memory", () => {
     const session = new Session("123", 467946, "cat");
 
-    dataAccess.trySave(session);
-    const res = dataAccess.tryFetchAll();
+    dataAccess.save(session);
+    const res = dataAccess.fetchAll();
 
     expect(res.includes(session)).toBeTruthy();
   });
@@ -31,14 +33,11 @@ describe("Game data access in memory", () => {
   it("does not save session to memory with an already existing id", () => {
     const session = new Session("3", 467946, "cat");
 
-    dataAccess.trySave(session);
-    const res = dataAccess.tryFetchAll();
-
-    expect(res.length).toEqual(3);
+    expect(() => dataAccess.save(session)).toThrow(IdDuplicateException);
   });
 
   it("gets all the sessions from the memory", () => {
-    const res = dataAccess.tryFetchAll();
+    const res = dataAccess.fetchAll();
 
     expect(res.length).toEqual(3);
   });
@@ -46,17 +45,14 @@ describe("Game data access in memory", () => {
   it("deletes session from memory", () => {
     const session = new Session("4", 10, "mouse");
 
-    dataAccess.trySave(session);
-    dataAccess.tryDelete("4");
-    const res = dataAccess.tryFetchAll();
+    dataAccess.save(session);
+    dataAccess.delete("4");
+    const res = dataAccess.fetchAll();
 
     expect(res.length).toBe(3);
   });
 
   it("does not delete non existing session from memory", () => {
-    dataAccess.tryDelete("4");
-    const res = dataAccess.tryFetchAll();
-
-    expect(res.length).toBe(3);
+    expect(() => dataAccess.delete("4")).toThrow(DoesNotExistException);
   });
 });

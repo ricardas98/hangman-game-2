@@ -1,5 +1,10 @@
 import SessionGateway from "../../data-gateway/SessionGateway";
 import Session from "../../entities/session/Session";
+import { ActionType } from "../../exceptions/ActionTypes";
+import ActionFailedException from "../../exceptions/ActionFailedException";
+import DoesNotExistException from "../../exceptions/DoesNotExistException";
+import IdDuplicateException from "../../exceptions/IdDuplicateException";
+import MemoryEmptyException from "../../exceptions/MemoryEmptyException";
 
 export default class SessionAccessInMemory implements SessionGateway {
   private memory: Session[];
@@ -8,30 +13,21 @@ export default class SessionAccessInMemory implements SessionGateway {
     this.memory = [];
   }
 
-  trySave(session: Session): void {
-    try {
-      this.save(session);
-    } catch (e) {
-      console.log(e);
-    }
+  save(session: Session): void {
+    this.checkIfSessionIsDuplicate(session);
+    this.memory.push(session);
+    this.checkIfSessionSaved(session);
   }
 
-  tryDelete(id: string): void {
-    try {
-      this.delete(id);
-    } catch (e) {
-      console.log(e);
-    }
+  delete(id: string): void {
+    this.checkIfSessionExists(id);
+    this.memory = this.memory.filter((s) => s.getId() !== id);
+    this.checkIfSessionDeleted(id);
   }
 
-  tryFetchAll(): Session[] {
-    try {
-      return this.fetchAll();
-    } catch (e) {
-      console.log(e);
-      const s: Session[] = [];
-      return s;
-    }
+  fetchAll(): Session[] {
+    this.checkIfMemoryEmpty();
+    return this.memory;
   }
 
   generateSessionId(date: number): string {
@@ -40,49 +36,30 @@ export default class SessionAccessInMemory implements SessionGateway {
     );
   }
 
-  private save(session: Session): void {
-    this.checkIfSessionIsDuplicate(session);
-    this.memory.push(session);
-    this.checkIfSessionSaved(session);
-  }
-
-  private delete(id: string): void {
-    this.checkIfSessionExists(id);
-    this.memory = this.memory.filter((s) => s.getId() !== id);
-    this.checkIfSessionDeleted(id);
-  }
-
-  private fetchAll(): Session[] {
-    this.checkIfMemoryEmpty();
-    return this.memory;
-  }
-
   private findById(id: string): Session | undefined {
     return this.memory.find((session) => session.getId() === id);
   }
 
   private checkIfSessionSaved(session: Session): void {
     if (!this.memory.includes(session))
-      throw new Error("Could not save to memory");
+      throw new ActionFailedException(ActionType.Save, session.getId());
   }
   private checkIfSessionIsDuplicate(session: Session): void {
-    if (this.findById(session.getId()))
-      throw new Error("The session already exists in memory");
+    if (this.findById(session.getId())) throw new IdDuplicateException();
   }
 
   private checkIfSessionExists(id: string): void {
-    if (typeof this.findById(id) === undefined)
-      throw new Error("The session does not exist in memory");
+    if (this.findById(id) === undefined) throw new DoesNotExistException();
   }
 
   private checkIfSessionDeleted(id: string): void {
-    if (typeof this.findById(id) !== undefined)
-      throw new Error("Could not delete the session from memory");
+    if (this.findById(id))
+      throw new ActionFailedException(ActionType.Delete, id);
   }
 
   private checkIfMemoryEmpty(): void {
     if (this.memory.length === 0) {
-      throw new Error("There are no sessions in memory");
+      throw new MemoryEmptyException();
     }
   }
 }
