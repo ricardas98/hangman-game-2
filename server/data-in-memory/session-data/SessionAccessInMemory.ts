@@ -1,7 +1,7 @@
-import SessionDataGateway from "../../data-gateway/SessionDataGateway";
+import SessionGateway from "../../data-gateway/SessionGateway";
 import Session from "../../entities/session/Session";
 
-export default class SessionDataAccessInMemory implements SessionDataGateway {
+export default class SessionAccessInMemory implements SessionGateway {
   private memory: Session[];
 
   constructor() {

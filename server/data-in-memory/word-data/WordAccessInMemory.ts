@@ -1,6 +1,6 @@
-import WordDataGateway from "../../data-gateway/WordDataGateway";
+import WordGateway from "../../data-gateway/WordGateway";
 
-export default class WordDataAccessInMemory implements WordDataGateway {
+export default class WordAccessInMemory implements WordGateway {
   private memory: string[];
 
   constructor() {

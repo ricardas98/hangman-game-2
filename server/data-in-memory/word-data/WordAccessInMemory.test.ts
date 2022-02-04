@@ -1,11 +1,10 @@
-import exp from "constants";
-import WordDataAccessInMemory from "./WordDataAccessInMemory";
+import WordAccessInMemory from "./WordAccessInMemory";
 
 describe("Word data access in memory", () => {
-  let dataAccess: WordDataAccessInMemory;
+  let dataAccess: WordAccessInMemory;
 
   function initDataAccess() {
-    dataAccess = new WordDataAccessInMemory();
+    dataAccess = new WordAccessInMemory();
   }
 
   function addWords() {
