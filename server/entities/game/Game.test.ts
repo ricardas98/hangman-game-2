@@ -80,9 +80,6 @@ describe("Game entity", () => {
 
   it("handles game state after word has been guessed", () => {
     ["a", "t", "c"].forEach((letter) => (game = game.guess(letter)));
-    game = game.guess("a");
-    game = game.guess("t");
-    game = game.guess("c");
 
     const resultWord = game.getResultWord();
 
