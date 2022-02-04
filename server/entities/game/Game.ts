@@ -84,7 +84,7 @@ export default class Game {
   }
 
   private isGameLost(): boolean {
-    return this.misses.length >= 10 ? true : false;
+    return this.misses.length >= 10;
   }
 
   private isGameWon(): boolean {

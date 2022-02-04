@@ -79,6 +79,7 @@ describe("Game entity", () => {
   });
 
   it("handles game state after word has been guessed", () => {
+    ["a", "t", "c"].forEach((letter) => (game = game.guess(letter)));
     game = game.guess("a");
     game = game.guess("t");
     game = game.guess("c");
@@ -98,16 +99,9 @@ describe("Game entity", () => {
   });
 
   it("handles game state after word has been guessed", () => {
-    game = game.guess("x");
-    game = game.guess("q");
-    game = game.guess("e");
-    game = game.guess("r");
-    game = game.guess("y");
-    game = game.guess("u");
-    game = game.guess("i");
-    game = game.guess("o");
-    game = game.guess("p");
-    game = game.guess("z");
+    ["x", "q", "e", "r", "y", "u", "i", "o", "p", "z"].forEach(
+      (letter) => (game = game.guess(letter))
+    );
 
     const resultWord = game.getResultWord();
 
