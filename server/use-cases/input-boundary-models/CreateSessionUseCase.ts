@@ -1,5 +1,5 @@
 import OutputData from "../../output-data/OutputData";
 
-export default interface CreateGameUseCase {
+export default interface CreateSessionsUseCase {
   create(): OutputData;
 }
