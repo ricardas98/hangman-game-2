@@ -1,6 +1,5 @@
 import WordGateway from "../../data-gateway/WordGateway";
 import { ActionType } from "../../exceptions/ActionTypes";
-import MemoryEmptyException from "../../exceptions/MemoryEmptyException";
 import ActionFailedException from "../../exceptions/ActionFailedException";
 import IdDuplicateException from "../../exceptions/IdDuplicateException";
 import DoesNotExistException from "../../exceptions/DoesNotExistException";
@@ -25,7 +24,6 @@ export default class WordAccessInMemory implements WordGateway {
   }
 
   fetchAll(): string[] {
-    this.checkIfMemoryEmpty();
     return this.memory;
   }
 
@@ -54,9 +52,5 @@ export default class WordAccessInMemory implements WordGateway {
   private checkIfWordDeleted(word: string): void {
     if (this.memory.includes(word))
       throw new ActionFailedException(ActionType.Delete, word);
-  }
-
-  private checkIfMemoryEmpty(): void {
-    if (this.memory.length === 0) throw new MemoryEmptyException();
   }
 }

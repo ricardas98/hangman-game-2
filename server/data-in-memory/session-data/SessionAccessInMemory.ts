@@ -4,7 +4,6 @@ import { ActionType } from "../../exceptions/ActionTypes";
 import ActionFailedException from "../../exceptions/ActionFailedException";
 import DoesNotExistException from "../../exceptions/DoesNotExistException";
 import IdDuplicateException from "../../exceptions/IdDuplicateException";
-import MemoryEmptyException from "../../exceptions/MemoryEmptyException";
 
 export default class SessionAccessInMemory implements SessionGateway {
   private memory: Session[];
@@ -26,7 +25,6 @@ export default class SessionAccessInMemory implements SessionGateway {
   }
 
   fetchAll(): Session[] {
-    this.checkIfMemoryEmpty();
     return this.memory;
   }
 
@@ -55,11 +53,5 @@ export default class SessionAccessInMemory implements SessionGateway {
   private checkIfSessionDeleted(id: string): void {
     if (this.findById(id))
       throw new ActionFailedException(ActionType.Delete, id);
-  }
-
-  private checkIfMemoryEmpty(): void {
-    if (this.memory.length === 0) {
-      throw new MemoryEmptyException();
-    }
   }
 }
