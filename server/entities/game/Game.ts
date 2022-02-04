@@ -68,13 +68,11 @@ export default class Game {
   }
 
   private isLetterAlreadyGuessed(letter: string) {
-    const merged = this.mergeMatchesAndMisses();
-    return merged.includes(letter);
+    return this.mergeMatchesAndMisses().includes(letter);
   }
 
   private mergeMatchesAndMisses(): string[] {
-    const merged: string[] = this.misses.concat(this.matches);
-    return merged;
+    return this.misses.concat(this.matches);
   }
 
   private selectState(): GameState {
