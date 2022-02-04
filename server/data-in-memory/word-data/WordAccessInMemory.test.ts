@@ -1,11 +1,11 @@
 import exp from "constants";
-import WordDataAccessInMemory from "./WordDataAccessInMemory";
+import WordAccessInMemory from "./WordAccessInMemory";
 
 describe("Word data access in memory", () => {
-  let dataAccess: WordDataAccessInMemory;
+  let dataAccess: WordAccessInMemory;
 
   function initDataAccess() {
-    dataAccess = new WordDataAccessInMemory();
+    dataAccess = new WordAccessInMemory();
   }
 
   function addWords() {
@@ -28,25 +28,19 @@ describe("Word data access in memory", () => {
 
   it("does not save already saved word to memory", () => {
     dataAccess.trySave("elephant");
-    dataAccess.trySave("elephant");
-    dataAccess.trySave("elephant");
-    const res = dataAccess.tryFetchAll();
 
-    expect(res.filter((word) => word === "elephant").length).toBe(1);
+    expect(() => dataAccess.trySave("elephant")).toThrow(Error);
   });
 
   it("deletes the word from the memory", () => {
-    dataAccess.tryDelete("elephant");
+    dataAccess.tryDelete("mouse");
     const res = dataAccess.tryFetchAll();
 
-    expect(res).toEqual(["cat", "mouse", "dog"]);
+    expect(res).toEqual(["cat", "dog"]);
   });
 
   it("deletes non existing word from the memory", () => {
-    dataAccess.tryDelete("lion");
-    const res = dataAccess.tryFetchAll();
-
-    expect(res).toEqual(["cat", "mouse", "dog"]);
+    expect(() => dataAccess.tryDelete("lion")).toThrow(Error);
   });
 
   it("gets all the words from the memory", () => {

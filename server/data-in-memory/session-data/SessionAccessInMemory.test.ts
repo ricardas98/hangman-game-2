@@ -1,11 +1,11 @@
 import Session from "../../entities/session/Session";
-import SessionDataAccessInMemory from "./SessionDataAccessInMemory";
+import SessionAccessInMemory from "./SessionAccessInMemory";
 
 describe("Game data access in memory", () => {
-  let dataAccess: SessionDataAccessInMemory;
+  let dataAccess: SessionAccessInMemory;
 
   function initDataAccess() {
-    dataAccess = new SessionDataAccessInMemory();
+    dataAccess = new SessionAccessInMemory();
   }
 
   function addSessions() {

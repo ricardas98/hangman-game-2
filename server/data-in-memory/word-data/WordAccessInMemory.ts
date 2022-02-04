@@ -1,6 +1,6 @@
-import WordDataGateway from "../../data-gateway/WordDataGateway";
+import WordGateway from "../../data-gateway/WordGateway";
 
-export default class WordDataAccessInMemory implements WordDataGateway {
+export default class WordAccessInMemory implements WordGateway {
   private memory: string[];
 
   constructor() {
@@ -10,34 +10,32 @@ export default class WordDataAccessInMemory implements WordDataGateway {
   trySave(word: string): void {
     try {
       this.save(word);
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      throw new Error();
     }
   }
 
   tryDelete(word: string): void {
     try {
       this.delete(word);
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      throw new Error();
     }
   }
 
   tryFetchAll(): string[] {
     try {
       return this.fetchAll();
-    } catch (e) {
-      console.log(e);
-      return [];
+    } catch (err) {
+      throw new Error();
     }
   }
 
   tryGetRandomWord(): string {
     try {
       return this.getRandomWord();
-    } catch (e) {
-      console.log(e);
-      return "";
+    } catch (err) {
+      throw new Error();
     }
   }
 
@@ -69,13 +67,11 @@ export default class WordDataAccessInMemory implements WordDataGateway {
   }
 
   private checkIfWordIsAlreadyInMemory(word: string): void {
-    if (this.memory.includes(word))
-      throw new Error("The word is already saved in memory");
+    if (this.memory.includes(word)) throw "The word is already saved in memory";
   }
 
   private checkIfWordSaved(word: string): void {
-    if (!this.memory.includes(word))
-      throw new Error("Could not save to memory");
+    if (!this.memory.includes(word)) throw "Could not save to memory";
   }
 
   private checkIfWordExistsInMemory(word: string): void {
@@ -89,8 +85,7 @@ export default class WordDataAccessInMemory implements WordDataGateway {
   }
 
   private checkIfMemoryEmpty(): void {
-    if (this.memory.length === 0) {
+    if (this.memory.length === 0)
       throw new Error("There are no words in memory");
-    }
   }
 }
