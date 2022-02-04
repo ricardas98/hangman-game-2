@@ -1,4 +1,8 @@
+import exp from "constants";
+import ActionFailedException from "../../exceptions/ActionFailedException";
+import DoesNotExistException from "../../exceptions/DoesNotExistException";
 import WordAccessInMemory from "./WordAccessInMemory";
+import IdDuplicateException from "../../exceptions/IdDuplicateException";
 
 describe("Word data access in memory", () => {
   let dataAccess: WordAccessInMemory;
@@ -8,9 +12,9 @@ describe("Word data access in memory", () => {
   }
 
   function addWords() {
-    dataAccess.trySave("cat");
-    dataAccess.trySave("mouse");
-    dataAccess.trySave("dog");
+    dataAccess.save("cat");
+    dataAccess.save("mouse");
+    dataAccess.save("dog");
   }
 
   beforeEach(() => {
@@ -19,44 +23,38 @@ describe("Word data access in memory", () => {
   });
 
   it("saves word to memory", () => {
-    dataAccess.trySave("elephant");
-    const res = dataAccess.tryFetchAll();
+    dataAccess.save("elephant");
+    const res = dataAccess.fetchAll();
 
     expect(res.includes("elephant")).toBeTruthy();
   });
 
   it("does not save already saved word to memory", () => {
-    dataAccess.trySave("elephant");
-    dataAccess.trySave("elephant");
-    dataAccess.trySave("elephant");
-    const res = dataAccess.tryFetchAll();
+    dataAccess.save("elephant");
 
-    expect(res.filter((word) => word === "elephant").length).toBe(1);
+    expect(() => dataAccess.save("elephant")).toThrow(IdDuplicateException);
   });
 
   it("deletes the word from the memory", () => {
-    dataAccess.tryDelete("elephant");
-    const res = dataAccess.tryFetchAll();
+    dataAccess.delete("mouse");
+    const res = dataAccess.fetchAll();
 
-    expect(res).toEqual(["cat", "mouse", "dog"]);
+    expect(res).toEqual(["cat", "dog"]);
   });
 
   it("deletes non existing word from the memory", () => {
-    dataAccess.tryDelete("lion");
-    const res = dataAccess.tryFetchAll();
-
-    expect(res).toEqual(["cat", "mouse", "dog"]);
+    expect(() => dataAccess.delete("lion")).toThrow(DoesNotExistException);
   });
 
   it("gets all the words from the memory", () => {
-    const res = dataAccess.tryFetchAll();
+    const res = dataAccess.fetchAll();
 
     expect(res).toEqual(["cat", "mouse", "dog"]);
   });
 
   it("gets a random word from the memory", () => {
-    const res = dataAccess.tryGetRandomWord();
+    const res = dataAccess.getRandomWord();
 
-    expect(dataAccess.tryFetchAll().includes(res)).toBeTruthy();
+    expect(dataAccess.fetchAll().includes(res)).toBeTruthy();
   });
 });
