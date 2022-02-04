@@ -33,19 +33,7 @@ export default class CreateSessionInteractor implements CreateGameUseCase {
     );
   }
 
-  private saveSession(session: Session): void {}
-  /*
-
-  create(): OutputData {
-    const date = Date.now();
-
-    const session = new Session(
-
-    );
-
-    sessionGW.trySave(session);
-
-    return;
+  private saveSession(session: Session): void {
+    this.sessionGateway.save(session);
   }
-  */
 }
