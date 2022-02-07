@@ -1,7 +1,7 @@
-import OutputData from "../../output-data/OutputData";
+import SessionOutputData from "../../output-data/SessionOutputData";
 
 export default class PresenterREST {
-  processData(data: OutputData): string {
+  processData(data: SessionOutputData): string {
     return JSON.stringify({
       id: data.getSessionId(),
       state: data.getGameState(),

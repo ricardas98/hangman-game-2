@@ -1,8 +1,5 @@
-import SessionAccessInMemory from "../../../data-in-memory/session-data/SessionAccessInMemory";
-import WordAccessInMemory from "../../../data-in-memory/word-data/WordAccessInMemory";
-import { GameState } from "../../../entities/game-state/GameState";
 import Session from "../../../entities/session/Session";
-import OutputData from "../../../output-data/OutputData";
+import SessionOutputData from "../../../output-data/SessionOutputData";
 import CreateGameUseCase from "../../input-boundary-models/CreateSessionUseCase";
 import SessionGateway from "../../../data-gateway/SessionGateway";
 import WordGateway from ".../../../data-gateway/WordGateway";
@@ -16,12 +13,12 @@ export default class CreateSessionInteractor implements CreateGameUseCase {
     this.wordGateway = wordGateway;
   }
 
-  create(): OutputData {
+  create(): SessionOutputData {
     const session: Session = this.createSession();
 
     this.saveSession(session);
 
-    return new OutputData(session.getId(), session.getState(), [], []);
+    return new SessionOutputData(session.getId(), session.getState(), [], []);
   }
 
   private createSession(): Session {

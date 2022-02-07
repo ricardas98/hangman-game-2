@@ -1,7 +1,7 @@
 import SessionAccessInMemory from "../../../data-in-memory/session-data/SessionAccessInMemory";
 import WordAccessInMemory from "../../../data-in-memory/word-data/WordAccessInMemory";
 import { GameState } from "../../../entities/game-state/GameState";
-import OutputData from "../../../output-data/OutputData";
+import OutputData from "../../../output-data/SessionOutputData";
 import CreateGameUseCase from "../../input-boundary-models/CreateSessionUseCase";
 import CreateSessionInteractor from "./CreateSessionInteractor";
 

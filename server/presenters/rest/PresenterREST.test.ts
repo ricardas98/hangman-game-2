@@ -1,12 +1,12 @@
 import { GameState } from "../../entities/game-state/GameState";
-import OutputData from "../../output-data/OutputData";
+import SessionOutputData from "../../output-data/SessionOutputData";
 import PresenterREST from "./PresenterREST";
 import SessionPresenterREST from "./PresenterREST";
 
 describe("Session presenter REST", () => {
   it("returns output data in json string", () => {
     const presenterRest = new PresenterREST();
-    const data = new OutputData(
+    const data = new SessionOutputData(
       "1",
       GameState.Running,
       ["a", "b"],

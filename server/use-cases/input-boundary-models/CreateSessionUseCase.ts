@@ -1,5 +1,5 @@
-import OutputData from "../../output-data/OutputData";
+import SessionOutputData from "../../output-data/SessionOutputData";
 
-export default interface CreateSessionsUseCase {
-  create(): OutputData;
+export default interface CreateSessionUseCase {
+  create(): SessionOutputData;
 }

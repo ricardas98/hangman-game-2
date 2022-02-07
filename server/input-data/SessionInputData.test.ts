@@ -1,13 +1,13 @@
-import InputData from "./InputData";
+import SessionInputData from "./SessionInputData";
 
 describe("Input data", () => {
-  let data: InputData;
-  function initInputData() {
-    data = new InputData("1", "a");
+  let data: SessionInputData;
+  function initSessionOutputData() {
+    data = new SessionInputData("1", "a");
   }
 
   beforeEach(() => {
-    initInputData();
+    initSessionOutputData();
   });
 
   it("is created", () => {
