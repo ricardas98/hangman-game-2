@@ -1,15 +1,19 @@
+import { mock } from "jest-mock-extended";
+import CreateSessionInteractor from "../../use-cases/implementation/create-session/CreateSessionInteractor";
 import SessionControllerREST from "./SessionControllerREST";
-jest.mock(
-  "../../use-cases/implementation/create-session/CreateSessionInteractor"
-);
-//import CreateSessionInteractor from "../../use-cases/implementation/create-session/CreateSessionInteractor";
 
 describe("Session controller", () => {
+  let controller: SessionControllerREST;
+
+  function createController() {
+    controller = new SessionControllerREST(mock<CreateSessionInteractor>());
+  }
+
+  beforeAll(() => {
+    createController();
+  });
+
   it("is created", () => {
-    const interactor = require("../../use-cases/implementation/create-session/CreateSessionInteractor");
-
-    const res = new SessionControllerREST(interactor);
-
-    expect(res).toBeDefined();
+    expect(controller).toBeDefined();
   });
 });
