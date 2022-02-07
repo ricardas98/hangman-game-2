@@ -1,16 +1,14 @@
-import SessionAccessInMemory from "../../data-in-memory/session-data/SessionAccessInMemory";
-import WordAccessInMemory from "../../data-in-memory/word-data/WordAccessInMemory";
-import CreateSessionInteractor from "../../use-cases/implementation/create-session/CreateSessionInteractor";
 import SessionControllerREST from "./SessionControllerREST";
+jest.mock(
+  "../../use-cases/implementation/create-session/CreateSessionInteractor"
+);
+//import CreateSessionInteractor from "../../use-cases/implementation/create-session/CreateSessionInteractor";
 
 describe("Session controller", () => {
   it("is created", () => {
-    const res = new SessionControllerREST(
-      new CreateSessionInteractor(
-        new SessionAccessInMemory(),
-        new WordAccessInMemory()
-      )
-    );
+    const interactor = require("../../use-cases/implementation/create-session/CreateSessionInteractor");
+
+    const res = new SessionControllerREST(interactor);
 
     expect(res).toBeDefined();
   });

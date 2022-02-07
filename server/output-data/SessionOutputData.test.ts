@@ -1,11 +1,11 @@
 import { GameState } from "../entities/game-state/GameState";
-import OutputData from "./OutputData";
+import SessionOutputData from "./SessionOutputData";
 
 describe("Output data", () => {
-  let outputData: OutputData;
+  let outputData: SessionOutputData;
 
   function initOutputData() {
-    outputData = new OutputData(
+    outputData = new SessionOutputData(
       "123",
       GameState.Running,
       ["a", "b"],

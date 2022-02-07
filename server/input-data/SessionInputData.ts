@@ -1,4 +1,4 @@
-export default class InputData {
+export default class SessionInputData {
   private sessionId: string;
   private guess: string;
 

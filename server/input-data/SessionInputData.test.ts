@@ -1,9 +1,9 @@
-import InputData from "./InputData";
+import SessionInputData from "./SessionInputData";
 
 describe("Input data", () => {
-  let data: InputData;
+  let data: SessionInputData;
   function initInputData() {
-    data = new InputData("1", "a");
+    data = new SessionInputData("1", "a");
   }
 
   beforeEach(() => {
