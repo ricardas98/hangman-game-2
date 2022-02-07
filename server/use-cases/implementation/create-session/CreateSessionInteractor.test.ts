@@ -7,15 +7,27 @@ import CreateSessionInteractor from "./CreateSessionInteractor";
 
 describe("Create session interactor", () => {
   let interactor: CreateGameUseCase;
+  let wordsGW: WordAccessInMemory;
+
+  function initWordsGW() {
+    wordsGW = new WordAccessInMemory();
+  }
 
   function initInteractor() {
     interactor = new CreateSessionInteractor(
       new SessionAccessInMemory(),
-      new WordAccessInMemory()
+      wordsGW
     );
   }
 
+  function addWords() {
+    wordsGW.save("tiger");
+    wordsGW.save("koala");
+  }
+
   beforeEach(() => {
+    initWordsGW();
+    addWords();
     initInteractor();
   });
 
