@@ -21,7 +21,7 @@ export default class CreateSessionInteractor implements CreateGameUseCase {
 
     this.saveSession(session);
 
-    return new OutputData("", GameState.Running, [], []);
+    return new OutputData(session.getId(), session.getState(), [], []);
   }
 
   private createSession(): Session {

@@ -4,20 +4,21 @@ import PresenterREST from "../../presenters/rest/PresenterREST";
 import CreateSessionsUseCase from "../../use-cases/input-boundary-models/CreateSessionUseCase";
 
 export default class SessionControllerREST {
-  private interactorCreate: CreateSessionsUseCase;
+  private createUC: CreateSessionsUseCase;
   private presenter: PresenterREST;
 
-  constructor(interactorCreate: CreateSessionsUseCase) {
-    this.interactorCreate = interactorCreate;
+  constructor(createUC: CreateSessionsUseCase) {
+    this.createUC = createUC;
     this.presenter = new PresenterREST();
   }
 
-  create() {
-    const res = this.interactorCreate.create();
-    this.send(res);
+  create(res: any) {
+    const outputData: OutputData = this.createUC.create();
+    console.log(outputData.getSessionId());
+    this.send(res, 201, outputData);
   }
 
-  private send(data: OutputData): string {
-    return this.presenter.processData(data);
+  private send(res: any, status: number, data: OutputData): void {
+    res.status(status).send(this.presenter.processData(data));
   }
 }
