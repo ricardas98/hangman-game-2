@@ -1,4 +1,4 @@
-import OutputData from "../../output-data/OutputData";
+import OutputData from "../../output-data/SessionOutputData";
 
 export default interface CreateSessionsUseCase {
   create(): OutputData;

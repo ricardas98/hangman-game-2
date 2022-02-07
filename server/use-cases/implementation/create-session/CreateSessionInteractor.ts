@@ -2,7 +2,7 @@ import SessionAccessInMemory from "../../../data-in-memory/session-data/SessionA
 import WordAccessInMemory from "../../../data-in-memory/word-data/WordAccessInMemory";
 import { GameState } from "../../../entities/game-state/GameState";
 import Session from "../../../entities/session/Session";
-import OutputData from "../../../output-data/OutputData";
+import OutputData from "../../../output-data/SessionOutputData";
 import CreateGameUseCase from "../../input-boundary-models/CreateSessionUseCase";
 import SessionGateway from "../../../data-gateway/SessionGateway";
 import WordGateway from ".../../../data-gateway/WordGateway";

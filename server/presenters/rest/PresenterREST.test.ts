@@ -1,5 +1,5 @@
 import { GameState } from "../../entities/game-state/GameState";
-import OutputData from "../../output-data/OutputData";
+import OutputData from "../../output-data/SessionOutputData";
 import PresenterREST from "./PresenterREST";
 import SessionPresenterREST from "./PresenterREST";
 
