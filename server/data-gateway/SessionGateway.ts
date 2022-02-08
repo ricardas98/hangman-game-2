@@ -5,4 +5,5 @@ export default interface SessionGateway {
   save(session: Session): void;
   delete(id: string): void;
   fetchAll(sessions: Session[]): Session[];
+  generateSessionId(date: number): string;
 }
