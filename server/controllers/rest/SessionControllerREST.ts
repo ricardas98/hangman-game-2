@@ -9,8 +9,8 @@ export default class SessionControllerREST {
   private createSessionsUC: CreateSessionsUseCase;
   private presenter: SessionB2RConverter;
 
-  constructor(createSessionCallBack: CreateSessionInteractor) {
-    this.createSessionsUC = createSessionCallBack;
+  constructor(createSessionInteractor: CreateSessionInteractor) {
+    this.createSessionsUC = createSessionInteractor;
     this.presenter = new SessionB2RConverter();
   }
 
