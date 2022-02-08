@@ -34,10 +34,6 @@ describe("Create session interactor", () => {
     initInteractor();
   });
 
-  it("creates interactor", () => {
-    expect(interactor).toBeDefined();
-  });
-
   it("creates game", () => {
     sessionAccessInMemory.generateSessionId.mockReturnValue("1");
     sessionAccessInMemory.save.mockImplementation(() => {});
