@@ -43,10 +43,10 @@ describe("Session controller", () => {
     expect(controller).toBeDefined();
   });
 
-  it("created a new session", async () => {
+  it("created a new session", () => {
     const { res } = getMockRes();
 
-    await controller.create(res);
+    controller.create(res);
 
     expect(res.status).toBeCalledWith(201);
     expect(res.send).toBeCalledWith(
