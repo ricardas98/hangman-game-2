@@ -4,7 +4,7 @@ import CreateSessionInteractor from "../../use-cases/implementation/create-sessi
 import SessionControllerREST from "./SessionControllerREST";
 import SessionOutputData from "../../output-data/SessionOutputData";
 import { GameState } from "../../entities/game-state/GameState";
-import DataConverterREST from "../../presenters/rest/DataConverterREST";
+import SessionB2RConverter from "../../presenters/rest/SessionB2RConverter";
 import { getMockReq, getMockRes } from "@jest-mock/express";
 
 jest.mock(
@@ -63,7 +63,7 @@ describe("Session controller", () => {
 
     expect(res.status).toBeCalledWith(201);
     expect(res.send).toBeCalledWith(
-      new DataConverterREST().processData(outputData)
+      new SessionB2RConverter().processData(outputData)
     );
   });
 });

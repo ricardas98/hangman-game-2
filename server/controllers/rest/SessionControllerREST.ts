@@ -1,17 +1,17 @@
 import SessionInputData from "../../input-data/SessionInputData";
 import OutputData from "../../output-data/SessionOutputData";
-import DataConverterREST from "../../presenters/rest/DataConverterREST";
+import SessionB2RConverter from "../../presenters/rest/SessionB2RConverter";
 import CreateSessionInteractor from "../../use-cases/implementation/create-session/CreateSessionInteractor";
 import CreateSessionsUseCase from "../../use-cases/input-boundary-models/CreateSessionUseCase";
 import { Response } from "express";
 
 export default class SessionControllerREST {
   private createSessionsUC: CreateSessionsUseCase;
-  private presenter: DataConverterREST;
+  private presenter: SessionB2RConverter;
 
   constructor(createSessionCallBack: CreateSessionInteractor) {
     this.createSessionsUC = createSessionCallBack;
-    this.presenter = new DataConverterREST();
+    this.presenter = new SessionB2RConverter();
   }
 
   create(res: Response): void {
