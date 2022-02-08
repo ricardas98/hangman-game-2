@@ -14,7 +14,6 @@ export default class CreateSessionInteractor implements CreateGameUseCase {
     this.wordGateway = wordGateway;
   }
 
-  //not fully implemented
   create(): OutputData {
     const session: Session = this.createSession();
 
