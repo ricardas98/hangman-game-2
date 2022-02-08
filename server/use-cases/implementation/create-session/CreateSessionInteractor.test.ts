@@ -4,41 +4,43 @@ import { GameState } from "../../../entities/game-state/GameState";
 import OutputData from "../../../output-data/SessionOutputData";
 import CreateGameUseCase from "../../input-boundary-models/CreateSessionUseCase";
 import CreateSessionInteractor from "./CreateSessionInteractor";
+import { MockProxy, mock } from "jest-mock-extended";
+import SessionGateway from "../../../data-gateway/SessionGateway";
+import WordGateway from "../../../data-gateway/WordGateway";
 
 describe("Create session interactor", () => {
   let interactor: CreateGameUseCase;
-  let wordsGW: WordAccessInMemory;
+  let sessionAccessInMemory: MockProxy<SessionGateway>;
+  let wordAccessInMemory: MockProxy<WordGateway>;
 
-  function initWordsGW() {
-    wordsGW = new WordAccessInMemory();
+  function buildMockSessionAccessInMemory() {
+    sessionAccessInMemory = mock<SessionGateway>();
+  }
+
+  function buildMockWordAccessInMemory() {
+    wordAccessInMemory = mock<WordGateway>();
   }
 
   function initInteractor() {
     interactor = new CreateSessionInteractor(
-      new SessionAccessInMemory(),
-      wordsGW
+      sessionAccessInMemory,
+      wordAccessInMemory
     );
   }
 
-  function addWords() {
-    wordsGW.save("tiger");
-    wordsGW.save("koala");
-  }
-
   beforeEach(() => {
-    initWordsGW();
-    addWords();
+    buildMockSessionAccessInMemory();
+    buildMockWordAccessInMemory();
     initInteractor();
   });
 
-  it("creates interactor", () => {
-    expect(interactor).toBeDefined();
-  });
-
   it("creates game", () => {
+    sessionAccessInMemory.generateSessionId.mockReturnValue("1");
+    sessionAccessInMemory.save.mockImplementation(() => {});
+    wordAccessInMemory.getRandomWord.mockReturnValue("cat");
     const res: OutputData = interactor.create();
 
-    expect(res.getSessionId()).toBeDefined();
+    expect(res.getSessionId()).toBe("1");
     expect(res.getGameState()).toBe(GameState.Running);
     expect(res.getMatches()).toEqual([]);
     expect(res.getMisses()).toEqual([]);

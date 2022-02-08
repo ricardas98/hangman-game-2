@@ -1,5 +1,6 @@
+import { GameState } from "../../../entities/game-state/GameState";
 import Session from "../../../entities/session/Session";
-import SessionOutputData from "../../../output-data/SessionOutputData";
+import OutputData from "../../../output-data/SessionOutputData";
 import CreateGameUseCase from "../../input-boundary-models/CreateSessionUseCase";
 import SessionGateway from "../../../data-gateway/SessionGateway";
 import WordGateway from ".../../../data-gateway/WordGateway";
@@ -13,12 +14,12 @@ export default class CreateSessionInteractor implements CreateGameUseCase {
     this.wordGateway = wordGateway;
   }
 
-  create(): SessionOutputData {
+  create(): OutputData {
     const session: Session = this.createSession();
 
-    this.saveSession(session);
+    this.sessionGateway.save(session);
 
-    return new SessionOutputData(session.getId(), session.getState(), [], []);
+    return new OutputData(session.getId(), session.getState(), [], []);
   }
 
   private createSession(): Session {
@@ -28,9 +29,5 @@ export default class CreateSessionInteractor implements CreateGameUseCase {
       timestamp,
       this.wordGateway.getRandomWord()
     );
-  }
-
-  private saveSession(session: Session): void {
-    this.sessionGateway.save(session);
   }
 }
