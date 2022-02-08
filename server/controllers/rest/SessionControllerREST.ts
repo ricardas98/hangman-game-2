@@ -1,23 +1,24 @@
 import SessionInputData from "../../input-data/SessionInputData";
-import SessionOutputData from "../../output-data/SessionOutputData";
-import PresenterREST from "../../presenters/rest/PresenterREST";
+import OutputData from "../../output-data/SessionOutputData";
+import SessionB2RConverter from "../../presenters/rest/SessionB2RConverter";
+import CreateSessionInteractor from "../../use-cases/implementation/create-session/CreateSessionInteractor";
 import CreateSessionsUseCase from "../../use-cases/input-boundary-models/CreateSessionUseCase";
+import { Response } from "express";
 
 export default class SessionControllerREST {
-  private createUC: CreateSessionsUseCase;
-  private presenter: PresenterREST;
+  private createSessionsUC: CreateSessionsUseCase;
+  private converter: SessionB2RConverter;
 
-  constructor(createUC: CreateSessionsUseCase) {
-    this.createUC = createUC;
-    this.presenter = new PresenterREST();
+  constructor(
+    createSessionInteractor: CreateSessionsUseCase,
+    converter: SessionB2RConverter
+  ) {
+    this.createSessionsUC = createSessionInteractor;
+    this.converter = converter;
   }
 
-  create(res: any) {
-    const sessionOutputData: SessionOutputData = this.createUC.create();
-    this.send(res, 201, sessionOutputData);
-  }
-
-  private send(res: any, status: number, data: SessionOutputData): void {
-    res.status(status).send(this.presenter.processData(data));
+  create(res: Response): void {
+    const sessionData = this.createSessionsUC.create();
+    res.status(201).send(this.converter.processData(sessionData));
   }
 }

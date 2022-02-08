@@ -5,12 +5,13 @@ import CreateSessionInteractor from "./use-cases/implementation/create-session/C
 const sessionGw = new SessionAccessInMemory();
 const wordGw = new WordAccessInMemory();
 
+export const createSessionInteractor = new CreateSessionInteractor(
+  sessionGw,
+  wordGw
+);
+
 wordGw.save("parrot");
 wordGw.save("hamster");
 wordGw.save("tiger");
 wordGw.save("koala");
 wordGw.save("monkey");
-
-export const createSessionInteractor = () => {
-  return new CreateSessionInteractor(sessionGw, wordGw);
-};
