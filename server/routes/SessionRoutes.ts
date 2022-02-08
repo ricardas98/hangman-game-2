@@ -1,12 +1,12 @@
 import { createSessionInteractor } from "../Configuration";
-import SessionControllerREST from "../controllers/rest/SessionControllerREST";
-import DataConverterREST from "../presenters/rest/SessionB2RConverter";
+import SessionCreateControllerREST from "../controllers/rest/create/SessionCreateControllerREST";
+import SessionB2RConverter from "../presenters/rest/SessionB2RConverter";
 const router = require("express").Router();
 
 router.post("/", (req: any, res: any) => {
-  new SessionControllerREST(
+  new SessionCreateControllerREST(
     createSessionInteractor,
-    new DataConverterREST()
+    new SessionB2RConverter()
   ).create(res);
 });
 
