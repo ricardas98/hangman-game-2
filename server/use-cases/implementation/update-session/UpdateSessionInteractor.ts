@@ -14,10 +14,19 @@ export default class UpdateSessionInteractor implements UpdateSessionUseCase {
 
   update(data: SessionInputData): SessionOutputData {
     const session = this.sessionGateway.findById(data.getSessionId());
-    return new SessionOutputData("", GameState.Running, [], []);
-  }
 
-  private saveSession(session: Session): void {
-    this.sessionGateway.save(session);
+    session?.handleGuess(data.getGuess());
+
+    this.sessionGateway.delete(data.getSessionId());
+    session && this.sessionGateway.save(session);
+
+    return session
+      ? new SessionOutputData(
+          session?.getId(),
+          session?.getState(),
+          session?.getGame().getMatches(),
+          session?.getGame().getMisses()
+        )
+      : new SessionOutputData("", GameState.Running, [], []);
   }
 }
