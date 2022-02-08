@@ -40,8 +40,11 @@ describe("Session create controller", () => {
     controller.create(res);
 
     expect(res.status).toBeCalledWith(201);
-    expect(res.send).toBeCalledWith(
-      new SessionB2RConverter().processData(outputData)
-    );
+    expect(res.json).toBeCalledWith({
+      id: "1",
+      state: 0,
+      matches: [],
+      misses: [],
+    });
   });
 });

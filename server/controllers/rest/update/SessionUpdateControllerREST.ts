@@ -19,6 +19,6 @@ export default class SessionUpdateControllerREST {
     const inputData = new SessionInputData(req.params.id, req.body.guess);
     const outputData = this.updateSessionUC.update(inputData);
 
-    res.status(200).send(this.converter.processData(outputData));
+    res.status(200).json(this.converter.processData(outputData));
   }
 }

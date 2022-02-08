@@ -9,13 +9,16 @@ describe("Session presenter REST", () => {
       "1",
       GameState.Running,
       ["a", "b"],
-      ["x", " y", "z"]
+      ["x", "y", "z"]
     );
 
     const res = presenterRest.processData(data);
 
-    expect(res).toBe(
-      '{"id":"1","state":0,"matches":["a","b"],"misses":["x"," y","z"]}'
-    );
+    expect(res).toEqual({
+      id: "1",
+      state: 0,
+      matches: ["a", "b"],
+      misses: ["x", "y", "z"],
+    });
   });
 });

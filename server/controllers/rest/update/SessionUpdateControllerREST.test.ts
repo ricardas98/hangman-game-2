@@ -39,18 +39,15 @@ describe("Session update controller", () => {
       body: { guess: "a" },
     });
     const { res } = getMockRes();
-    const outputData = new SessionOutputData(
-      "123",
-      GameState.Running,
-      ["a"],
-      ["b", "c"]
-    );
 
     controller.update(req, res);
 
     expect(res.status).toBeCalledWith(200);
-    expect(res.send).toBeCalledWith(
-      new SessionB2RConverter().processData(outputData)
-    );
+    expect(res.json).toBeCalledWith({
+      id: "123",
+      state: 0,
+      matches: ["a"],
+      misses: ["b", "c"],
+    });
   });
 });
