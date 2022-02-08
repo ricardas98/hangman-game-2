@@ -1,10 +1,9 @@
 import Session from "../../../entities/session/Session";
 import SessionOutputData from "../../../output-data/SessionOutputData";
-import UpdateSessionUseCase from "../../input-boundary-models/UpdateSessionUseCase";
 import SessionGateway from "../../../data-gateway/SessionGateway";
-import WordGateway from ".../../../data-gateway/WordGateway";
 import { GameState } from "../../../entities/game-state/GameState";
 import SessionInputData from "../../../input-data/SessionInputData";
+import UpdateSessionUseCase from "../../input-boundary-models/UpdateSessionUseCase";
 
 export default class UpdateSessionInteractor implements UpdateSessionUseCase {
   private sessionGateway: SessionGateway;

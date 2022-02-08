@@ -1,6 +1,7 @@
 import SessionAccessInMemory from "../../../data-in-memory/session-data/SessionAccessInMemory";
 import WordAccessInMemory from "../../../data-in-memory/word-data/WordAccessInMemory";
 import { GameState } from "../../../entities/game-state/GameState";
+import SessionInputData from "../../../input-data/SessionInputData";
 import OutputData from "../../../output-data/SessionOutputData";
 import UpdateGameUseCase from "../../input-boundary-models/UpdateSessionUseCase";
 import UpdateSessionInteractor from "./UpdateSessionInteractor";
@@ -21,7 +22,7 @@ describe("Create session interactor", () => {
   });
 
   it("creates game", () => {
-    const res: OutputData = interactor.update();
+    const res: OutputData = interactor.update(new SessionInputData("1", "a"));
 
     expect(res.getSessionId()).toBeDefined();
     expect(res.getGameState()).toBe(GameState.Running);
