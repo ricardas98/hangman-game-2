@@ -1,5 +1,5 @@
-import InputData from "../../input-data/InputData";
-import OutputData from "../../output-data/OutputData";
+import SessionInputData from "../../input-data/SessionInputData";
+import SessionOutputData from "../../output-data/SessionOutputData";
 import PresenterREST from "../../presenters/rest/PresenterREST";
 import CreateSessionsUseCase from "../../use-cases/input-boundary-models/CreateSessionUseCase";
 
@@ -13,12 +13,11 @@ export default class SessionControllerREST {
   }
 
   create(res: any) {
-    const outputData: OutputData = this.createUC.create();
-    console.log(outputData.getSessionId());
-    this.send(res, 201, outputData);
+    const sessionOutputData: SessionOutputData = this.createUC.create();
+    this.send(res, 201, sessionOutputData);
   }
 
-  private send(res: any, status: number, data: OutputData): void {
+  private send(res: any, status: number, data: SessionOutputData): void {
     res.status(status).send(this.presenter.processData(data));
   }
 }
