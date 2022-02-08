@@ -6,7 +6,8 @@
   "scripts": {
     "start": "tsnd --respawn index.ts",
     "build": "tsc --project ./",
-    "test": "jest"
+    "test": "jest",
+    "testc": "jest --coverage"
   },
   "keywords": [],
   "author": "",

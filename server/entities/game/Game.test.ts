@@ -78,4 +78,33 @@ describe("Game entity", () => {
     expect(res.getMatches()).toEqual(["a"]);
     expect(res.getMisses()).toEqual([]);
   });
+
+  it("sets game to lost when there are 10 misses", () => {
+    ["x", "y", "z", "q", "r", "u", "o", "p", "b", "n"].forEach((l) => {
+      game = game.guess(l);
+    });
+
+    expect(game.getState()).toEqual(GameState.Lost);
+    expect(game.getMisses()).toEqual([
+      "x",
+      "y",
+      "z",
+      "q",
+      "r",
+      "u",
+      "o",
+      "p",
+      "b",
+      "n",
+    ]);
+  });
+
+  it("sets game to won the word is guessed", () => {
+    ["t", "c", "a"].forEach((l) => {
+      game = game.guess(l);
+    });
+
+    expect(game.getState()).toEqual(GameState.Won);
+    expect(game.getMatches()).toEqual(["t", "c", "a"]);
+  });
 });
