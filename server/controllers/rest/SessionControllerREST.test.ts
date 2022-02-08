@@ -1,3 +1,4 @@
+import { createSessionInteractor } from "../../Configuration";
 import Session from "../../entities/session/Session";
 import CreateSessionInteractor from "../../use-cases/implementation/create-session/CreateSessionInteractor";
 import SessionControllerREST from "./SessionControllerREST";
@@ -22,7 +23,7 @@ describe("Session controller", () => {
   let interactor;
 
   function createController() {
-    controller = new SessionControllerREST(new CreateSessionInteractor());
+    controller = new SessionControllerREST(createSessionInteractor());
   }
 
   beforeAll(() => {
