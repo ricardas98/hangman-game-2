@@ -7,21 +7,6 @@ import { GameState } from "../../entities/game-state/GameState";
 import SessionB2RConverter from "../../presenters/rest/SessionB2RConverter";
 import { getMockReq, getMockRes } from "@jest-mock/express";
 
-jest.mock(
-  "../../use-cases/implementation/create-session/CreateSessionInteractor",
-  () => {
-    return {
-      CreateSessionInteractor: jest.fn().mockImplementation(() => {
-        return {
-          create: () => {
-            return new Session("1", 134446, "cat");
-          },
-        };
-      }),
-    };
-  }
-);
-
 describe("Session controller", () => {
   let controller: SessionControllerREST;
   let outputData: SessionOutputData;
