@@ -7,15 +7,18 @@ import { Response } from "express";
 
 export default class SessionControllerREST {
   private createSessionsUC: CreateSessionsUseCase;
-  private presenter: SessionB2RConverter;
+  private converter: SessionB2RConverter;
 
-  constructor(createSessionInteractor: CreateSessionInteractor) {
+  constructor(
+    createSessionInteractor: CreateSessionsUseCase,
+    converter: SessionB2RConverter
+  ) {
     this.createSessionsUC = createSessionInteractor;
-    this.presenter = new SessionB2RConverter();
+    this.converter = converter;
   }
 
   create(res: Response): void {
     const sessionData = this.createSessionsUC.create();
-    res.status(201).send(this.presenter.processData(sessionData));
+    res.status(201).send(this.converter.processData(sessionData));
   }
 }

@@ -20,10 +20,13 @@ describe("Session controller", () => {
   }
 
   function createController() {
-    controller = new SessionControllerREST(mockInteractor());
+    controller = new SessionControllerREST(
+      mockInteractor(),
+      new SessionB2RConverter()
+    );
   }
 
-  function setOutputData() {
+  function BuildOutputData() {
     outputData = new SessionOutputData(
       "1",
       GameState.Running,
@@ -33,7 +36,7 @@ describe("Session controller", () => {
   }
 
   beforeEach(() => {
-    setOutputData();
+    BuildOutputData();
     createController();
   });
 
