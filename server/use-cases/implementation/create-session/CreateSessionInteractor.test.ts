@@ -2,14 +2,14 @@ import SessionAccessInMemory from "../../../data-in-memory/session-data/SessionA
 import WordAccessInMemory from "../../../data-in-memory/word-data/WordAccessInMemory";
 import { GameState } from "../../../entities/game-state/GameState";
 import OutputData from "../../../output-data/SessionOutputData";
-import CreateGameUseCase from "../../input-boundary-models/CreateSessionUseCase";
+import CreateSessionUseCase from "../../input-boundary-models/CreateSessionUseCase";
 import CreateSessionInteractor from "./CreateSessionInteractor";
 import { MockProxy, mock } from "jest-mock-extended";
 import SessionGateway from "../../../data-gateway/SessionGateway";
 import WordGateway from "../../../data-gateway/WordGateway";
 
 describe("Create session interactor", () => {
-  let interactor: CreateGameUseCase;
+  let interactor: CreateSessionUseCase;
   let sessionAccessInMemory: MockProxy<SessionGateway>;
   let wordAccessInMemory: MockProxy<WordGateway>;
 

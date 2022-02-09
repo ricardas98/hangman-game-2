@@ -5,7 +5,6 @@ import { mock } from "jest-mock-extended";
 import SessionOutputData from "../../../output-data/SessionOutputData";
 import { GameState } from "../../../entities/game-state/GameState";
 import { getMockReq, getMockRes } from "@jest-mock/express";
-import { Request, Response } from "express";
 
 describe("Session update controller", () => {
   let controller: SessionUpdateControllerREST;

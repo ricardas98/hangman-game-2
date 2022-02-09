@@ -1,4 +1,4 @@
-export default class SessionInputData {
+export default class BoundaryUpdateSession {
   private sessionId: string;
   private guess: string;
 

@@ -1,4 +1,4 @@
-import SessionInputData from "../../../input-data/SessionInputData";
+import BoundaryUpdateSession from "../../../input-data/BoundaryUpdateSession";
 import SessionB2RConverter from "../../../presenters/rest/SessionB2RConverter";
 import UpdateSessionUseCase from "../../../use-cases/input-boundary-models/UpdateSessionUseCase";
 import { Request, Response } from "express";
@@ -16,7 +16,7 @@ export default class SessionUpdateControllerREST {
   }
 
   update(req: Request, res: Response): void {
-    const inputData = new SessionInputData(req.params.id, req.body.guess);
+    const inputData = new BoundaryUpdateSession(req.params.id, req.body.guess);
     const outputData = this.updateSessionUC.update(inputData);
 
     res.status(200).json(this.converter.processData(outputData));
