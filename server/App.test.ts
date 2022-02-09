@@ -17,20 +17,18 @@ describe("App", () => {
     game = await request(app.getApp()).post("/api/sessions").send();
   }
 
-  function buildSessionRouter() {
-    sessionRouter = new SessionRouter(
-      createSessionInteractor,
-      updateSessionInteractor,
-      deleteSessionInteractor
+  function buildApp() {
+    app = new App(
+      new SessionRouter(
+        createSessionInteractor,
+        updateSessionInteractor,
+        deleteSessionInteractor
+      ).getRouter(),
+      5005
     );
   }
 
-  function buildApp() {
-    app = new App(sessionRouter.getRouter(), 5005);
-  }
-
   beforeEach(() => {
-    buildSessionRouter();
     buildApp();
     createGame();
   });
@@ -136,7 +134,7 @@ describe("App", () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.body.id).toBeDefined();
-    console.log(res.body.misses);
+
     expect(res.body.state).toBe(1);
     expect(res.body.matches).toEqual(["p", "a", "r", "o", "t"]);
     expect(res.body.misses).toEqual([]);
