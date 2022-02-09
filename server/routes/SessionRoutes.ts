@@ -1,11 +1,13 @@
 import {
   createSessionInteractor,
+  deleteSessionInteractor,
   updateSessionInteractor,
 } from "../Configuration";
 import SessionCreateControllerREST from "../controllers/rest/create/SessionCreateControllerREST";
 import SessionB2RConverter from "../presenters/rest/SessionB2RConverter";
 import { Request, Response } from "express";
 import SessionUpdateControllerREST from "../controllers/rest/update/SessionUpdateControllerREST";
+import SessionDeleteControllerREST from "../controllers/rest/delete/SessionDeleteControllerREST";
 
 const router = require("express").Router();
 
@@ -21,6 +23,10 @@ router.put("/:id", (req: Request, res: Response) => {
     updateSessionInteractor,
     new SessionB2RConverter()
   ).update(req, res);
+});
+
+router.delete("/:id", (req: Request, res: Response) => {
+  new SessionDeleteControllerREST(deleteSessionInteractor).delete(req, res);
 });
 
 export default router;
