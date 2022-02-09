@@ -1,9 +1,22 @@
 import express from "express";
-import router from "./routes/SessionRoutes";
-const app = express();
 
-app.use(express.json());
+export default class App {
+  private app: any;
+  private port: number;
 
-app.use("/api/sessions", router);
+  constructor(router: any, port: number) {
+    this.port = port;
+    this.app = express();
+    this.app.use(express.json());
+    this.app.use("/api/sessions", router);
+  }
 
-export default app;
+  listen() {
+    this.app.listen(this.port, () => {
+      console.log(`Server is running on port ${this.port}`);
+    });
+  }
+  getApp() {
+    return this.app;
+  }
+}

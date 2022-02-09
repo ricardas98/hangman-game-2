@@ -1,19 +1,46 @@
-import app from "./App";
+import App from "./App";
+import SessionRouter from "./routes/SessionRouter";
+import {
+  createSessionInteractor,
+  deleteSessionInteractor,
+  updateSessionInteractor,
+} from "./ConfigurationTest";
+
 const request = require("supertest");
 
 describe("App", () => {
+  let app: App;
   let game: any;
+  let sessionRouter: SessionRouter;
 
   async function createGame() {
-    game = await request(app).post("/api/sessions").send();
+    game = await request(app.getApp()).post("/api/sessions").send();
+  }
+
+  function buildSessionRouter() {
+    sessionRouter = new SessionRouter(
+      createSessionInteractor,
+      updateSessionInteractor,
+      deleteSessionInteractor
+    );
+  }
+
+  function buildApp() {
+    app = new App(sessionRouter.getRouter(), 5005);
   }
 
   beforeEach(() => {
+    buildSessionRouter();
+    buildApp();
     createGame();
   });
 
+  it("Sum 1", () => {
+    expect(1).toBe(1);
+  });
+
   it("creates a new session", async () => {
-    const res = await request(app).post("/api/sessions").send();
+    const res = await request(app.getApp()).post("/api/sessions").send();
 
     expect(res.statusCode).toBe(201);
     expect(res.body.id).toBeDefined();
@@ -23,7 +50,7 @@ describe("App", () => {
   });
 
   it("updates session", async () => {
-    const res = await request(app)
+    const res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "a" });
 
@@ -35,43 +62,42 @@ describe("App", () => {
   });
 
   it("updates session to lost", async () => {
-    let res = await request(app)
+    let res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "x" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "x" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "c" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "v" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "b" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "n" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "m" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "q" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "w" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "e" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "f" });
 
     expect(res.statusCode).toBe(200);
     expect(res.body.id).toBeDefined();
-    console.log(res.body.misses);
     expect(res.body.state).toBe(2);
     expect(res.body.matches).toEqual([]);
     expect(res.body.misses).toEqual([
@@ -89,22 +115,22 @@ describe("App", () => {
   });
 
   it("updates session to won", async () => {
-    let res = await request(app)
+    let res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "p" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "p" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "a" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "r" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "o" });
-    res = await request(app)
+    res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "t" });
 
@@ -117,7 +143,7 @@ describe("App", () => {
   });
 
   it("deletes session", async () => {
-    const res = await request(app)
+    const res = await request(app.getApp())
       .delete(`/api/sessions/${game.body.id}`)
       .send();
 
