@@ -8,10 +8,6 @@ const sessionGw = new SessionAccessInMemory();
 const wordGw = new WordAccessInMemory();
 
 wordGw.save("parrot");
-wordGw.save("hamster");
-wordGw.save("tiger");
-wordGw.save("koala");
-wordGw.save("monkey");
 
 export const createSessionInteractor = new CreateSessionInteractor(
   sessionGw,
