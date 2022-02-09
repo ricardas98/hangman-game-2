@@ -1,7 +1,4 @@
-import SessionInputData from "../../input-data/SessionInputData";
-import OutputData from "../../output-data/SessionOutputData";
 import SessionB2RConverter from "../../presenters/rest/SessionB2RConverter";
-import CreateSessionInteractor from "../../use-cases/implementation/create-session/CreateSessionInteractor";
 import CreateSessionsUseCase from "../../use-cases/input-boundary-models/CreateSessionUseCase";
 import { Response } from "express";
 

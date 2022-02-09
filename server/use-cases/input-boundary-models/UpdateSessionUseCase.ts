@@ -1,5 +1,5 @@
-import SessionOutputData from "../../output-data/SessionOutputData";
+import BoundarySessionOutput from "../../output-data/BoundarySessionOutput";
 
 export default interface UpdateSessionUseCase {
-  update(): SessionOutputData;
+  update(): BoundarySessionOutput;
 }

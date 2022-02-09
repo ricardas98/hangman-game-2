@@ -1,7 +1,7 @@
-import OutputData from "../../output-data/SessionOutputData";
+import BoundarySessionOutput from "../../output-data/BoundarySessionOutput";
 
 export default class DataConverterREST {
-  processData(data: OutputData): string {
+  processData(data: BoundarySessionOutput): string {
     return JSON.stringify({
       id: data.getSessionId(),
       state: data.getGameState(),
