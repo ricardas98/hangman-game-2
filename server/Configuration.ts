@@ -7,7 +7,26 @@ import UpdateSessionInteractor from "./use-cases/implementation/update-session/U
 const sessionGw = new SessionAccessInMemory();
 const wordGw = new WordAccessInMemory();
 
-wordGw.save("parrot");
+[
+  "dog",
+  "cat",
+  "parrot",
+  "hamster",
+  "elephant",
+  "mouse",
+  "fly",
+  "giraffe",
+  "panda",
+  "tiger",
+  "koala",
+  "leopard",
+  "racoon",
+  "mole",
+  "deer",
+  "monkey",
+].forEach((word) => {
+  wordGw.save(word);
+});
 
 export const createSessionInteractor = new CreateSessionInteractor(
   sessionGw,
