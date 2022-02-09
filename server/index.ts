@@ -1,11 +1,11 @@
 const serverApp = require("./App");
-import App from "./App";
+import App from "./src/App";
 import {
   createSessionInteractor,
   deleteSessionInteractor,
   updateSessionInteractor,
-} from "./Configuration";
-import SessionRouter from "./routes/SessionRouter";
+} from "./src/Configuration";
+import SessionRouter from "./src/SessionRouter";
 
 const port = 5005;
 
