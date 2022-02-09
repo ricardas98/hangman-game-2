@@ -12,7 +12,13 @@ describe("Session update controller", () => {
   function mockInteractor() {
     const interactor = mock<UpdateSessionUseCase>();
     interactor.update.mockReturnValue(
-      new SessionOutputData("123", GameState.Running, ["a"], ["b", "c"])
+      new SessionOutputData(
+        "123",
+        GameState.Running,
+        ["a"],
+        ["b", "c"],
+        new Map<number, string>([[0, "a"]])
+      )
     );
     return interactor;
   }
@@ -47,6 +53,7 @@ describe("Session update controller", () => {
       state: 0,
       matches: ["a"],
       misses: ["b", "c"],
+      resultWord: [[0, "a"]],
     });
   });
 });

@@ -16,17 +16,25 @@ export default class UpdateSessionInteractor implements UpdateSessionUseCase {
     const session = this.sessionGateway.findById(data.getSessionId());
 
     session?.handleGuess(data.getGuess());
+    //console.log(session?.getGame().getResultWord());
 
     this.sessionGateway.delete(data.getSessionId());
     session && this.sessionGateway.save(session);
 
-    return session
+    return session !== undefined
       ? new SessionOutputData(
           session?.getId(),
           session?.getState(),
           session?.getGame().getMatches(),
-          session?.getGame().getMisses()
+          session?.getGame().getMisses(),
+          session?.getGame().getResultWord()
         )
-      : new SessionOutputData("", GameState.Running, [], []);
+      : new SessionOutputData(
+          "",
+          GameState.Running,
+          [],
+          [],
+          new Map<number, string>([])
+        );
   }
 }

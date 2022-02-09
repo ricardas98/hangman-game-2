@@ -13,7 +13,13 @@ describe("Session create controller", () => {
   function mockInteractor() {
     const interactor = mock<CreateSessionsUseCase>();
     interactor.create.mockReturnValue(
-      new SessionOutputData("1", GameState.Running, [], [])
+      new SessionOutputData(
+        "1",
+        GameState.Running,
+        [],
+        [],
+        new Map<number, string>([])
+      )
     );
     return interactor;
   }
@@ -35,7 +41,13 @@ describe("Session create controller", () => {
 
   it("created a new session", () => {
     const { res } = getMockRes();
-    const outputData = new SessionOutputData("1", GameState.Running, [], []);
+    const outputData = new SessionOutputData(
+      "1",
+      GameState.Running,
+      [],
+      [],
+      new Map<number, string>([])
+    );
 
     controller.create(res);
 
@@ -45,6 +57,7 @@ describe("Session create controller", () => {
       state: 0,
       matches: [],
       misses: [],
+      resultWord: [],
     });
   });
 });

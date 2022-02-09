@@ -9,7 +9,11 @@ describe("Session presenter REST", () => {
       "1",
       GameState.Running,
       ["a", "b"],
-      ["x", "y", "z"]
+      ["x", "y", "z"],
+      new Map<number, string>([
+        [0, "a"],
+        [3, "b"],
+      ])
     );
 
     const res = presenterRest.processData(data);
@@ -19,6 +23,10 @@ describe("Session presenter REST", () => {
       state: 0,
       matches: ["a", "b"],
       misses: ["x", "y", "z"],
+      resultWord: [
+        [0, "a"],
+        [3, "b"],
+      ],
     });
   });
 });

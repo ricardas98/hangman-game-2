@@ -7,6 +7,7 @@ export default class SessionB2RConverter {
       state: data.getGameState(),
       matches: data.getMatches(),
       misses: data.getMisses(),
+      resultWord: Array.from(data.getResultWord()),
     };
   }
 }
