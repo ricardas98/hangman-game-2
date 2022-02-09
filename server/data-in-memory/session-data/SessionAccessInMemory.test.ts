@@ -1,3 +1,4 @@
+import { GameState } from "../../entities/game-state/GameState";
 import Session from "../../entities/session/Session";
 import DoesNotExistException from "../../exceptions/DoesNotExistException";
 import IdDuplicateException from "../../exceptions/IdDuplicateException";
@@ -19,6 +20,14 @@ describe("Game data access in memory", () => {
   beforeEach(() => {
     initDataAccess();
     addSessions();
+  });
+
+  it("finds session by id", () => {
+    const res = dataAccess.findById("2");
+
+    expect(res?.getId()).toBe("2");
+    expect(res?.getState()).toBe(GameState.Running);
+    expect(res?.getGame().getWord()).toBe("dog");
   });
 
   it("saves new session to memory", () => {

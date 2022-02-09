@@ -1,5 +1,5 @@
-import OutputData from "../../output-data/SessionOutputData";
+import BoundarySessionOutput from "../../output-data/BoundarySessionOutput";
 
-export default interface CreateSessionsUseCase {
-  create(): OutputData;
+export default interface CreateSessionUseCase {
+  create(): BoundarySessionOutput;
 }

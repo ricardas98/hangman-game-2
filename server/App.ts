@@ -1,4 +1,7 @@
-const express = require("express");
+import express from "express";
+import router from "./routes/SessionRoutes";
 const app = express();
 
-//const gameRoute = require("./routes/games");
+app.use("/api/sessions", router);
+
+export default app;

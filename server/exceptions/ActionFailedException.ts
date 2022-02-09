@@ -6,6 +6,6 @@ export default class ActionFailedException extends Error {
     actionType: ActionType,
     msg: string = "action failed"
   ) {
-    super(`Object (id: ${id})` + msg + `(action type: ${actionType})`);
+    super(`Object (id: ${id}) ` + msg + ` (action type: ${actionType})`);
   }
 }
