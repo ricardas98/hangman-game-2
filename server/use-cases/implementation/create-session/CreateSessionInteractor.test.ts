@@ -1,7 +1,7 @@
 import SessionAccessInMemory from "../../../data-in-memory/session-data/SessionAccessInMemory";
 import WordAccessInMemory from "../../../data-in-memory/word-data/WordAccessInMemory";
 import { GameState } from "../../../entities/game-state/GameState";
-import OutputData from "../../../output-data/SessionOutputData";
+import BoundarySessionOutput from "../../../output-data/BoundarySessionOutput";
 import CreateGameUseCase from "../../input-boundary-models/CreateSessionUseCase";
 import CreateSessionInteractor from "./CreateSessionInteractor";
 import { MockProxy, mock } from "jest-mock-extended";
@@ -38,7 +38,7 @@ describe("Create session interactor", () => {
     sessionAccessInMemory.generateSessionId.mockReturnValue("1");
     sessionAccessInMemory.save.mockImplementation(() => {});
     wordAccessInMemory.getRandomWord.mockReturnValue("cat");
-    const res: OutputData = interactor.create();
+    const res: BoundarySessionOutput = interactor.create();
 
     expect(res.getSessionId()).toBe("1");
     expect(res.getGameState()).toBe(GameState.Running);
