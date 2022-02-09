@@ -1,8 +1,19 @@
 const serverApp = require("./App");
-import app from "./App";
+import App from "./App";
+import {
+  createSessionInteractor,
+  deleteSessionInteractor,
+  updateSessionInteractor,
+} from "./Configuration";
+import SessionRouter from "./routes/SessionRouter";
 
 const port = 5005;
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+const app: App = new App(
+  new SessionRouter(
+    createSessionInteractor,
+    updateSessionInteractor,
+    deleteSessionInteractor
+  ).getRouter(),
+  port
+);

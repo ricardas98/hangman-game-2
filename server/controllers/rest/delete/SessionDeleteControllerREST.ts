@@ -6,7 +6,7 @@ import BoundaryDeleteSession from "../../../input-data/BoundaryDeleteSession";
 export default class SessionDeleteControllerREST {
   private deleteSessionUC: DeleteSessionUseCase;
 
-  constructor(deleteSessionInteractor: DeleteSessionInteractor) {
+  constructor(deleteSessionInteractor: DeleteSessionUseCase) {
     this.deleteSessionUC = deleteSessionInteractor;
   }
 
