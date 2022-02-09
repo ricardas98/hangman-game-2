@@ -13,11 +13,16 @@ describe("App", () => {
   });
   const payload = { guess: "a" };
   it("updates session", async () => {
-    const game = await request(app).post("/api/sessions").send();
+    const game = await request(app).post("/api/sessions").send({ guess: "a" });
     const res = await request(app)
       .put(`/api/sessions/${game.body.id}`)
       .send(payload);
 
     expect(res.statusCode).toBe(200);
+    expect(res.body.id).toBeDefined();
+    expect(res.body.state).toBe(0);
+    expect(res.body.matches).toBeDefined();
+    expect(res.body.misses).toBeDefined();
+    expect(res.body.matches + res.body.misses).toEqual("a");
   });
 });
