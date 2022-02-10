@@ -11,12 +11,12 @@ describe("App", () => {
     expect(res.body.matches).toEqual([]);
     expect(res.body.misses).toEqual([]);
   });
-  const payload = { guess: "a" };
+
   it("updates session", async () => {
-    const game = await request(app).post("/api/sessions").send({ guess: "a" });
+    const game = await request(app).post("/api/sessions").send();
     const res = await request(app)
       .put(`/api/sessions/${game.body.id}`)
-      .send(payload);
+      .send({ guess: "a" });
 
     expect(res.statusCode).toBe(200);
     expect(res.body.id).toBeDefined();
