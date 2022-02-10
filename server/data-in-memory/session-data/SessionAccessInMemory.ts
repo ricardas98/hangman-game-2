@@ -37,9 +37,7 @@ export default class SessionAccessInMemory implements SessionGateway {
   }
 
   findById(id: string): Session | undefined {
-    const session = this.memory.find((e) => {
-      return e.getId() === id;
-    });
+    const session = this.memory.find((e) => e.getId() === id);
 
     if (session === undefined) throw new DoesNotExistException(id);
     return session;
@@ -62,8 +60,6 @@ export default class SessionAccessInMemory implements SessionGateway {
   }
 
   private doesMemoryContainId(id: string): boolean {
-    return this.memory.some((e) => {
-      return e.getId() === id;
-    });
+    return this.memory.some((e) => e.getId() === id);
   }
 }
