@@ -1,5 +1,3 @@
-import SessionAccessInMemory from "../../../data-in-memory/session-data/SessionAccessInMemory";
-import WordAccessInMemory from "../../../data-in-memory/word-data/WordAccessInMemory";
 import { GameState } from "../../../entities/game-state/GameState";
 import BoundarySessionOutput from "../../../output-data/BoundarySessionOutput";
 import CreateGameUseCase from "../../input-boundary-models/CreateSessionUseCase";
