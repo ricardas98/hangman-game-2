@@ -1,6 +1,6 @@
 import { GameState } from "../entities/game-state/GameState";
 
-export default class SessionOutputData {
+export default class BoundarySessionOutput {
   private sessionId: string;
   private state: GameState;
   private matches: string[];

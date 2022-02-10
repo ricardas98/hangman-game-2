@@ -1,10 +1,7 @@
-import SessionAccessInMemory from "../../../data-in-memory/session-data/SessionAccessInMemory";
-import SessionOutputData from "../../../output-data/SessionOutputData";
 import DeleteSessionUseCase from "../../input-boundary-models/DeleteSessionUseCase";
 import DeleteSessionInteractor from "./DeleteSessionInteractor";
 import { MockProxy, mock } from "jest-mock-extended";
 import SessionGateway from "../../../data-gateway/SessionGateway";
-import Session from "../../../entities/session/Session";
 import BoundaryDeleteSession from "../../../input-data/BoundaryDeleteSession";
 
 describe("Delete session interactor", () => {

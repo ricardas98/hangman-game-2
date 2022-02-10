@@ -5,10 +5,6 @@ import { GameState } from "../game-state/GameState";
 describe("Session entity", () => {
   let session: Session;
 
-  function createSession() {
-    session = new Session("123", 1643783253144, "cat");
-  }
-
   beforeEach(() => {
     createSession();
   });
@@ -40,4 +36,8 @@ describe("Session entity", () => {
     expect(res1.getState()).toEqual(GameState.Running);
     expect(res2.getState()).toEqual(GameState.Lost);
   });
+
+  function createSession() {
+    session = new Session("123", 1643783253144, "cat");
+  }
 });

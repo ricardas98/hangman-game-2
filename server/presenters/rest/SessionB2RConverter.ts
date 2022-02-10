@@ -1,13 +1,14 @@
-import OutputData from "../../output-data/SessionOutputData";
+import BoundarySessionOutput from "../../output-data/BoundarySessionOutput";
+import RestSession from "./RestSesion";
 
 export default class SessionB2RConverter {
-  processData(data: OutputData): object {
-    return {
-      id: data.getSessionId(),
-      state: data.getGameState(),
-      matches: data.getMatches(),
-      misses: data.getMisses(),
-      resultWord: Array.from(data.getResultWord()),
-    };
+  processData(data: BoundarySessionOutput): RestSession {
+    return new RestSession(
+      data.getSessionId(),
+      data.getGameState(),
+      data.getMatches(),
+      data.getMisses(),
+      Array.from(data.getResultWord())
+    );
   }
 }
