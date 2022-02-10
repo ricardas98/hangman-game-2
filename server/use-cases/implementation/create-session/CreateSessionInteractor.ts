@@ -23,7 +23,7 @@ export default class CreateSessionInteractor implements CreateGameUseCase {
       session.getState(),
       [],
       [],
-      new Map<number, string>([])
+      new Map<number, string>()
     );
   }
 

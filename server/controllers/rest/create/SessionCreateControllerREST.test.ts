@@ -21,10 +21,6 @@ describe("Session create controller", () => {
     createController();
   });
 
-  it("is created", () => {
-    expect(controller).toBeDefined();
-  });
-
   it("created a new session", () => {
     const { res } = getMockRes();
 
