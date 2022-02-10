@@ -17,8 +17,6 @@ export default class UpdateSessionInteractor implements UpdateSessionUseCase {
     this.sessionGateway.delete(data.getSessionId());
     this.sessionGateway.save(session);
 
-    console.log(session);
-
     return new BoundarySessionOutput(
       session.getId(),
       session.getState(),
