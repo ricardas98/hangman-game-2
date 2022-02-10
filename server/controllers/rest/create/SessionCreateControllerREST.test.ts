@@ -1,6 +1,6 @@
 import { mock } from "jest-mock-extended";
 import SessionCreateControllerREST from "./SessionCreateControllerREST";
-import SessionOutputData from "../../../output-data/SessionOutputData";
+import BoundarySessionOutput from "../../../output-data/BoundarySessionOutput";
 import { GameState } from "../../../entities/game-state/GameState";
 
 import { getMockRes } from "@jest-mock/express";
@@ -9,21 +9,7 @@ import SessionB2RConverter from "../../../presenters/rest/SessionB2RConverter";
 
 describe("Session create controller", () => {
   let controller: SessionCreateControllerREST;
-
-  function mockInteractor() {
-    const interactor = mock<CreateSessionsUseCase>();
-    interactor.create.mockReturnValue(
-      new SessionOutputData("1", GameState.Running, [], [])
-    );
-    return interactor;
-  }
-
-  function createController() {
-    controller = new SessionCreateControllerREST(
-      mockInteractor(),
-      new SessionB2RConverter()
-    );
-  }
+  const outputData = new BoundarySessionOutput("1", GameState.Running, [], []);
 
   beforeEach(() => {
     createController();
@@ -35,7 +21,6 @@ describe("Session create controller", () => {
 
   it("created a new session", () => {
     const { res } = getMockRes();
-    const outputData = new SessionOutputData("1", GameState.Running, [], []);
 
     controller.create(res);
 
@@ -47,4 +32,17 @@ describe("Session create controller", () => {
       misses: [],
     });
   });
+
+  function mockInteractor() {
+    const interactor = mock<CreateSessionsUseCase>();
+    interactor.create.mockReturnValue(outputData);
+    return interactor;
+  }
+
+  function createController() {
+    controller = new SessionCreateControllerREST(
+      mockInteractor(),
+      new SessionB2RConverter()
+    );
+  }
 });

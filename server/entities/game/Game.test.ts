@@ -4,10 +4,6 @@ import Game from "./Game";
 describe("Game entity", () => {
   let game: Game;
 
-  function createGame(): void {
-    game = new Game("cat");
-  }
-
   beforeEach(() => createGame());
 
   it("is created", () => {
@@ -174,4 +170,8 @@ describe("Game entity", () => {
     expect(game.getState()).toEqual(GameState.Won);
     expect(game.getMatches()).toEqual(["t", "c", "a"]);
   });
+
+  function createGame(): void {
+    game = new Game("cat");
+  }
 });

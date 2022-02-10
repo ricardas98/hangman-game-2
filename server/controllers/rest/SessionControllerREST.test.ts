@@ -10,6 +10,26 @@ describe("Session controller", () => {
   let controller: SessionControllerREST;
   let outputData: BoundarySessionOutput;
 
+  beforeEach(() => {
+    BuildOutputData();
+    createController();
+  });
+
+  it("is created", () => {
+    expect(controller).toBeDefined();
+  });
+
+  it("created a new session", () => {
+    const { res } = getMockRes();
+
+    controller.create(res);
+
+    expect(res.status).toBeCalledWith(201);
+    expect(res.send).toBeCalledWith(
+      new SessionB2RConverter().processData(outputData)
+    );
+  });
+
   function mockInteractor() {
     const interactor = mock<CreateSessionsUseCase>();
     interactor.create.mockReturnValue(
@@ -33,24 +53,4 @@ describe("Session controller", () => {
       ["b", "c"]
     );
   }
-
-  beforeEach(() => {
-    BuildOutputData();
-    createController();
-  });
-
-  it("is created", () => {
-    expect(controller).toBeDefined();
-  });
-
-  it("created a new session", () => {
-    const { res } = getMockRes();
-
-    controller.create(res);
-
-    expect(res.status).toBeCalledWith(201);
-    expect(res.send).toBeCalledWith(
-      new SessionB2RConverter().processData(outputData)
-    );
-  });
 });
