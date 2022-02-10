@@ -33,19 +33,6 @@ describe("Create session interactor", () => {
     expect(res.getMisses()).toEqual(["a"]);
   });
 
-  it("updates non existing game", () => {
-    sessionGateway.findById.mockReturnValue(undefined);
-
-    const res: BoundarySessionOutput = interactor.update(
-      new SessionInputData("1", "a")
-    );
-
-    expect(res.getSessionId()).toBe("");
-    expect(res.getGameState()).toBe(GameState.Running);
-    expect(res.getMatches()).toEqual([]);
-    expect(res.getMisses()).toEqual([]);
-  });
-
   function buildMockSessionAccessInMemory() {
     sessionGateway = mock<SessionGateway>();
   }

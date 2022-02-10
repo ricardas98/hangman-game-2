@@ -6,5 +6,5 @@ export default interface SessionGateway {
   delete(id: string): void;
   fetchAll(sessions: Session[]): Session[];
   generateSessionId(date: number): string;
-  findById(id: string): Session | undefined;
+  findById(id: string): Session;
 }

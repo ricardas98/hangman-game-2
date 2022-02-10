@@ -20,13 +20,11 @@ export default class UpdateSessionInteractor implements UpdateSessionUseCase {
     this.sessionGateway.delete(data.getSessionId());
     session && this.sessionGateway.save(session);
 
-    return session
-      ? new BoundarySessionOutput(
-          session?.getId(),
-          session?.getState(),
-          session?.getGame().getMatches(),
-          session?.getGame().getMisses()
-        )
-      : new BoundarySessionOutput("", GameState.Running, [], []);
+    return new BoundarySessionOutput(
+      session?.getId(),
+      session?.getState(),
+      session?.getGame().getMatches(),
+      session?.getGame().getMisses()
+    );
   }
 }

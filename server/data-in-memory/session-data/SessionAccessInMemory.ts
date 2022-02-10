@@ -36,7 +36,7 @@ export default class SessionAccessInMemory implements SessionGateway {
     );
   }
 
-  findById(id: string): Session | undefined {
+  findById(id: string): Session {
     const session = this.memory.find((e) => e.getId() === id);
 
     if (session === undefined) throw new DoesNotExistException(id);
