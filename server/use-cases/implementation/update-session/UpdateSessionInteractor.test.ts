@@ -1,6 +1,4 @@
 import SessionGateway from "../../../data-gateway/SessionGateway";
-import SessionAccessInMemory from "../../../data-in-memory/session-data/SessionAccessInMemory";
-import WordAccessInMemory from "../../../data-in-memory/word-data/WordAccessInMemory";
 import { GameState } from "../../../entities/game-state/GameState";
 import SessionInputData from "../../../input-data/SessionInputData";
 import BoundarySessionOutput from "../../../output-data/BoundarySessionOutput";
@@ -11,15 +9,7 @@ import Session from "../../../entities/session/Session";
 
 describe("Create session interactor", () => {
   let interactor: UpdateGameUseCase;
-  let sessionAccessInMemory: MockProxy<SessionGateway>;
-
-  function buildMockSessionAccessInMemory() {
-    sessionAccessInMemory = mock<SessionGateway>();
-  }
-
-  function initInteractor() {
-    interactor = new UpdateSessionInteractor(sessionAccessInMemory);
-  }
+  let sessionGateway: MockProxy<SessionGateway>;
 
   beforeEach(() => {
     buildMockSessionAccessInMemory();
@@ -31,9 +21,7 @@ describe("Create session interactor", () => {
   });
 
   it("updates existing game", () => {
-    sessionAccessInMemory.findById.mockReturnValue(
-      new Session("1", 64694, "dog")
-    );
+    sessionGateway.findById.mockReturnValue(new Session("1", 64694, "dog"));
 
     const res: BoundarySessionOutput = interactor.update(
       new SessionInputData("1", "a")
@@ -46,7 +34,7 @@ describe("Create session interactor", () => {
   });
 
   it("updates non existing game", () => {
-    sessionAccessInMemory.findById.mockReturnValue(undefined);
+    sessionGateway.findById.mockReturnValue(undefined);
 
     const res: BoundarySessionOutput = interactor.update(
       new SessionInputData("1", "a")
@@ -57,4 +45,12 @@ describe("Create session interactor", () => {
     expect(res.getMatches()).toEqual([]);
     expect(res.getMisses()).toEqual([]);
   });
+
+  function buildMockSessionAccessInMemory() {
+    sessionGateway = mock<SessionGateway>();
+  }
+
+  function initInteractor() {
+    interactor = new UpdateSessionInteractor(sessionGateway);
+  }
 });
