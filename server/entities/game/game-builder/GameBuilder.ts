@@ -1,6 +1,4 @@
 import Game from "../Game";
-import RunningState from "../game-state/RunningState";
-import State from "../game-state/State";
 
 export default class GameBuilder {
   private readonly word: string;
