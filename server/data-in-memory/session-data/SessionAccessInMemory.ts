@@ -19,7 +19,7 @@ export default class SessionAccessInMemory implements SessionGateway {
   }
 
   delete(id: string): void {
-    this.checkIfSessionExists(id);
+    this.findById(id);
     this.memory = this.memory.filter((s) => s.getId() !== id);
     this.checkIfSessionDeleted(id);
   }
@@ -37,24 +37,33 @@ export default class SessionAccessInMemory implements SessionGateway {
   }
 
   findById(id: string): Session | undefined {
-    return this.memory.find((session) => session.getId() === id);
+    const session = this.memory.find((e) => {
+      return e.getId() === id;
+    });
+
+    if (session === undefined) throw new DoesNotExistException(id);
+    return session;
   }
 
   private checkIfSessionSaved(session: Session): void {
     if (!this.memory.includes(session))
       throw new ActionFailedException(session.getId(), ActionType.Save);
   }
-  private checkIfSessionIsDuplicate(session: Session): void {
-    if (this.findById(session.getId()))
-      throw new IdDuplicateException(session.getId());
-  }
 
-  private checkIfSessionExists(id: string): void {
-    if (this.findById(id) === undefined) throw new DoesNotExistException(id);
+  private checkIfSessionIsDuplicate(session: Session): void {
+    if (this.doesMemoryContainId(session.getId())) {
+      throw new IdDuplicateException(session.getId());
+    }
   }
 
   private checkIfSessionDeleted(id: string): void {
-    if (this.findById(id))
+    if (this.doesMemoryContainId(id))
       throw new ActionFailedException(id, ActionType.Delete);
+  }
+
+  private doesMemoryContainId(id: string): boolean {
+    return this.memory.some((e) => {
+      return e.getId() === id;
+    });
   }
 }
