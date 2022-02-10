@@ -1,5 +1,3 @@
-import SessionAccessInMemory from "../../../data-in-memory/session-data/SessionAccessInMemory";
-import WordAccessInMemory from "../../../data-in-memory/word-data/WordAccessInMemory";
 import { GameState } from "../../../entities/game-state/GameState";
 import BoundarySessionOutput from "../../../output-data/BoundarySessionOutput";
 import CreateGameUseCase from "../../input-boundary-models/CreateSessionUseCase";
@@ -10,23 +8,8 @@ import WordGateway from "../../../data-gateway/WordGateway";
 
 describe("Create session interactor", () => {
   let interactor: CreateGameUseCase;
-  let sessionAccessInMemory: MockProxy<SessionGateway>;
-  let wordAccessInMemory: MockProxy<WordGateway>;
-
-  function buildMockSessionAccessInMemory() {
-    sessionAccessInMemory = mock<SessionGateway>();
-  }
-
-  function buildMockWordAccessInMemory() {
-    wordAccessInMemory = mock<WordGateway>();
-  }
-
-  function initInteractor() {
-    interactor = new CreateSessionInteractor(
-      sessionAccessInMemory,
-      wordAccessInMemory
-    );
-  }
+  let sessionGateway: MockProxy<SessionGateway>;
+  let wordGateway: MockProxy<WordGateway>;
 
   beforeEach(() => {
     buildMockSessionAccessInMemory();
@@ -35,9 +18,9 @@ describe("Create session interactor", () => {
   });
 
   it("creates game", () => {
-    sessionAccessInMemory.generateSessionId.mockReturnValue("1");
-    sessionAccessInMemory.save.mockImplementation(() => {});
-    wordAccessInMemory.getRandomWord.mockReturnValue("cat");
+    sessionGateway.generateSessionId.mockReturnValue("1");
+    sessionGateway.save.mockImplementation(() => {});
+    wordGateway.getRandomWord.mockReturnValue("cat");
     const res: BoundarySessionOutput = interactor.create();
 
     expect(res.getSessionId()).toBe("1");
@@ -45,4 +28,16 @@ describe("Create session interactor", () => {
     expect(res.getMatches()).toEqual([]);
     expect(res.getMisses()).toEqual([]);
   });
+
+  function buildMockSessionAccessInMemory() {
+    sessionGateway = mock<SessionGateway>();
+  }
+
+  function buildMockWordAccessInMemory() {
+    wordGateway = mock<WordGateway>();
+  }
+
+  function initInteractor() {
+    interactor = new CreateSessionInteractor(sessionGateway, wordGateway);
+  }
 });

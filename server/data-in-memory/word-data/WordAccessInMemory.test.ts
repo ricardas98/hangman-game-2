@@ -7,16 +7,6 @@ import IdDuplicateException from "../../exceptions/IdDuplicateException";
 describe("Word data access in memory", () => {
   let dataAccess: WordAccessInMemory;
 
-  function initDataAccess() {
-    dataAccess = new WordAccessInMemory();
-  }
-
-  function addWords() {
-    dataAccess.save("cat");
-    dataAccess.save("mouse");
-    dataAccess.save("dog");
-  }
-
   beforeEach(() => {
     initDataAccess();
     addWords();
@@ -57,4 +47,14 @@ describe("Word data access in memory", () => {
 
     expect(dataAccess.fetchAll().includes(res)).toBeTruthy();
   });
+
+  function initDataAccess() {
+    dataAccess = new WordAccessInMemory();
+  }
+
+  function addWords() {
+    dataAccess.save("cat");
+    dataAccess.save("mouse");
+    dataAccess.save("dog");
+  }
 });
