@@ -79,6 +79,13 @@ describe("Game entity", () => {
     expect(res.getMisses()).toEqual([]);
   });
 
+  it("handles missed letter", () => {
+    const res: Game = game.guess("x");
+
+    expect(res.getMatches()).toEqual([]);
+    expect(res.getMisses()).toEqual(["x"]);
+  });
+
   it("sets game to lost when there are 10 misses", () => {
     ["x", "y", "z", "q", "r", "u", "o", "p", "b", "n"].forEach((l) => {
       game = game.guess(l);

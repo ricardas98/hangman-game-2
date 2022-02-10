@@ -13,7 +13,7 @@ describe("App", () => {
   let game: any;
 
   async function createGame() {
-    game = await request(app.getApp()).post("/api/sessions").send();
+    return request(app.getApp()).post("/api/sessions").send();
   }
 
   function buildApp() {
@@ -27,19 +27,17 @@ describe("App", () => {
     );
   }
 
-  beforeEach(() => {
+  beforeEach(async () => {
     buildApp();
-    createGame();
+    game = await createGame();
   });
 
   it("creates a new session", async () => {
-    const res = await request(app.getApp()).post("/api/sessions").send();
-
-    expect(res.statusCode).toBe(201);
-    expect(res.body.id).toBeDefined();
-    expect(res.body.state).toBe(0);
-    expect(res.body.matches).toEqual([]);
-    expect(res.body.misses).toEqual([]);
+    expect(game.statusCode).toBe(201);
+    expect(game.body.id).toBeDefined();
+    expect(game.body.state).toBe(0);
+    expect(game.body.matches).toEqual([]);
+    expect(game.body.misses).toEqual([]);
   });
 
   it("updates session", async () => {
@@ -56,39 +54,14 @@ describe("App", () => {
   });
 
   it("updates session to lost", async () => {
-    let res = await request(app.getApp())
-      .put(`/api/sessions/${game.body.id}`)
-      .send({ guess: "x" });
-    res = await request(app.getApp())
-      .put(`/api/sessions/${game.body.id}`)
-      .send({ guess: "x" });
-    res = await request(app.getApp())
-      .put(`/api/sessions/${game.body.id}`)
-      .send({ guess: "c" });
-    res = await request(app.getApp())
-      .put(`/api/sessions/${game.body.id}`)
-      .send({ guess: "v" });
-    res = await request(app.getApp())
-      .put(`/api/sessions/${game.body.id}`)
-      .send({ guess: "b" });
-    res = await request(app.getApp())
-      .put(`/api/sessions/${game.body.id}`)
-      .send({ guess: "n" });
-    res = await request(app.getApp())
-      .put(`/api/sessions/${game.body.id}`)
-      .send({ guess: "m" });
-    res = await request(app.getApp())
-      .put(`/api/sessions/${game.body.id}`)
-      .send({ guess: "q" });
-    res = await request(app.getApp())
-      .put(`/api/sessions/${game.body.id}`)
-      .send({ guess: "w" });
-    res = await request(app.getApp())
-      .put(`/api/sessions/${game.body.id}`)
-      .send({ guess: "e" });
-    res = await request(app.getApp())
-      .put(`/api/sessions/${game.body.id}`)
-      .send({ guess: "f" });
+    const guesses = ["x", "c", "v", "b", "n", "m", "q", "w", "e", "y"];
+    let res: any;
+
+    for (let i = 0; i < guesses.length; i++) {
+      res = await request(app.getApp())
+        .put(`/api/sessions/${game.body.id}`)
+        .send({ guess: guesses[i] });
+    }
 
     expect(res.statusCode).toBe(200);
     expect(res.body.id).toBeDefined();
@@ -104,7 +77,7 @@ describe("App", () => {
       "q",
       "w",
       "e",
-      "f",
+      "y",
     ]);
     expect(res.body.resultWord).toEqual([]);
   });
