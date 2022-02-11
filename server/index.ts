@@ -17,3 +17,5 @@ const app: App = new App(
   ).getRouter(),
   port
 );
+
+app.listen();
