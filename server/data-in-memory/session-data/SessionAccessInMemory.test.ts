@@ -2,6 +2,7 @@ import { GameState } from "../../entities/game-state/GameState";
 import Session from "../../entities/session/Session";
 import DoesNotExistException from "../../exceptions/DoesNotExistException";
 import IdDuplicateException from "../../exceptions/IdDuplicateException";
+import IdGenerator from "./IdGenerator";
 import SessionAccessInMemory from "./SessionAccessInMemory";
 
 describe("Game data access in memory", () => {
@@ -56,7 +57,7 @@ describe("Game data access in memory", () => {
   });
 
   function initDataAccess() {
-    dataAccess = new SessionAccessInMemory();
+    dataAccess = new SessionAccessInMemory(new IdGenerator());
   }
 
   function addSessions() {
