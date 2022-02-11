@@ -4,7 +4,7 @@ import {
   createSessionInteractor,
   deleteSessionInteractor,
   updateSessionInteractor,
-} from "./ConfigurationTest";
+} from "./AcceptanceTestConfiguration";
 
 const request = require("supertest");
 
