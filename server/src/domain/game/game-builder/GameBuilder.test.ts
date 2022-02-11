@@ -1,6 +1,4 @@
-import { GameState } from "../../game-state/GameState";
 import Game from "../Game";
-import WonState from "../game-state/WonState";
 import GameBuilder from "./GameBuilder";
 
 describe("Game builder (builder pattern)", () => {
