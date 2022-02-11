@@ -1,10 +1,10 @@
 import { mock } from "jest-mock-extended";
-import SessionCreateRoute from "../../../src/rest/implementation/SessionCreateRoute";
-import BoundarySessionOutput from "../../../src/rest/api/entity/BoundarySessionOutput";
-import { GameState } from "../../../src/domain/game-state/GameState";
+import SessionCreateRoute from "./SessionCreateRoute";
+import BoundarySessionOutput from "../api/entity/BoundarySessionOutput";
+import { GameState } from "../../domain/game-state/GameState";
 import { getMockRes } from "@jest-mock/express";
-import CreateSessionsUseCase from "../../../src/use-case/api/CreateSessionUseCase";
-import SessionB2RConverter from "../../../src/rest/implementation/converter/SessionB2RConverter";
+import CreateSessionsUseCase from "../../use-case/api/CreateSessionUseCase";
+import SessionB2RConverter from "./converter/SessionB2RConverter";
 
 describe("Session create controller", () => {
   let controller: SessionCreateRoute;

@@ -1,10 +1,10 @@
-import IdGenerator from "./src/gateway/implementation/helper/IdGenerator";
-import InMemorySession from "./src/gateway/implementation/InMemorySession";
-import InMemoryWord from "./src/gateway/implementation/InMemoryWord";
-import RandomWordProvider from "./src/gateway/implementation/RandomWordProvider";
-import CreateSessionInteractor from "./src/use-case/implementation/CreateSessionInteractor";
-import DeleteSessionInteractor from "./src/use-case/implementation/DeleteSessionInteractor";
-import UpdateSessionInteractor from "./src/use-case/implementation/UpdateSessionInteractor";
+import IdGenerator from "./gateway/implementation/helper/IdGenerator";
+import InMemorySession from "./gateway/implementation/InMemorySession";
+import InMemoryWord from "./gateway/implementation/InMemoryWord";
+import RandomWordProvider from "./gateway/implementation/helper/RandomWordProvider";
+import CreateSessionInteractor from "./use-case/implementation/CreateSessionInteractor";
+import DeleteSessionInteractor from "./use-case/implementation/DeleteSessionInteractor";
+import UpdateSessionInteractor from "./use-case/implementation/UpdateSessionInteractor";
 
 const sessionGw = new InMemorySession(new IdGenerator());
 const wordGw = new InMemoryWord(new RandomWordProvider());
