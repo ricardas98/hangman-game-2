@@ -4,7 +4,7 @@ import { ActionType } from "./exception/ActionTypes";
 import ActionFailedException from "./exception/ActionFailedException";
 import DoesNotExistException from "./exception/DoesNotExistException";
 import IdDuplicateException from "./exception/IdDuplicateException";
-import StringGenerator from "./helper/StringGenerator";
+import StringGenerator from "../api/helper/StringGenerator";
 import { time, timeStamp } from "console";
 
 export default class InMemorySession implements SessionGateway {

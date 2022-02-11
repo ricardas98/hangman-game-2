@@ -1,5 +1,5 @@
-const serverApp = require("./App");
 import App from "./src/App";
+
 import {
   createSessionInteractor,
   deleteSessionInteractor,

@@ -1,4 +1,4 @@
-import StringGenerator from "./StringGenerator";
+import StringGenerator from "../../api/helper/StringGenerator";
 
 export default class IdGenerator implements StringGenerator {
   generate(seed: number): string {

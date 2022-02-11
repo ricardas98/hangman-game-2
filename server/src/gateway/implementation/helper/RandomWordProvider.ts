@@ -1,4 +1,4 @@
-import RandomStringFromListProvider from "./RandomStringFromListProvider";
+import RandomStringFromListProvider from "../../api/helper/RandomStringFromListProvider";
 
 export default class RandomWordProvider
   implements RandomStringFromListProvider

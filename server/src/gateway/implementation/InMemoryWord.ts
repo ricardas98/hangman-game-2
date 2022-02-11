@@ -3,7 +3,7 @@ import { ActionType } from "./exception/ActionTypes";
 import ActionFailedException from "./exception/ActionFailedException";
 import IdDuplicateException from "./exception/IdDuplicateException";
 import DoesNotExistException from "./exception/DoesNotExistException";
-import RandomStringFromListProvider from "./helper/RandomStringFromListProvider";
+import RandomStringFromListProvider from "../api/helper/RandomStringFromListProvider";
 
 export default class InMemoryWord implements WordGateway {
   private readonly memory: string[];
