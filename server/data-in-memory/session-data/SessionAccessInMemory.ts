@@ -4,23 +4,27 @@ import { ActionType } from "../../exceptions/ActionTypes";
 import ActionFailedException from "../../exceptions/ActionFailedException";
 import DoesNotExistException from "../../exceptions/DoesNotExistException";
 import IdDuplicateException from "../../exceptions/IdDuplicateException";
+import StringGenerator from "./StringGenerator";
 
 export default class SessionAccessInMemory implements SessionGateway {
-  private memory: Session[];
+  private readonly memory: Session[];
+  private idGenerator: StringGenerator;
 
-  constructor() {
+  constructor(idGenerator: StringGenerator) {
     this.memory = [];
+    this.idGenerator = idGenerator;
   }
 
   save(session: Session): void {
     this.checkIfSessionIsDuplicate(session);
-    this.memory.push(session);
+    this.memory.splice(this.memory.length - 1, 0, session);
     this.checkIfSessionSaved(session);
   }
 
   delete(id: string): void {
     this.findById(id);
-    this.memory = this.memory.filter((s) => s.getId() !== id);
+    const index = this.memory.findIndex((s) => s.getId() === id);
+    this.memory.splice(index, 1);
     this.checkIfSessionDeleted(id);
   }
 
@@ -29,17 +33,15 @@ export default class SessionAccessInMemory implements SessionGateway {
   }
 
   generateSessionId(timestamp: number): string {
-    return String(
-      timestamp.toString() +
-        "x" +
-        Math.floor(Math.random() * 1000000).toString()
-    );
+    return this.idGenerator.generate(timestamp);
   }
 
   findById(id: string): Session {
     const session = this.memory.find((e) => e.getId() === id);
 
-    if (session === undefined) throw new DoesNotExistException(id);
+    if (session === undefined) {
+      throw new DoesNotExistException(id);
+    }
     return session;
   }
 

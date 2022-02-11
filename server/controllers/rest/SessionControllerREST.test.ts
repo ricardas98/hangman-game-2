@@ -33,7 +33,13 @@ describe("Session controller", () => {
   function mockInteractor() {
     const interactor = mock<CreateSessionsUseCase>();
     interactor.create.mockReturnValue(
-      new BoundarySessionOutput("1", GameState.Running, ["a"], ["b", "c"])
+      new BoundarySessionOutput(
+        "1",
+        GameState.Running,
+        ["a"],
+        ["b", "c"],
+        new Map<number, string>([[0, "a"]])
+      )
     );
     return interactor;
   }
@@ -50,7 +56,8 @@ describe("Session controller", () => {
       "1",
       GameState.Running,
       ["a"],
-      ["b", "c"]
+      ["b", "c"],
+      new Map<number, string>([[0, "a"]])
     );
   }
 });

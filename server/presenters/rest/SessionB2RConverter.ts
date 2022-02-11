@@ -7,7 +7,8 @@ export default class SessionB2RConverter {
       data.getSessionId(),
       data.getGameState(),
       data.getMatches(),
-      data.getMisses()
+      data.getMisses(),
+      Array.from(data.getResultWord())
     );
   }
 }

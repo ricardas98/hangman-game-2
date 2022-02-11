@@ -5,7 +5,6 @@ import { mock } from "jest-mock-extended";
 import BoundarySessionOutput from "../../../output-data/BoundarySessionOutput";
 import { GameState } from "../../../entities/game-state/GameState";
 import { getMockReq, getMockRes } from "@jest-mock/express";
-import { Request, Response } from "express";
 
 describe("Session update controller", () => {
   let controller: SessionUpdateControllerREST;
@@ -33,13 +32,20 @@ describe("Session update controller", () => {
       state: 0,
       matches: ["a"],
       misses: ["b", "c"],
+      resultWord: [[0, "a"]],
     });
   });
 
   function mockInteractor() {
     const interactor = mock<UpdateSessionUseCase>();
     interactor.update.mockReturnValue(
-      new BoundarySessionOutput("123", GameState.Running, ["a"], ["b", "c"])
+      new BoundarySessionOutput(
+        "123",
+        GameState.Running,
+        ["a"],
+        ["b", "c"],
+        new Map<number, string>([[0, "a"]])
+      )
     );
     return interactor;
   }

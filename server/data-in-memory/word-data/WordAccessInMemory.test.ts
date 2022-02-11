@@ -1,8 +1,8 @@
-import exp from "constants";
-import ActionFailedException from "../../exceptions/ActionFailedException";
 import DoesNotExistException from "../../exceptions/DoesNotExistException";
 import WordAccessInMemory from "./WordAccessInMemory";
 import IdDuplicateException from "../../exceptions/IdDuplicateException";
+import FakeRandomWordGetter from "../fake-word-data/FakeRandomWordProvider";
+import RandomWordProvider from "./RandomWordProvider";
 
 describe("Word data access in memory", () => {
   let dataAccess: WordAccessInMemory;
@@ -29,7 +29,7 @@ describe("Word data access in memory", () => {
     dataAccess.delete("mouse");
     const res = dataAccess.fetchAll();
 
-    expect(res).toEqual(["cat", "dog"]);
+    expect(res).toEqual(["dog", "cat"]);
   });
 
   it("deletes non existing word from the memory", () => {
@@ -39,7 +39,7 @@ describe("Word data access in memory", () => {
   it("gets all the words from the memory", () => {
     const res = dataAccess.fetchAll();
 
-    expect(res).toEqual(["cat", "mouse", "dog"]);
+    expect(res).toEqual(["mouse", "dog", "cat"]);
   });
 
   it("gets a random word from the memory", () => {
@@ -49,7 +49,7 @@ describe("Word data access in memory", () => {
   });
 
   function initDataAccess() {
-    dataAccess = new WordAccessInMemory();
+    dataAccess = new WordAccessInMemory(new RandomWordProvider());
   }
 
   function addWords() {

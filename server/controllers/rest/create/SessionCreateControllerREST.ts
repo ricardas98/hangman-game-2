@@ -16,7 +16,6 @@ export default class SessionCreateControllerREST {
 
   create(res: Response): void {
     const outputData = this.createSessionsUC.create();
-
     res.status(201).json(this.converter.processData(outputData));
   }
 }

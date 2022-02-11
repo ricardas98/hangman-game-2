@@ -1,13 +1,13 @@
 import { GameState } from "../../../entities/game-state/GameState";
 import BoundarySessionOutput from "../../../output-data/BoundarySessionOutput";
-import CreateGameUseCase from "../../input-boundary-models/CreateSessionUseCase";
+import CreateSessionUseCase from "../../input-boundary-models/CreateSessionUseCase";
 import CreateSessionInteractor from "./CreateSessionInteractor";
 import { MockProxy, mock } from "jest-mock-extended";
 import SessionGateway from "../../../data-gateway/SessionGateway";
 import WordGateway from "../../../data-gateway/WordGateway";
 
 describe("Create session interactor", () => {
-  let interactor: CreateGameUseCase;
+  let interactor: CreateSessionUseCase;
   let sessionGateway: MockProxy<SessionGateway>;
   let wordGateway: MockProxy<WordGateway>;
 

@@ -5,17 +5,20 @@ export default class BoundarySessionOutput {
   private state: GameState;
   private matches: string[];
   private misses: string[];
+  private resultWord: Map<number, string>;
 
   constructor(
     sessionId: string,
     state: GameState,
     matches: string[],
-    misses: string[]
+    misses: string[],
+    resultWord: Map<number, string>
   ) {
     this.sessionId = sessionId;
     this.state = state;
     this.matches = matches;
     this.misses = misses;
+    this.resultWord = resultWord;
   }
 
   getSessionId(): string {
@@ -32,5 +35,9 @@ export default class BoundarySessionOutput {
 
   getMisses(): string[] {
     return this.misses;
+  }
+
+  getResultWord(): Map<number, string> {
+    return this.resultWord;
   }
 }

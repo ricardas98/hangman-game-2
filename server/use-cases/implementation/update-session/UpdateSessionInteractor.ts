@@ -1,8 +1,6 @@
-import Session from "../../../entities/session/Session";
 import BoundarySessionOutput from "../../../output-data/BoundarySessionOutput";
 import SessionGateway from "../../../data-gateway/SessionGateway";
-import { GameState } from "../../../entities/game-state/GameState";
-import SessionInputData from "../../../input-data/SessionInputData";
+import BoundaryUpdateSession from "../../../input-data/BoundaryUpdateSession";
 import UpdateSessionUseCase from "../../input-boundary-models/UpdateSessionUseCase";
 
 export default class UpdateSessionInteractor implements UpdateSessionUseCase {
@@ -12,17 +10,19 @@ export default class UpdateSessionInteractor implements UpdateSessionUseCase {
     this.sessionGateway = sessionGateway;
   }
 
-  update(data: SessionInputData): BoundarySessionOutput {
+  update(data: BoundaryUpdateSession): BoundarySessionOutput {
     const session = this.sessionGateway.findById(data.getSessionId());
 
     session.handleGuess(data.getGuess());
-
     this.sessionGateway.delete(data.getSessionId());
+    this.sessionGateway.save(session);
+
     return new BoundarySessionOutput(
       session.getId(),
       session.getState(),
       session.getGame().getMatches(),
-      session.getGame().getMisses()
+      session.getGame().getMisses(),
+      session.getGame().getResultWord()
     );
   }
 }

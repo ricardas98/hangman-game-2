@@ -9,14 +9,16 @@ import SessionB2RConverter from "../../../presenters/rest/SessionB2RConverter";
 
 describe("Session create controller", () => {
   let controller: SessionCreateControllerREST;
-  const outputData = new BoundarySessionOutput("1", GameState.Running, [], []);
+  const outputData = new BoundarySessionOutput(
+    "1",
+    GameState.Running,
+    [],
+    [],
+    new Map<number, string>([])
+  );
 
   beforeEach(() => {
     createController();
-  });
-
-  it("is created", () => {
-    expect(controller).toBeDefined();
   });
 
   it("created a new session", () => {
@@ -30,6 +32,7 @@ describe("Session create controller", () => {
       state: 0,
       matches: [],
       misses: [],
+      resultWord: [],
     });
   });
 
