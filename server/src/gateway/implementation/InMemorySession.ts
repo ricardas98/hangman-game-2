@@ -4,12 +4,16 @@ import { ActionType } from "./exception/ActionTypes";
 import ActionFailedException from "./exception/ActionFailedException";
 import DoesNotExistException from "./exception/DoesNotExistException";
 import IdDuplicateException from "./exception/IdDuplicateException";
+import StringGenerator from "./helper/StringGenerator";
+import { time, timeStamp } from "console";
 
 export default class InMemorySession implements SessionGateway {
   private memory: Session[];
+  private idGenerator: StringGenerator;
 
-  constructor() {
+  constructor(idGenerator: StringGenerator) {
     this.memory = [];
+    this.idGenerator = idGenerator;
   }
 
   save(session: Session): void {
@@ -29,11 +33,7 @@ export default class InMemorySession implements SessionGateway {
   }
 
   generateSessionId(timestamp: number): string {
-    return String(
-      timestamp.toString() +
-        "x" +
-        Math.floor(Math.random() * 1000000).toString()
-    );
+    return this.idGenerator.generate(timestamp);
   }
 
   findById(id: string): Session | undefined {

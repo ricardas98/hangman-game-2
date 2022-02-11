@@ -1,8 +1,8 @@
-import SessionCreateRoute from "./rest/implementation/SessionCreateRoute";
-import SessionB2RConverter from "./rest/implementation/converter/SessionB2RConverter";
+import SessionCreateRoute from "../src/rest/implementation/SessionCreateRoute";
+import SessionB2RConverter from "../src/rest/implementation/converter/SessionB2RConverter";
 import { Request, Response } from "express";
-import SessionUpdateRoute from "./rest/implementation/SessionUpdateRoute";
-import SessionDeleteRoute from "./rest/implementation/SessionDeleteRoute";
+import SessionUpdateRoute from "../src/rest/implementation/SessionUpdateRoute";
+import SessionDeleteRoute from "../src/rest/implementation/SessionDeleteRoute";
 import CreateSessionUseCase from "./use-case/api/CreateSessionUseCase";
 import UpdateSessionUseCase from "./use-case/api/UpdateSessionUseCase";
 import DeleteSessionUseCase from "./use-case/api/DeleteSessionUseCase";

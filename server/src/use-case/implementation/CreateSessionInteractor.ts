@@ -1,4 +1,3 @@
-import { GameState } from "../../domain/game-state/GameState";
 import Session from "../../domain/session/Session";
 import BoundarySessionOutput from "../../rest/api/entity/BoundarySessionOutput";
 import CreateGameUseCase from "../api/CreateSessionUseCase";
@@ -24,7 +23,7 @@ export default class CreateSessionInteractor implements CreateGameUseCase {
       session.getState(),
       [],
       [],
-      new Map<number, string>([])
+      new Map<number, string>()
     );
   }
 

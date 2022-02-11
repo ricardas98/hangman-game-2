@@ -1,19 +1,10 @@
 import DoesNotExistException from "./exception/DoesNotExistException";
 import InMemoryWord from "./InMemoryWord";
 import IdDuplicateException from "./exception/IdDuplicateException";
+import RandomWordProvider from "./helper/RandomWordProvider";
 
 describe("Word data access in memory", () => {
   let dataAccess: InMemoryWord;
-
-  function initDataAccess() {
-    dataAccess = new InMemoryWord();
-  }
-
-  function addWords() {
-    dataAccess.save("cat");
-    dataAccess.save("mouse");
-    dataAccess.save("dog");
-  }
 
   beforeEach(() => {
     initDataAccess();
@@ -37,7 +28,7 @@ describe("Word data access in memory", () => {
     dataAccess.delete("mouse");
     const res = dataAccess.fetchAll();
 
-    expect(res).toEqual(["cat", "dog"]);
+    expect(res).toEqual(["dog", "cat"]);
   });
 
   it("deletes non existing word from the memory", () => {
@@ -47,7 +38,7 @@ describe("Word data access in memory", () => {
   it("gets all the words from the memory", () => {
     const res = dataAccess.fetchAll();
 
-    expect(res).toEqual(["cat", "mouse", "dog"]);
+    expect(res).toEqual(["mouse", "dog", "cat"]);
   });
 
   it("gets a random word from the memory", () => {
@@ -55,4 +46,14 @@ describe("Word data access in memory", () => {
 
     expect(dataAccess.fetchAll().includes(res)).toBeTruthy();
   });
+
+  function initDataAccess() {
+    dataAccess = new InMemoryWord(new RandomWordProvider());
+  }
+
+  function addWords() {
+    dataAccess.save("cat");
+    dataAccess.save("mouse");
+    dataAccess.save("dog");
+  }
 });

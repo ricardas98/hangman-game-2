@@ -1,19 +1,9 @@
 import Session from "./Session";
 import Game from "../game/Game";
-import exp from "constants";
-import { type } from "os";
+import { GameState } from "../game-state/GameState";
 
 describe("Session entity", () => {
   let session: Session;
-  let game: any;
-
-  function mockGame() {
-    game = jest.createMockFromModule("../game/Game");
-  }
-
-  function createSession() {
-    session = new Session("123", 1643783253144, "cat");
-  }
 
   beforeEach(() => {
     createSession();
@@ -35,18 +25,19 @@ describe("Session entity", () => {
     expect(res).toBe(1643783253144);
   });
 
-  it("gets Game", () => {
-    const res: Game = session.getGame();
-
-    expect(typeof res).toEqual(typeof new Game());
-  });
-
   it("handles guess", () => {
-    const oldObj: Game = session.getGame();
+    const res1: Game = session.getGame();
 
-    session.handleGuess("x");
-    const newObj: Game = session.getGame();
+    ["x", "q", "e", "r", "z", "w", "p", "y", "v", "t", "d"].forEach((letter) =>
+      session.handleGuess(letter)
+    );
+    const res2: Game = session.getGame();
 
-    expect(newObj).not.toBe(oldObj);
+    expect(res1.getState()).toEqual(GameState.Running);
+    expect(res2.getState()).toEqual(GameState.Lost);
   });
+
+  function createSession() {
+    session = new Session("123", 1643783253144, "cat");
+  }
 });

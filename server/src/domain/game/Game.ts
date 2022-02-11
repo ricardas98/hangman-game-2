@@ -1,11 +1,6 @@
 import GameBuilder from "./game-builder/GameBuilder";
 import { GameState } from "../game-state/GameState";
 
-import State from "./game-state/State";
-import RunningState from "./game-state/RunningState";
-import LostState from "./game-state/LostState";
-import WonState from "./game-state/WonState";
-
 export default class Game {
   private state: GameState;
   private word: string;
@@ -52,20 +47,11 @@ export default class Game {
   }
 
   private buildResultWord(): Map<number, string> {
-    let resultWord = new Map<number, string>();
-    const wordArr: string[] = [...this.word];
-    wordArr.map((e, i) => {
-      this.addLetterToMapIfItsInArray(resultWord, wordArr, i);
-    });
-    return resultWord;
-  }
-
-  private addLetterToMapIfItsInArray(
-    map: Map<number, string>,
-    arr: string[],
-    index: number
-  ) {
-    this.matches.includes(arr[index]) && map.set(index, arr[index]);
+    let resultMap: Map<number, string> = new Map();
+    [...this.word].forEach(
+      (e: string, i: number) => this.matches.includes(e) && resultMap.set(i, e)
+    );
+    return resultMap;
   }
 
   private addMatch(letter: string): Game {
@@ -83,13 +69,11 @@ export default class Game {
   }
 
   private isLetterAlreadyGuessed(letter: string) {
-    const merged = this.mergeMatchesAndMisses();
-    return merged.includes(letter);
+    return this.mergeMatchesAndMisses().includes(letter);
   }
 
   private mergeMatchesAndMisses(): string[] {
-    const merged: string[] = this.misses.concat(this.matches);
-    return merged;
+    return this.misses.concat(this.matches);
   }
 
   private selectState(): GameState {
@@ -98,7 +82,7 @@ export default class Game {
   }
 
   private isGameLost(): boolean {
-    return this.misses.length >= 10 ? true : false;
+    return this.misses.length >= 10;
   }
 
   private isGameWon(): boolean {

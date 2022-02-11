@@ -12,36 +12,24 @@ describe("App", () => {
   let app: App;
   let game: any;
 
-  async function createGame() {
-    return request(app.getApp()).post("/api/sessions").send();
-  }
-
-  function buildApp() {
-    app = new App(
-      new SessionRouter(
-        createSessionInteractor,
-        updateSessionInteractor,
-        deleteSessionInteractor
-      ).getRouter(),
-      5005
-    );
-  }
-
   beforeEach(async () => {
     buildApp();
     game = await createGame();
   });
 
+  afterEach(() => {
+    deleteSession();
+  });
+
   it("creates a new session", async () => {
     expect(game.statusCode).toBe(201);
-    expect(game.body.id).toBeDefined();
+    expect(game.body.id).toBe("123456");
     expect(game.body.state).toBe(0);
     expect(game.body.matches).toEqual([]);
     expect(game.body.misses).toEqual([]);
   });
 
   it("updates session", async () => {
-    const game = await request(app.getApp()).post("/api/sessions").send();
     const res = await request(app.getApp())
       .put(`/api/sessions/${game.body.id}`)
       .send({ guess: "a" });
@@ -83,7 +71,6 @@ describe("App", () => {
   });
 
   it("updates session to won", async () => {
-    const game = await request(app.getApp()).post("/api/sessions").send();
     let res: any;
     let guesses = ["p", "a", "t", "o", "r"];
 
@@ -115,4 +102,23 @@ describe("App", () => {
 
     expect(res.statusCode).toBe(204);
   });
+
+  function createGame() {
+    return request(app.getApp()).post("/api/sessions").send();
+  }
+
+  function buildApp() {
+    app = new App(
+      new SessionRouter(
+        createSessionInteractor,
+        updateSessionInteractor,
+        deleteSessionInteractor
+      ).getRouter(),
+      5005
+    );
+  }
+
+  async function deleteSession() {
+    await request(app.getApp()).delete("/api/sessions/123456").send();
+  }
 });

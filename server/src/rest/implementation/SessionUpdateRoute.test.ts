@@ -9,27 +9,6 @@ import { getMockReq, getMockRes } from "@jest-mock/express";
 describe("Session update controller", () => {
   let controller: SessionUpdateRoute;
 
-  function mockInteractor() {
-    const interactor = mock<UpdateSessionUseCase>();
-    interactor.update.mockReturnValue(
-      new BoundarySessionOutput(
-        "123",
-        GameState.Running,
-        ["a"],
-        ["b", "c"],
-        new Map<number, string>([[0, "a"]])
-      )
-    );
-    return interactor;
-  }
-
-  function createController() {
-    controller = new SessionUpdateRoute(
-      mockInteractor(),
-      new SessionB2RConverter()
-    );
-  }
-
   beforeEach(() => {
     createController();
   });
@@ -56,4 +35,25 @@ describe("Session update controller", () => {
       resultWord: [[0, "a"]],
     });
   });
+
+  function mockInteractor() {
+    const interactor = mock<UpdateSessionUseCase>();
+    interactor.update.mockReturnValue(
+      new BoundarySessionOutput(
+        "123",
+        GameState.Running,
+        ["a"],
+        ["b", "c"],
+        new Map<number, string>([[0, "a"]])
+      )
+    );
+    return interactor;
+  }
+
+  function createController() {
+    controller = new SessionUpdateRoute(
+      mockInteractor(),
+      new SessionB2RConverter()
+    );
+  }
 });
