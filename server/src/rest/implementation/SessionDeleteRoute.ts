@@ -10,9 +10,16 @@ export default class SessionDeleteControllerREST {
   }
 
   delete(req: Request, res: Response): void {
+    try {
+      this.tryDelete(req, res);
+    } catch (e) {
+      res.sendStatus(404);
+    }
+  }
+
+  private tryDelete(req: Request, res: Response) {
     const inputData = new BoundaryDeleteSession(req.params.id);
     this.deleteSessionUC.delete(inputData);
-
     res.sendStatus(204);
   }
 }
