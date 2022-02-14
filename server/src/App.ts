@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 
 export default class App {
   private app: any;
@@ -7,6 +8,7 @@ export default class App {
   constructor(router: any, port: number) {
     this.port = port;
     this.app = express();
+    this.app.use(cors());
     this.app.use(express.json());
     this.app.use("/api/sessions", router);
   }
