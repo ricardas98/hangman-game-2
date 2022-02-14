@@ -3,10 +3,10 @@ import Session from "../../domain/session/Session";
 import DoesNotExistException from "./exception/DoesNotExistException";
 import IdDuplicateException from "./exception/IdDuplicateException";
 import IdGenerator from "./helper/IdGenerator";
-import InMemorySession from "./InMemorySession";
+import InMemorySessionGateway from "./InMemorySessionGateway";
 
 describe("Game data access in memory", () => {
-  let dataAccess: InMemorySession;
+  let dataAccess: InMemorySessionGateway;
 
   beforeEach(() => {
     initDataAccess();
@@ -57,7 +57,7 @@ describe("Game data access in memory", () => {
   });
 
   function initDataAccess() {
-    dataAccess = new InMemorySession(new IdGenerator());
+    dataAccess = new InMemorySessionGateway(new IdGenerator());
   }
 
   function addSessions() {

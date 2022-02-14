@@ -1,13 +1,13 @@
 import IdGenerator from "./gateway/implementation/helper/IdGenerator";
-import InMemorySession from "./gateway/implementation/InMemorySession";
-import InMemoryWord from "./gateway/implementation/InMemoryWord";
+import InMemorySession from "./gateway/implementation/InMemorySessionGateway";
+import InMemoryWordGateway from "./gateway/implementation/InMemoryWordGateway";
 import RandomWordProvider from "./gateway/implementation/helper/RandomWordProvider";
 import CreateSessionInteractor from "./use-case/implementation/CreateSessionInteractor";
 import DeleteSessionInteractor from "./use-case/implementation/DeleteSessionInteractor";
 import UpdateSessionInteractor from "./use-case/implementation/UpdateSessionInteractor";
 
 const sessionGw = new InMemorySession(new IdGenerator());
-const wordGw = new InMemoryWord(new RandomWordProvider());
+const wordGw = new InMemoryWordGateway(new RandomWordProvider());
 
 [
   "dog",

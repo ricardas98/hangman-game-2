@@ -1,10 +1,10 @@
 import DoesNotExistException from "./exception/DoesNotExistException";
-import InMemoryWord from "./InMemoryWord";
+import InMemoryWordGateway from "./InMemoryWordGateway";
 import IdDuplicateException from "./exception/IdDuplicateException";
 import RandomWordProvider from "./helper/RandomWordProvider";
 
 describe("Word data access in memory", () => {
-  let dataAccess: InMemoryWord;
+  let dataAccess: InMemoryWordGateway;
 
   beforeEach(() => {
     initDataAccess();
@@ -48,7 +48,7 @@ describe("Word data access in memory", () => {
   });
 
   function initDataAccess() {
-    dataAccess = new InMemoryWord(new RandomWordProvider());
+    dataAccess = new InMemoryWordGateway(new RandomWordProvider());
   }
 
   function addWords() {

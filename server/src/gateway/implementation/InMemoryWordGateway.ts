@@ -5,7 +5,7 @@ import IdDuplicateException from "./exception/IdDuplicateException";
 import DoesNotExistException from "./exception/DoesNotExistException";
 import RandomStringFromListProvider from "../api/helper/RandomStringFromListProvider";
 
-export default class InMemoryWord implements WordGateway {
+export default class InMemoryWordGateway implements WordGateway {
   private readonly memory: string[];
   private randomWordGetter: RandomStringFromListProvider;
 
