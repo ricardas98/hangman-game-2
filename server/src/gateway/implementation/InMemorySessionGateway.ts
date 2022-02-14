@@ -6,7 +6,7 @@ import DoesNotExistException from "./exception/DoesNotExistException";
 import IdDuplicateException from "./exception/IdDuplicateException";
 import StringGenerator from "../api/helper/StringGenerator";
 
-export default class SessionAccessInMemory implements SessionGateway {
+export default class SessionAccessInMemoryGateway implements SessionGateway {
   private readonly memory: Session[];
   private idGenerator: StringGenerator;
 
