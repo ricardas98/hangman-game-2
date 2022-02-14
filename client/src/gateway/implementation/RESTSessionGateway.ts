@@ -1,6 +1,6 @@
 import { SessionGateway } from "../api/SessionGateway";
 import { Observable } from "rxjs";
-import Session from "../../controller/model/Session";
+import { Session } from "../../domain/Session";
 import { Client } from "../api/Client";
 
 export default class RESTSessionGateway implements SessionGateway {

@@ -1,7 +1,7 @@
 import { Client } from "../api/Client";
 import RESTSessionGateway from "./RESTSessionGateway";
 import { MockProxy, mock } from "jest-mock-extended";
-import Session from "../../controller/model/Session";
+import { Session } from "../../domain/Session";
 import { SessionGateway } from "../api/SessionGateway";
 import { of } from "rxjs";
 
@@ -9,17 +9,9 @@ describe("REST session gateway", () => {
   let client: MockProxy<Client>;
   let gateway: SessionGateway;
 
-  function mockClient() {
-    client = mock<Client>();
-  }
-
-  function createGateway() {
-    gateway = new RESTSessionGateway(client);
-  }
-
   beforeEach(() => {
     mockClient();
-    createGateway();
+    initGateway();
   });
 
   it("Create game", () => {
@@ -29,4 +21,12 @@ describe("REST session gateway", () => {
 
     observable.subscribe((res) => expect(res).toEqual(session));
   });
+
+  function mockClient() {
+    client = mock<Client>();
+  }
+
+  function initGateway() {
+    gateway = new RESTSessionGateway(client);
+  }
 });
