@@ -1,5 +1,5 @@
 import DoesNotExistException from "./exception/DoesNotExistException";
-import InMemoryWordGateway from "./InMemoryWordGateway.";
+import InMemoryWordGateway from "./InMemoryWordGateway";
 import IdDuplicateException from "./exception/IdDuplicateException";
 import RandomWordProvider from "./helper/RandomWordProvider";
 

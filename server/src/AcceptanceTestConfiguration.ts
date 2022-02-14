@@ -1,5 +1,5 @@
 import InMemorySession from "./gateway/implementation/InMemorySessionGateway";
-import InMemoryWordGateway from "./gateway/implementation/InMemoryWordGateway.";
+import InMemoryWordGateway from "./gateway/implementation/InMemoryWordGateway";
 import CreateSessionInteractor from "./use-case/implementation/CreateSessionInteractor";
 import DeleteSessionInteractor from "./use-case/implementation/DeleteSessionInteractor";
 import UpdateSessionInteractor from "./use-case/implementation/UpdateSessionInteractor";
