@@ -11,14 +11,6 @@ describe("Create session interactor", () => {
   let interactor: UpdateSessionUseCase;
   let sessionAccessInMemory: MockProxy<SessionGateway>;
 
-  function buildMockSessionAccessInMemory() {
-    sessionAccessInMemory = mock<SessionGateway>();
-  }
-
-  function initInteractor() {
-    interactor = new UpdateSessionInteractor(sessionAccessInMemory);
-  }
-
   beforeEach(() => {
     buildMockSessionAccessInMemory();
     initInteractor();
@@ -39,16 +31,11 @@ describe("Create session interactor", () => {
     expect(res.getMisses()).toEqual(["a"]);
   });
 
-  it("updates non existing game", () => {
-    sessionAccessInMemory.findById.mockReturnValue(undefined);
+  function buildMockSessionAccessInMemory() {
+    sessionAccessInMemory = mock<SessionGateway>();
+  }
 
-    const res: BoundarySessionOutput = interactor.update(
-      new BoundaryUpdateSessionInput("1", "a")
-    );
-
-    expect(res.getSessionId()).toBe("");
-    expect(res.getGameState()).toBe(GameState.Running);
-    expect(res.getMatches()).toEqual([]);
-    expect(res.getMisses()).toEqual([]);
-  });
+  function initInteractor() {
+    interactor = new UpdateSessionInteractor(sessionAccessInMemory);
+  }
 });
