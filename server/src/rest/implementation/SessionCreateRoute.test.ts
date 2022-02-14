@@ -8,7 +8,6 @@ import SessionB2RConverter from "./converter/SessionB2RConverter";
 
 describe("Session create controller", () => {
   let controller: SessionCreateRoute;
-
   const outputData = new BoundarySessionOutput(
     "1",
     GameState.Running,
@@ -16,20 +15,13 @@ describe("Session create controller", () => {
     [],
     new Map<number, string>([])
   );
+
   beforeEach(() => {
     createController();
   });
 
   it("created a new session", () => {
     const { res } = getMockRes();
-
-    const outputData = new BoundarySessionOutput(
-      "1",
-      GameState.Running,
-      [],
-      [],
-      new Map<number, string>([])
-    );
 
     controller.create(res);
 
