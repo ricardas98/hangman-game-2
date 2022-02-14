@@ -1,5 +1,4 @@
 import SessionGateway from "../../gateway/api/SessionGateway";
-import BoundaryDeleteSessionInput from "../api/entity/BoundaryDeleteSessionInput";
 import DeleteSessionUseCase from "../api/DeleteSessionUseCase";
 
 export default class DeleteSessionInteractor implements DeleteSessionUseCase {
@@ -9,7 +8,7 @@ export default class DeleteSessionInteractor implements DeleteSessionUseCase {
     this.sessionGateway = sessionGateway;
   }
 
-  delete(data: BoundaryDeleteSessionInput): void {
-    this.sessionGateway.delete(data.getSessionId());
+  delete(id: string): void {
+    this.sessionGateway.delete(id);
   }
 }

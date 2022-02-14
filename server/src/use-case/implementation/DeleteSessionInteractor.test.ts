@@ -2,7 +2,6 @@ import DeleteSessionUseCase from "../api/DeleteSessionUseCase";
 import DeleteSessionInteractor from "./DeleteSessionInteractor";
 import { MockProxy, mock } from "jest-mock-extended";
 import SessionGateway from "../../gateway/api/SessionGateway";
-import BoundaryDeleteSessionInput from "../api/entity/BoundaryDeleteSessionInput";
 
 describe("Delete session interactor", () => {
   let interactor: DeleteSessionUseCase;
@@ -23,7 +22,7 @@ describe("Delete session interactor", () => {
 
   it("deletes existing game", () => {
     sessionAccessInMemory.delete.mockImplementation(() => {});
-    interactor.delete(new BoundaryDeleteSessionInput("1"));
+    interactor.delete("1");
 
     expect(sessionAccessInMemory.delete).toBeCalledTimes(1);
   });
