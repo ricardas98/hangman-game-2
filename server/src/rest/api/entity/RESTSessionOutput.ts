@@ -1,4 +1,4 @@
-export default class RestSessionOutput {
+export default class RESTSessionOutput {
   readonly id: string;
   readonly state: number;
   readonly matches: string[];

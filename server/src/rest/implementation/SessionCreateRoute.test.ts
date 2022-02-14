@@ -1,6 +1,6 @@
 import { mock } from "jest-mock-extended";
 import SessionCreateRoute from "./SessionCreateRoute";
-import BoundarySessionOutput from "../api/entity/BoundarySessionOutput";
+import BoundarySessionOutput from "../../use-case/api/entity/BoundarySessionOutput";
 import { GameState } from "../../domain/game-state/GameState";
 import { getMockRes } from "@jest-mock/express";
 import CreateSessionsUseCase from "../../use-case/api/CreateSessionUseCase";

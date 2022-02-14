@@ -1,6 +1,5 @@
 import { GameState } from "../../../domain/game-state/GameState";
-import BoundarySessionOutput from "../../../rest/api/entity/BoundarySessionOutput";
-import RestSessionOutput from "./RestSesionOutput";
+import BoundarySessionOutput from "../../../use-case/api/entity/BoundarySessionOutput";
 import SessionB2RConverter from "./SessionB2RConverter";
 
 describe("Session presenter REST", () => {

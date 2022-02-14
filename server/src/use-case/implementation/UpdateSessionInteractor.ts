@@ -1,4 +1,4 @@
-import BoundarySessionOutput from "../../rest/api/entity/BoundarySessionOutput";
+import BoundarySessionOutput from "../api/entity/BoundarySessionOutput";
 import SessionGateway from "../../gateway/api/SessionGateway";
 import BoundaryUpdateSessionInput from "../api/entity/BoundaryUpdateSessionInput";
 import UpdateSessionUseCase from "../api/UpdateSessionUseCase";

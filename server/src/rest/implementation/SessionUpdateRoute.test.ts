@@ -2,7 +2,7 @@ import SessionB2RConverter from "./converter/SessionB2RConverter";
 import UpdateSessionUseCase from "../../use-case/api/UpdateSessionUseCase";
 import SessionUpdateRoute from "./SessionUpdateRoute";
 import { mock } from "jest-mock-extended";
-import BoundarySessionOutput from "../api/entity/BoundarySessionOutput";
+import BoundarySessionOutput from "../../use-case/api/entity/BoundarySessionOutput";
 import { GameState } from "../../domain/game-state/GameState";
 import { getMockReq, getMockRes } from "@jest-mock/express";
 
