@@ -1,7 +1,8 @@
 import BoundarySessionOutput from "../../api/entity/BoundarySessionOutput";
+import RestSessionOutput from "./RestSesionOutput";
 
 export default class SessionB2RConverter {
-  processData(data: BoundarySessionOutput): object {
+  processData(data: BoundarySessionOutput): RestSessionOutput {
     return {
       id: data.getSessionId(),
       state: data.getGameState(),

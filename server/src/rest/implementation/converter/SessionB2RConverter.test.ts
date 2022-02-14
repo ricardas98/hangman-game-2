@@ -1,5 +1,6 @@
 import { GameState } from "../../../domain/game-state/GameState";
 import BoundarySessionOutput from "../../../rest/api/entity/BoundarySessionOutput";
+import RestSessionOutput from "./RestSesionOutput";
 import SessionB2RConverter from "./SessionB2RConverter";
 
 describe("Session presenter REST", () => {
@@ -18,15 +19,13 @@ describe("Session presenter REST", () => {
 
     const res = presenterRest.processData(data);
 
-    expect(res).toEqual({
-      id: "1",
-      state: 0,
-      matches: ["a", "b"],
-      misses: ["x", "y", "z"],
-      resultWord: [
-        [0, "a"],
-        [3, "b"],
-      ],
-    });
+    expect(res.id).toEqual("1");
+    expect(res.matches).toEqual(["a", "b"]);
+    expect(res.misses).toEqual(["x", "y", "z"]);
+    expect(res.resultWord).toEqual([
+      [0, "a"],
+      [3, "b"],
+    ]);
+    expect(res.state).toEqual(0);
   });
 });
