@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 import { Session } from "../../domain/Session";
 import { Client } from "../api/Client";
 
-export default class RESTSessionGateway implements SessionGateway {
+export class RestSessionGateway implements SessionGateway {
   private readonly client: Client;
 
   constructor(client: Client) {

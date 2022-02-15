@@ -1,6 +1,6 @@
 import { MockProxy, mock } from "jest-mock-extended";
 import { CreateSessionUseCase } from "../../use-case/api/CreateSessionUseCase";
-import { SessionD2BConverter } from "./converter/SessionD2BConverter";
+import { SessionB2VConverter } from "./converter/SessionB2VConverter";
 import CreateSessionController from "./CreateSessionController";
 
 describe("Create session controller", () => {
@@ -16,7 +16,7 @@ describe("Create session controller", () => {
   function initController() {
     controller = new CreateSessionController(
       interactor,
-      new SessionD2BConverter()
+      new SessionB2VConverter()
     );
   }
 

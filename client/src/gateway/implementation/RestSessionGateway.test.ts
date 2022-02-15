@@ -1,5 +1,5 @@
 import { Client } from "../api/Client";
-import RESTSessionGateway from "./RESTSessionGateway";
+import { RestSessionGateway } from "./RestSessionGateway";
 import { MockProxy, mock } from "jest-mock-extended";
 import { Session } from "../../domain/Session";
 import { SessionGateway } from "../api/SessionGateway";
@@ -27,6 +27,6 @@ describe("REST session gateway", () => {
   }
 
   function initGateway() {
-    gateway = new RESTSessionGateway(client);
+    gateway = new RestSessionGateway(client);
   }
 });

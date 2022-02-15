@@ -4,6 +4,6 @@ import { Session } from "../../domain/Session";
 
 export interface SessionGateway {
   create(): Observable<Session>;
-  update(session: BoundarySessionOutput): Observable<BoundarySessionOutput>;
-  delete(id: string): Observable<BoundarySessionOutput>;
+  update(session: BoundarySessionOutput): Observable<Session>;
+  delete(id: string): Observable<Session>;
 }

@@ -1,21 +1,21 @@
 import { Observable } from "rxjs";
 import { CreateSessionUseCase } from "../../use-case/api/CreateSessionUseCase";
-import { SessionView } from "../model/SessionView";
-import { SessionD2BConverter } from "./converter/SessionD2BConverter";
+import { ViewSession } from "../model/ViewSession";
+import { SessionB2VConverter } from "./converter/SessionB2VConverter";
 
 export default class CreateSessionController {
   private createSessionUC: CreateSessionUseCase;
-  private converter: SessionD2BConverter;
+  private converter: SessionB2VConverter;
 
   constructor(
     createSessionUC: CreateSessionUseCase,
-    converter: SessionD2BConverter
+    converter: SessionB2VConverter
   ) {
     this.createSessionUC = createSessionUC;
     this.converter = converter;
   }
 
-  create(): Observable<SessionView> {
+  create(): Observable<ViewSession> {
     const boundaryObservable = this.createSessionUC.create();
     return this.converter.processData(boundaryObservable);
   }

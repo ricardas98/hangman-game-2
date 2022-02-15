@@ -1,15 +1,15 @@
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { BoundarySessionOutput } from "../../../use-case/api/entity/BoundarySessionOutput";
-import { SessionView } from "../../model/SessionView";
+import { ViewSession } from "../../model/ViewSession";
 
-export class SessionD2BConverter {
+export class SessionB2VConverter {
   processData(
     data: Observable<BoundarySessionOutput>
-  ): Observable<SessionView> {
+  ): Observable<ViewSession> {
     return data.pipe(
       map(
-        (s) => new SessionView(s.id, s.state, s.matches, s.misses, s.resultWord)
+        (s) => new ViewSession(s.id, s.state, s.matches, s.misses, s.resultWord)
       )
     );
   }

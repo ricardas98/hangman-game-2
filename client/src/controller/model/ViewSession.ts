@@ -1,6 +1,6 @@
 import { GameState } from "./GameState";
 
-export class SessionView {
+export class ViewSession {
   readonly id: string;
   readonly state: GameState;
   readonly matches: string[];
