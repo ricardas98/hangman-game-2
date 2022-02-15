@@ -1,31 +1,20 @@
 import { CreateSessionUseCase } from "../api/CreateSessionUseCase";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
 import { SessionGateway } from "../../gateway/api/SessionGateway";
-import { Session } from "../../domain/Session";
 import { BoundarySessionOutput } from "../api/entity/BoundarySessionOutput";
+import { SessionD2BConverter } from "./converter/SessionD2BConverter";
 
 export class CreateSessionInteractor implements CreateSessionUseCase {
   private readonly sessionGateway: SessionGateway;
+  private readonly converter: SessionD2BConverter;
 
-  constructor(sessionGateway: SessionGateway) {
+  constructor(sessionGateway: SessionGateway, converter: SessionD2BConverter) {
     this.sessionGateway = sessionGateway;
+    this.converter = converter;
   }
 
   create(): Observable<BoundarySessionOutput> {
-    return this.sessionGateway
-      .create()
-      .pipe(
-        map(
-          (res) =>
-            new BoundarySessionOutput(
-              res.id,
-              res.state,
-              res.matches,
-              res.misses,
-              res.resultWord
-            )
-        )
-      );
+    const domainObservable = this.sessionGateway.create();
+    return this.converter.processData(domainObservable);
   }
 }
