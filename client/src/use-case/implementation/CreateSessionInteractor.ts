@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { SessionGateway } from "../../gateway/api/SessionGateway";
 import { BoundarySessionOutput } from "../api/entity/BoundarySessionOutput";
 import { SessionD2BConverter } from "./converter/SessionD2BConverter";
+import { map } from "rxjs/operators";
 
 export class CreateSessionInteractor implements CreateSessionUseCase {
   private readonly sessionGateway: SessionGateway;
@@ -14,7 +15,8 @@ export class CreateSessionInteractor implements CreateSessionUseCase {
   }
 
   create(): Observable<BoundarySessionOutput> {
-    const domainObservable = this.sessionGateway.create();
-    return this.converter.processData(domainObservable);
+    return this.sessionGateway
+      .create()
+      .pipe(map(s => this.converter.processData(s)));
   }
 }

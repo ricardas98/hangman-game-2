@@ -2,8 +2,9 @@ import { Observable } from "rxjs";
 import { CreateSessionUseCase } from "../../use-case/api/CreateSessionUseCase";
 import { ViewSession } from "../model/ViewSession";
 import { SessionB2VConverter } from "./converter/SessionB2VConverter";
+import { map } from "rxjs/operators";
 
-export default class CreateSessionController {
+export class CreateSessionController {
   private createSessionUC: CreateSessionUseCase;
   private converter: SessionB2VConverter;
 
@@ -16,7 +17,8 @@ export default class CreateSessionController {
   }
 
   create(): Observable<ViewSession> {
-    const boundaryObservable = this.createSessionUC.create();
-    return this.converter.processData(boundaryObservable);
+    return this.createSessionUC
+      .create()
+      .pipe(map(s => this.converter.processData(s)));
   }
 }
