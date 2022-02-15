@@ -3,14 +3,14 @@ export class BoundarySessionOutput {
   readonly state: number;
   readonly matches: string[];
   readonly misses: string[];
-  readonly resultWord: string[];
+  readonly resultWord: [number, string][];
 
   constructor(
     id: string,
     state: number,
     matches: string[],
     misses: string[],
-    resultWord: string[]
+    resultWord: [number, string][]
   ) {
     this.id = id;
     this.state = state;
