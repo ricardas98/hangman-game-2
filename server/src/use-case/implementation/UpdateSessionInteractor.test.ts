@@ -1,7 +1,7 @@
 import SessionGateway from "../../gateway/api/SessionGateway";
 import { GameState } from "../../domain/game-state/GameState";
 import BoundaryUpdateSessionInput from "../api/entity/BoundaryUpdateSessionInput";
-import BoundarySessionOutput from "../../rest/api/entity/BoundarySessionOutput";
+import BoundarySessionOutput from "../api/entity/BoundarySessionOutput";
 import UpdateSessionUseCase from "../api/UpdateSessionUseCase";
 import UpdateSessionInteractor from "./UpdateSessionInteractor";
 import { MockProxy, mock } from "jest-mock-extended";

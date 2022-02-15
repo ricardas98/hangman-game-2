@@ -1,4 +1,4 @@
-export default class RestSession {
+export class Session {
   readonly id: string;
   readonly state: number;
   readonly matches: string[];

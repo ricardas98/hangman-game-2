@@ -1,5 +1,5 @@
 import { GameState } from "../../domain/game-state/GameState";
-import BoundarySessionOutput from "../../rest/api/entity/BoundarySessionOutput";
+import BoundarySessionOutput from "../api/entity/BoundarySessionOutput";
 import CreateSessionUseCase from "../api/CreateSessionUseCase";
 import CreateSessionInteractor from "./CreateSessionInteractor";
 import { MockProxy, mock } from "jest-mock-extended";
@@ -32,7 +32,7 @@ describe("Create session interactor", () => {
     initInteractor();
   });
 
-  it("creates game", () => {
+  it("creates session/game", () => {
     sessionAccessInMemory.generateSessionId.mockReturnValue("1");
     sessionAccessInMemory.save.mockImplementation(() => {});
     wordAccessInMemory.getRandomWord.mockReturnValue("cat");

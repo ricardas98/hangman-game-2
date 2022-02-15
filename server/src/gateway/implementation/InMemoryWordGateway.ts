@@ -1,4 +1,5 @@
-import WordGateway from "../../gateway/api/WordGateway";
+import WordGateway from "../api/WordGateway";
+
 import { ActionType } from "./exception/ActionTypes";
 import ActionFailedException from "./exception/ActionFailedException";
 import IdDuplicateException from "./exception/IdDuplicateException";

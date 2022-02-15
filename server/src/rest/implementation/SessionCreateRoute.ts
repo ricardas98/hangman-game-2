@@ -3,19 +3,19 @@ import CreateSessionUseCase from "../../use-case/api/CreateSessionUseCase";
 import { Response } from "express";
 
 export default class SessionCreateRoute {
-  private createSessionsUC: CreateSessionUseCase;
+  private createSessionUC: CreateSessionUseCase;
   private converter: SessionB2RConverter;
 
   constructor(
-    createSessionInteractor: CreateSessionUseCase,
+    createSessionUC: CreateSessionUseCase,
     converter: SessionB2RConverter
   ) {
-    this.createSessionsUC = createSessionInteractor;
+    this.createSessionUC = createSessionUC;
     this.converter = converter;
   }
 
   create(res: Response): void {
-    const outputData = this.createSessionsUC.create();
+    const outputData = this.createSessionUC.create();
     res.status(201).json(this.converter.processData(outputData));
   }
 }

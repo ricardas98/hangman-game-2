@@ -1,4 +1,4 @@
-import BoundarySessionOutput from "../../rest/api/entity/BoundarySessionOutput";
+import BoundarySessionOutput from "./entity/BoundarySessionOutput";
 
 export default interface CreateSessionUseCase {
   create(): BoundarySessionOutput;
