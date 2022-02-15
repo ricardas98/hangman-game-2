@@ -14,10 +14,11 @@ export class RestSessionGateway implements SessionGateway {
     return this.client.post("/api/sessions");
   }
 
+  //TODO
   update(session: Session): Observable<Session> {
     return new Observable<Session>();
   }
-
+  //TODO
   delete(id: string): Observable<Session> {
     return new Observable<Session>();
   }
