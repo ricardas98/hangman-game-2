@@ -21,9 +21,7 @@ describe("Create session interactor", () => {
     const boundarySession = new BoundarySessionOutput("123", 0, [], [], []);
     gateway.create.mockReturnValue(of(session));
 
-    const observable = interactor.create();
-
-    observable.subscribe(res => {
+    interactor.create().subscribe(res => {
       expect(res).toEqual(boundarySession);
       done();
     });
