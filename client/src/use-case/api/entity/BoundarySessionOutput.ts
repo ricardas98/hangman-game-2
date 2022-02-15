@@ -1,5 +1,3 @@
-import { GameState } from "../../../controller/model/GameState";
-
 export class BoundarySessionOutput {
   readonly id: string;
   readonly state: number;
