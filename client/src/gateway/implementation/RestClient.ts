@@ -2,7 +2,7 @@ import { Client } from "../api/Client";
 import { map, Observable } from "rxjs";
 import { ajax } from "rxjs/ajax";
 
-export class RestRequestClient implements Client {
+export class RestClient implements Client {
   private readonly serverURL: string;
 
   constructor(serverURL: string) {
@@ -16,6 +16,6 @@ export class RestRequestClient implements Client {
   ): Observable<T> {
     return ajax
       .post<T>(this.serverURL + url, body, headers)
-      .pipe(map((res) => res.response));
+      .pipe(map(res => res.response));
   }
 }
