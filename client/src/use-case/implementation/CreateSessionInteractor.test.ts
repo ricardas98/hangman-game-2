@@ -5,6 +5,7 @@ import { SessionGateway } from "../../gateway/api/SessionGateway";
 import { CreateSessionUseCase } from "../api/CreateSessionUseCase";
 import { CreateSessionInteractor } from "./CreateSessionInteractor";
 import { Session } from "../../domain/Session";
+import { SessionD2BConverter } from "./converter/SessionD2BConverter";
 
 describe("Create session interactor", () => {
   let interactor: CreateSessionUseCase;
@@ -15,14 +16,17 @@ describe("Create session interactor", () => {
     initInteractor();
   });
 
-  it("Creates session", () => {
+  it("Creates session", done => {
     const session = new Session("123", 0, [], [], []);
     const boundarySession = new BoundarySessionOutput("123", 0, [], [], []);
     gateway.create.mockReturnValue(of(session));
 
     const observable = interactor.create();
 
-    observable.subscribe((res) => expect(res).toEqual(boundarySession));
+    observable.subscribe(res => {
+      expect(res).toEqual(boundarySession);
+      done();
+    });
   });
 
   function mockGateway() {
@@ -30,6 +34,9 @@ describe("Create session interactor", () => {
   }
 
   function initInteractor() {
-    interactor = new CreateSessionInteractor(gateway);
+    interactor = new CreateSessionInteractor(
+      gateway,
+      new SessionD2BConverter()
+    );
   }
 });

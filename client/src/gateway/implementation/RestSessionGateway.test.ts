@@ -14,12 +14,15 @@ describe("REST session gateway", () => {
     initGateway();
   });
 
-  it("Create game", () => {
+  it("Create game", done => {
     const session = new Session("123", 0, [], [], []);
     client.post.mockReturnValue(of(session));
     const observable = gateway.create();
 
-    observable.subscribe((res) => expect(res).toEqual(session));
+    observable.subscribe(res => {
+      expect(res).toEqual(session);
+      done();
+    });
   });
 
   function mockClient() {
