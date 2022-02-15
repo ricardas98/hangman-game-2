@@ -5,11 +5,11 @@ import { ViewSession } from "../../model/ViewSession";
 
 export class SessionB2VConverter {
   processData(
-    data: Observable<BoundarySessionOutput>
+    observable: Observable<BoundarySessionOutput>
   ): Observable<ViewSession> {
-    return data.pipe(
+    return observable.pipe(
       map(
-        (s) => new ViewSession(s.id, s.state, s.matches, s.misses, s.resultWord)
+        s => new ViewSession(s.id, s.state, s.matches, s.misses, s.resultWord)
       )
     );
   }
