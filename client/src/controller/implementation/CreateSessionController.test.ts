@@ -11,7 +11,7 @@ describe("Create session controller", () => {
     initController();
   });
 
-  it("should create game", () => {});
+  it.todo("should create game");
 
   function initController() {
     controller = new CreateSessionController(
