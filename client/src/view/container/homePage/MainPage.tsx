@@ -5,8 +5,7 @@ import { ViewSession } from "../../../controller/model/ViewSession";
 
 export const MainPage = () => {
     const [session, setSession] = useState<ViewSession | undefined>(undefined);
-
-    const {createGame} = useHomePage(createSessionController, setSession);
+    const createGame = useHomePage(createSessionController, setSession);
 
     return(
         session === undefined ?  <div>
