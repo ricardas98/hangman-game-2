@@ -8,7 +8,7 @@ export const HomePage = () => {
     return(
     <div>
         <h1>Hangman game</h1>
-        <div>ID: {session.id}</div>
+        <div>ID: {session?.id}</div>
     </div>
     );
 }
