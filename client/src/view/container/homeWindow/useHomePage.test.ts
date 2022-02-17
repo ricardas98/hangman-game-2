@@ -30,11 +30,11 @@ describe("Home page hook", () => {
     controller.create.mockReturnValue(of(viewSession));
     const { result } = renderHook(() => useHomePage(controller));
 
-    expect(result.current.id).toBe("123");
-    expect(result.current.state).toEqual(GameState.Lost);
-    expect(result.current.matches).toEqual(["a", "b"]);
-    expect(result.current.misses).toEqual(["x", "y", "z"]);
-    expect(result.current.resultWord).toEqual([
+    expect(result.current?.id).toBe("123");
+    expect(result.current?.state).toEqual(GameState.Lost);
+    expect(result.current?.matches).toEqual(["a", "b"]);
+    expect(result.current?.misses).toEqual(["x", "y", "z"]);
+    expect(result.current?.resultWord).toEqual([
       [0, "a"],
       [5, "b"],
     ]);
