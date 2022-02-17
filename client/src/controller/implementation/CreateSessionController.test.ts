@@ -1,5 +1,4 @@
 import { MockProxy, mock } from "jest-mock-extended";
-import { Session } from "../../domain/Session";
 import { CreateSessionUseCase } from "../../use-case/api/CreateSessionUseCase";
 import { SessionB2VConverter } from "./converter/SessionB2VConverter";
 import { CreateSessionController } from "./CreateSessionController";
@@ -9,38 +8,34 @@ import { ViewSession } from "../model/ViewSession";
 
 describe("Create session controller", () => {
   let controller: CreateSessionController;
-  let interactor: MockProxy<CreateSessionUseCase>;
+  let useCase: MockProxy<CreateSessionUseCase>;
 
   beforeEach(() => {
     mockInteractor();
     initController();
   });
 
-  it("should create game", done => {
-    const session = new BoundarySessionOutput("123", 0, [], [], []);
-    const viewSession = new ViewSession("123", 0, [], [], []);
-    interactor.create.mockReturnValue(of(session));
+  it("creates game", done => {
+    const boundarySession = new BoundarySessionOutput("123", 0, [], [], []);
+    const viewSession = new ViewSession("123", 0, [], [], "");
+    useCase.create.mockReturnValue(of(boundarySession));
 
     const observable = controller.create();
 
     observable.subscribe(res => {
-      expect(res.id).toEqual(viewSession.id);
-      expect(res.state).toEqual(viewSession.state);
-      expect(res.matches).toEqual(viewSession.matches);
-      expect(res.misses).toEqual(viewSession.misses);
-      expect(res.resultWord).toEqual(viewSession.resultWord);
+      expect(res).toEqual(viewSession);
       done();
     });
   });
 
   function initController() {
     controller = new CreateSessionController(
-      interactor,
+      useCase,
       new SessionB2VConverter()
     );
   }
 
   function mockInteractor() {
-    interactor = mock<CreateSessionUseCase>();
+    useCase = mock<CreateSessionUseCase>();
   }
 });
