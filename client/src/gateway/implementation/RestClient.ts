@@ -18,4 +18,14 @@ export class RestClient implements Client {
       .post<T>(this.serverURL + url, body, headers)
       .pipe(map(res => res.response));
   }
+
+  put<T>(
+    url: string,
+    body?: any,
+    headers?: Record<string, string>
+  ): Observable<T> {
+    return ajax
+      .put<T>(this.serverURL + url, body, headers)
+      .pipe(map(res => res.response));
+  }
 }
