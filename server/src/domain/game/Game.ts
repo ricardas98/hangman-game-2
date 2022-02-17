@@ -48,8 +48,10 @@ export default class Game {
 
   private buildResultWord(): Map<number, string> {
     let resultMap: Map<number, string> = new Map();
-    [...this.word].forEach(
-      (e: string, i: number) => this.matches.includes(e) && resultMap.set(i, e)
+    [...this.word].forEach((letter: string, i: number) =>
+      this.matches.includes(letter)
+        ? resultMap.set(i, letter)
+        : resultMap.set(i, "_")
     );
     return resultMap;
   }
@@ -86,6 +88,6 @@ export default class Game {
   }
 
   private isGameWon(): boolean {
-    return this.word.split("").every((letter) => this.matches.includes(letter));
+    return this.word.split("").every(letter => this.matches.includes(letter));
   }
 }
