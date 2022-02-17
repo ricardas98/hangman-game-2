@@ -3,12 +3,10 @@ import { CreateSessionController } from "../../../controller/implementation/Crea
 import { ViewSession } from "../../../controller/model/ViewSession";
 
 export function useHomePage(controller: CreateSessionController) {
-  const [session, setSession] = useState<ViewSession>(
-    new ViewSession("", 0, [], [], [])
-  );
+  const [session, setSession] = useState<ViewSession>();
 
   useEffect(() => {
-    const subs = controller.create().subscribe(s => setSession(s));
+    const subs = controller.create().subscribe(setSession);
 
     return () => subs.unsubscribe();
   }, []);
