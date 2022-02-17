@@ -15,9 +15,11 @@ export class RestSessionGateway implements SessionGateway {
     return this.client.post(SESSIONS_PATH);
   }
 
-  //TODO
-  update(session: Session): Observable<Session> {
-    return new Observable<Session>();
+  update(id: string, guess: string): Observable<Session> {
+    return this.client.put(
+      SESSIONS_PATH + "/" + id,
+      JSON.stringify({ guess: guess })
+    );
   }
   //TODO
   delete(id: string): Observable<Session> {
