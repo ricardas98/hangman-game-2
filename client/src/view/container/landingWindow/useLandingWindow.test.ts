@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { CreateSessionController } from "../../../controller/implementation/CreateSessionController";
-import { useHomePage } from "./useHomePage";
+import { useLandingWindow } from "./useLandingWindow";
 import { renderHook } from "@testing-library/react-hooks";
 import { mock, MockProxy } from "jest-mock-extended";
 import { ViewSession } from "../../../controller/model/ViewSession";
@@ -31,7 +31,9 @@ describe("Home page hook", () => {
   it("creates game", () => {
     controller.create.mockReturnValue(of(viewSession));
 
-    const { result } = renderHook(() => useHomePage(controller, setSession));
+    const { result } = renderHook(() =>
+      useLandingWindow(controller, setSession)
+    );
 
     act(() => {
       result.current();
