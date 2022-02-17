@@ -27,6 +27,14 @@ describe("App", () => {
     expect(game.body.state).toBe(0);
     expect(game.body.matches).toEqual([]);
     expect(game.body.misses).toEqual([]);
+    expect(game.body.resultWord).toEqual([
+      [0, "_"],
+      [1, "_"],
+      [2, "_"],
+      [3, "_"],
+      [4, "_"],
+      [5, "_"],
+    ]);
   });
 
   it("updates session", async () => {
@@ -67,7 +75,14 @@ describe("App", () => {
       "e",
       "y",
     ]);
-    expect(res.body.resultWord).toEqual([]);
+    expect(res.body.resultWord).toEqual([
+      [0, "_"],
+      [1, "_"],
+      [2, "_"],
+      [3, "_"],
+      [4, "_"],
+      [5, "_"],
+    ]);
   });
 
   it("updates session to won", async () => {
