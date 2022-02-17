@@ -6,8 +6,7 @@ import { SessionD2BConverter } from "./use-case/implementation/converter/Session
 import { CreateSessionInteractor } from "./use-case/implementation/CreateSessionInteractor";
 
 // @ts-ignore
-const url: string = process.env.REACT_APP_SERVER_URL;
-const client = new RestClient(url);
+const client = new RestClient(process.env.REACT_APP_SERVER_URL);
 const sessionGateway = new RestSessionGateway(client);
 
 const sessionD2BConverter = new SessionD2BConverter();
