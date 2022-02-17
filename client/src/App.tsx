@@ -1,9 +1,10 @@
+import { HomePage } from "./view/container/homeWindow/HomePage";
+
 function App() {
 
   return (
     <div className="App">
-      <button>New Game</button>
-      <h1>Hello world!</h1>
+      <HomePage/>
     </div>
   );
 }
