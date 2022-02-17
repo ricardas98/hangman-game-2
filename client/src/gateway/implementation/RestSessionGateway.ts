@@ -2,7 +2,7 @@ import { SessionGateway } from "../api/SessionGateway";
 import { Observable } from "rxjs";
 import { Session } from "../../domain/Session";
 import { Client } from "../api/Client";
-import { POST_ROUTE } from "../../RouteConsts";
+import { SESSIONS_PATH } from "../../PathConsts";
 
 export class RestSessionGateway implements SessionGateway {
   private readonly client: Client;
@@ -12,7 +12,7 @@ export class RestSessionGateway implements SessionGateway {
   }
 
   create(): Observable<Session> {
-    return this.client.post(POST_ROUTE);
+    return this.client.post(SESSIONS_PATH);
   }
 
   //TODO
