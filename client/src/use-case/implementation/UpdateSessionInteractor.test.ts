@@ -25,7 +25,7 @@ describe("Update session interactor", () => {
       [],
       [[0, "a"]]
     );
-    gateway.create.mockReturnValue(of(session));
+    gateway.update.mockReturnValue(of(session));
 
     interactor.update("123", "a").subscribe(s => {
       expect(s).toEqual(boundarySession);
