@@ -10,10 +10,11 @@ import { act } from "react-dom/test-utils";
 
 describe("Session delete window", () => {
   let controller: MockProxy<DeleteSessionController>;
-  const setSession = jest.fn();
+  let setSession: jest.Mock;
 
   beforeEach(() => {
     initController();
+    setSession = jest.fn();
   });
 
   it("deletes session", () => {
@@ -22,9 +23,7 @@ describe("Session delete window", () => {
       useDeleteSessionWindow(controller, setSession)
     );
 
-    act(() => {
-      result.current("1");
-    });
+    act(() => result.current("1"));
 
     expect(setSession).toHaveBeenCalledWith(undefined);
     expect(controller.delete).toBeCalled();
