@@ -28,6 +28,7 @@ describe("Game window hook", () => {
   it("updates game", () => {
     controller.update.mockReturnValue(of(viewSession));
     const { result } = renderHook(() => useGameWindow(controller, setSession));
+
     act(() => {
       result.current("123", "a");
     });

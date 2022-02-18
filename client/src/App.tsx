@@ -1,4 +1,4 @@
-import { MainWindow } from "./view/container/mainWindow/MainWindow";
+import { MainWindow } from "./view/container/main-window/MainWindow";
 
 function App() {
 

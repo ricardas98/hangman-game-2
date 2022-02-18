@@ -7,11 +7,11 @@ interface LandingWindowProps {
 }
 
 export const LandingWindow = ({setSession} : LandingWindowProps) => {
-    const createGame = useLandingWindow(createSessionController, setSession);
+    const createSession = useLandingWindow(createSessionController, setSession);
 
     return(
         <div>
-            <button onClick={() => createGame()}>start</button>
+            <button onClick={() => createSession()}>start</button>
         </div> 
     );
 }
