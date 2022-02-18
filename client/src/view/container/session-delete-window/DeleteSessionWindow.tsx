@@ -1,4 +1,4 @@
-import { deleteSessionController } from "Configuration"
+import { deleteSessionController } from "../../../Configuration"
 import { ViewSession } from "controller/model/ViewSession"
 import { useDeleteSessionWindow } from "./useSessionDeleteWindow"
 
@@ -11,5 +11,5 @@ export const DeleteSessionWindow = ({id, setSession} : DeleteSessionWindowProps)
 
     const deleteSession = useDeleteSessionWindow(deleteSessionController, setSession)
 
-    return (<div><button onClick={() => {deleteSession(id)}}>Quit</button></div>)
+    return <button onClick={() => {deleteSession(id)}}>Quit</button>
 }
