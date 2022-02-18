@@ -1,3 +1,4 @@
+import { jsx } from "@emotion/react";
 import { letterSpacing } from "@mui/system";
 import { updateSessionController } from "Configuration";
 import { useEffect } from "react";
@@ -21,6 +22,10 @@ export const GameWindow = ({session, setSession}: GameWindowProps) => {
         return session.misses.concat(session.matches).includes(k) ? true : false
     }
 
+    function renderKey(k: string, index: number): JSX.Element {
+        return <button key={index} disabled={shouldBeDisabled(k)} onClick={() => updateGame(session.id, k)}>{k}</button>
+    }
+
     return (
     <div>
         <p>{session.id}</p>
@@ -29,7 +34,7 @@ export const GameWindow = ({session, setSession}: GameWindowProps) => {
             {keyboard.map((row, index) =>
                 <div key={index}>
                     {row.map((k, index) => 
-                        <button key={index} disabled={shouldBeDisabled(k)} onClick={() => updateGame(session.id, k)}>{k}</button>
+                        renderKey(k, index)
                     )}
                 </div>
             )}
