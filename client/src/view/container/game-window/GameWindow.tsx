@@ -7,7 +7,7 @@ import { useGameWindow } from "./useGameWindow";
 
 interface GameWindowProps {
     session: ViewSession
-    setSession: React.Dispatch<React.SetStateAction<ViewSession | undefined>>
+    setSession: (session: ViewSession | undefined) => void
 }
 
 export const GameWindow = ({session, setSession}: GameWindowProps) => {

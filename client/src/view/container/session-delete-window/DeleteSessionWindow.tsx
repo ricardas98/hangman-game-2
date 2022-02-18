@@ -2,11 +2,9 @@ import { deleteSessionController } from "Configuration"
 import { ViewSession } from "controller/model/ViewSession"
 import { useDeleteSessionWindow } from "./useDeleteSessionWindow"
 
-
-
 interface DeleteSessionWindowProps {
     id: string,
-    setSession: React.Dispatch<React.SetStateAction<ViewSession | undefined>>
+    setSession: (session: ViewSession | undefined) => void
 }
 
 export const DeleteSessionWindow = ({id, setSession} : DeleteSessionWindowProps) => {
