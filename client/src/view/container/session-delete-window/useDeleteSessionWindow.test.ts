@@ -23,9 +23,7 @@ describe("Session delete window", () => {
       useDeleteSessionWindow(controller, setSession)
     );
 
-    act(() => {
-      result.current("1");
-    });
+    act(() => result.current("1"));
 
     expect(setSession).toHaveBeenCalledWith(undefined);
     expect(controller.delete).toBeCalled();
