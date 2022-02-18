@@ -20,9 +20,7 @@ describe("Game window hook", () => {
   );
   const setSession = jest.fn();
 
-  beforeEach(() => {
-    initController();
-  });
+  beforeEach(initController);
 
   it("updates game", () => {
     controller.update.mockReturnValue(of(viewSession));

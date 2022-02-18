@@ -20,9 +20,7 @@ describe("Landing window hook", () => {
   );
   let setSession = jest.fn();
 
-  beforeEach(() => {
-    initController();
-  });
+  beforeEach(initController);
 
   it("creates game", () => {
     controller.create.mockReturnValue(of(viewSession));
