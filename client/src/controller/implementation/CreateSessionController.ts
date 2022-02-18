@@ -5,8 +5,8 @@ import { SessionB2VConverter } from "./converter/SessionB2VConverter";
 import { map } from "rxjs/operators";
 
 export class CreateSessionController {
-  private createSessionUC: CreateSessionUseCase;
-  private converter: SessionB2VConverter;
+  private readonly createSessionUC: CreateSessionUseCase;
+  private readonly converter: SessionB2VConverter;
 
   constructor(
     createSessionUC: CreateSessionUseCase,

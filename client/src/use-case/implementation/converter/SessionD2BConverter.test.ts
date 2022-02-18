@@ -11,7 +11,7 @@ describe("Session domain to boundary converter", () => {
     ["x", "y", "z"],
     [
       [0, "a"],
-      [5, "b"],
+      [1, "b"],
     ]
   );
 
@@ -26,10 +26,7 @@ describe("Session domain to boundary converter", () => {
     expect(boundaryModel.state).toEqual(GameState.Lost);
     expect(boundaryModel.matches).toEqual(["a", "b"]);
     expect(boundaryModel.misses).toEqual(["x", "y", "z"]);
-    expect(boundaryModel.resultWord).toEqual([
-      [0, "a"],
-      [5, "b"],
-    ]);
+    expect(boundaryModel.resultWord).toEqual("ab");
   });
 
   function initConverter() {

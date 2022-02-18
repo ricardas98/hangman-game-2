@@ -26,10 +26,7 @@ describe("Session boundary to view converter", () => {
     expect(viewModel.state).toEqual(GameState.Lost);
     expect(viewModel.matches).toEqual(["a", "b"]);
     expect(viewModel.misses).toEqual(["x", "y", "z"]);
-    expect(viewModel.resultWord).toEqual([
-      [0, "a"],
-      [5, "b"],
-    ]);
+    expect(viewModel.resultWord).toEqual("ab");
   });
 
   function initConverter() {

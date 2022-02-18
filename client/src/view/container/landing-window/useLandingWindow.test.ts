@@ -9,45 +9,29 @@ import { ViewSession } from "../../../controller/model/ViewSession";
 import { of } from "rxjs";
 import { act } from "react-dom/test-utils";
 
-describe("Home page hook", () => {
+describe("Landing window hook", () => {
   let controller: MockProxy<CreateSessionController>;
-  const setSession = jest.fn();
   let viewSession = new ViewSession(
     "123",
     2,
     ["a", "b"],
     ["x", "y", "z"],
-    [
-      [0, "a"],
-      [5, "b"],
-    ]
+    "ab"
   );
+  let setSession = jest.fn();
 
-  beforeEach(() => {
-    initController();
-    mockUseState();
-  });
+  beforeEach(initController);
 
   it("creates game", () => {
     controller.create.mockReturnValue(of(viewSession));
-
     const { result } = renderHook(() =>
       useLandingWindow(controller, setSession)
     );
 
-    act(() => {
-      result.current();
-    });
+    act(() => result.current());
 
     expect(setSession).toHaveBeenCalledWith(viewSession);
   });
-
-  function mockUseState() {
-    jest.mock("react", () => ({
-      ...jest.requireActual("react"),
-      useState: jest.fn(),
-    }));
-  }
 
   function initController() {
     controller = mock<CreateSessionController>();

@@ -1,3 +1,5 @@
+import { UpdateSessionController } from "controller/implementation/UpdateSessionController";
+import { UpdateSessionInteractor } from "use-case/implementation/UpdateSessionInteractor";
 import { SessionB2VConverter } from "./controller/implementation/converter/SessionB2VConverter";
 import { CreateSessionController } from "./controller/implementation/CreateSessionController";
 import { RestClient } from "./gateway/implementation/RestClient";
@@ -17,7 +19,17 @@ const createSessionInteractor = new CreateSessionInteractor(
   sessionD2BConverter
 );
 
+const updateSessionInteractor = new UpdateSessionInteractor(
+  sessionGateway,
+  sessionD2BConverter
+);
+
 export const createSessionController = new CreateSessionController(
   createSessionInteractor,
+  sessionB2VConverter
+);
+
+export const updateSessionController = new UpdateSessionController(
+  updateSessionInteractor,
   sessionB2VConverter
 );

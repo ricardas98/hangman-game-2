@@ -5,14 +5,14 @@ export class ViewSession {
   readonly state: GameState;
   readonly matches: string[];
   readonly misses: string[];
-  readonly resultWord: [number, string][];
+  readonly resultWord: string;
 
   constructor(
     id: string,
     state: number,
     matches: string[],
     misses: string[],
-    resultWord: [number, string][]
+    resultWord: string
   ) {
     this.id = id;
     this.state = state;
