@@ -28,9 +28,7 @@ describe("Landing window hook", () => {
       useLandingWindow(controller, setSession)
     );
 
-    act(() => {
-      result.current();
-    });
+    act(() => result.current());
 
     expect(setSession).toHaveBeenCalledWith(viewSession);
   });
