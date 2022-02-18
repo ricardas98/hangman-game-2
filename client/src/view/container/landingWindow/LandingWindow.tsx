@@ -11,7 +11,7 @@ export const LandingWindow = ({setSession} : LandingWindowProps) => {
 
     return(
         <div>
-            <button onClick={() => createGame()}>start</button>
+            <button onClick={createGame}>start</button>
         </div> 
     );
 }
