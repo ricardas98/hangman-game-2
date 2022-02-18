@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ViewSession } from "../../../controller/model/ViewSession";
-import { GameWindow } from "../gameWindow/GameWindow";
-import { LandingWindow } from "../landingWindow/LandingWindow";
+import { GameWindow } from "../game-window/GameWindow";
+import { LandingWindow } from "../landing-window/LandingWindow";
 
 export const MainWindow = () => {
     const [session, setSession] = useState<ViewSession | undefined>(undefined);

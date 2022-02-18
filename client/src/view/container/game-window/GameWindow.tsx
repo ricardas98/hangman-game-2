@@ -1,7 +1,4 @@
-import { jsx } from "@emotion/react";
-import { letterSpacing } from "@mui/system";
 import { updateSessionController } from "Configuration";
-import { useEffect } from "react";
 import { ViewSession } from "../../../controller/model/ViewSession"
 import { useGameWindow } from "./useGameWindow";
 
