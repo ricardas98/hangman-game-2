@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { Session } from "../../domain/Session";
 import { Client } from "../api/Client";
 import { SESSIONS_PATH } from "../../PathConsts";
+import { REQUEST_HEADERS } from "HeadersConst";
 
 export class RestSessionGateway implements SessionGateway {
   private readonly client: Client;
@@ -18,7 +19,8 @@ export class RestSessionGateway implements SessionGateway {
   update(id: string, guess: string): Observable<Session> {
     return this.client.put(
       SESSIONS_PATH + "/" + id,
-      JSON.stringify({ guess: guess })
+      JSON.stringify({ guess: guess }),
+      REQUEST_HEADERS
     );
   }
   //TODO
