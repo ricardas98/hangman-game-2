@@ -37,9 +37,7 @@ export const GameWindow = ({session, setSession}: GameWindowProps) => {
         <p>{session.id}</p>
         <h1>{session.resultWord}</h1>
         <div className="keyboard">
-            {keyboard.map((row, index) =>
-                renderKeys(row, index)
-            )}
+            {keyboard.map((row, index) => renderKeys(row, index))}
         </div>
     </div>)
 }
