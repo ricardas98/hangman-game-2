@@ -10,10 +10,11 @@ import { act } from "react-dom/test-utils";
 
 describe("Session delete window", () => {
   let controller: MockProxy<DeleteSessionController>;
-  const setSession = jest.fn();
+  let setSession: jest.Mock;
 
   beforeEach(() => {
     initController();
+    setSession = jest.fn();
   });
 
   it("deletes session", () => {
