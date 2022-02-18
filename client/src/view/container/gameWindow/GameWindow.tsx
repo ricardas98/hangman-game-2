@@ -17,14 +17,22 @@ export const GameWindow = ({session, setSession}: GameWindowProps) => {
         ["z", "x", "c", "v", "b", "n", "m"],
       ];
 
+    function shouldBeDisabled(k: string): boolean{
+        return session.misses.concat(session.matches).includes(k) ? true : false
+    }
+
     return (
     <div>
         <p>{session.id}</p>
         <h1>{session.resultWord}</h1>
-        <div className="keyboard">{
-        keyboard.map((row, index) =><div key={index}>{
-            row.map((k, index) => <button key={index} disabled={session.misses.concat(session.matches).includes(k) ? true : false} onClick={() => updateGame(session.id, k)}>{k}</button>)
-            }</div>)}
+        <div className="keyboard">
+            {keyboard.map((row, index) =>
+                <div key={index}>
+                    {row.map((k, index) => 
+                        <button key={index} disabled={shouldBeDisabled(k)} onClick={() => updateGame(session.id, k)}>{k}</button>
+                    )}
+                </div>
+            )}
         </div>
     </div>)
 }
