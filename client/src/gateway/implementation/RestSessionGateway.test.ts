@@ -34,6 +34,17 @@ describe("REST session gateway", () => {
     });
   });
 
+  it("deletes session", done => {
+    const responseData: number = 204;
+    client.delete.mockReturnValue(of(responseData));
+
+    gateway.delete("123").subscribe(res => {
+      expect(res).toEqual(responseData);
+      expect(client.delete).toBeCalled();
+      done();
+    });
+  });
+
   function mockClient() {
     client = mock<Client>();
   }
