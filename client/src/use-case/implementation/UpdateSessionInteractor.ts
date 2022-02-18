@@ -14,7 +14,7 @@ export class UpdateSessionInteractor implements UpdateSessionUseCase {
     this.converter = converter;
   }
 
-  update(id: string, guess: string) {
+  update(id: string, guess: string): Observable<BoundarySessionOutput> {
     return this.gateway
       .update(id, guess)
       .pipe(map(s => this.converter.processData(s)));
