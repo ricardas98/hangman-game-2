@@ -11,7 +11,6 @@ import { act } from "react-dom/test-utils";
 
 describe("Landing window hook", () => {
   let controller: MockProxy<CreateSessionController>;
-  const setSession = jest.fn();
   let viewSession = new ViewSession(
     "123",
     2,
@@ -19,10 +18,10 @@ describe("Landing window hook", () => {
     ["x", "y", "z"],
     "ab"
   );
+  let setSession = jest.fn();
 
   beforeEach(() => {
     initController();
-    mockUseState();
   });
 
   it("creates game", () => {
@@ -40,12 +39,5 @@ describe("Landing window hook", () => {
 
   function initController() {
     controller = mock<CreateSessionController>();
-  }
-
-  function mockUseState() {
-    jest.mock("react", () => ({
-      ...jest.requireActual("react"),
-      useState: jest.fn(),
-    }));
   }
 });
