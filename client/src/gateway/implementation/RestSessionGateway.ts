@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 import { Session } from "../../domain/Session";
 import { Client } from "../api/Client";
 import { SESSIONS_PATH } from "../../PathConsts";
-import { REQUEST_HEADERS } from "HeadersConst";
+import { REQUEST_HEADERS } from "../../HeadersConst";
 
 export class RestSessionGateway implements SessionGateway {
   private readonly client: Client;
