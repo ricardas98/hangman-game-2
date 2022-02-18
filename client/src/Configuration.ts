@@ -1,7 +1,7 @@
-import { DeleteSessionController } from "controller/implementation/DeleteSessionController";
-import { UpdateSessionController } from "controller/implementation/UpdateSessionController";
-import { DeleteSessionInteractor } from "use-case/implementation/DeleteSessionInteractor";
-import { UpdateSessionInteractor } from "use-case/implementation/UpdateSessionInteractor";
+import { DeleteSessionController } from "./controller/implementation/DeleteSessionController";
+import { UpdateSessionController } from "./controller/implementation/UpdateSessionController";
+import { DeleteSessionInteractor } from "./use-case/implementation/DeleteSessionInteractor";
+import { UpdateSessionInteractor } from "./use-case/implementation/UpdateSessionInteractor";
 import { SessionB2VConverter } from "./controller/implementation/converter/SessionB2VConverter";
 import { CreateSessionController } from "./controller/implementation/CreateSessionController";
 import { RestClient } from "./gateway/implementation/RestClient";
