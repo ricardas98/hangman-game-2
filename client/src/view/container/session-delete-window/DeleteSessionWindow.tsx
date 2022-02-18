@@ -1,6 +1,6 @@
 import { deleteSessionController } from "Configuration"
 import { ViewSession } from "controller/model/ViewSession"
-import { useDeleteSessionWindow } from "./useDeleteSessionWindow"
+import { useDeleteSessionWindow } from "./useSessionDeleteWindow"
 
 interface DeleteSessionWindowProps {
     id: string,

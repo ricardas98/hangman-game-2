@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { DeleteSessionUseCase } from "use-case/api/DeleteSessionUseCase";
+import { DeleteSessionUseCase } from "../../use-case/api/DeleteSessionUseCase";
 import { SessionB2VConverter } from "./converter/SessionB2VConverter";
 
 export class DeleteSessionController {

@@ -1,6 +1,6 @@
-import { createSessionController } from "Configuration";
+import { createSessionController } from "../../../Configuration";
 import { useLandingWindow } from "./useLandingWindow";
-import { ViewSession } from "controller/model/ViewSession";
+import { ViewSession } from "../../../controller/model/ViewSession";
 
 interface LandingWindowProps {
     setSession: (session: ViewSession | undefined) => void
@@ -11,7 +11,7 @@ export const LandingWindow = ({setSession} : LandingWindowProps) => {
 
     return(
         <div>
-            <button onClick={() => createSession()}>start</button>
+            <button data-testid="start-button" onClick={() => createSession()}>start</button>
         </div> 
     );
 }

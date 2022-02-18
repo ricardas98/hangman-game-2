@@ -1,6 +1,6 @@
 import { ViewSession } from "controller/model/ViewSession";
 import { Observable } from "rxjs";
-import { UpdateSessionUseCase } from "use-case/api/UpdateSessionUseCase";
+import { UpdateSessionUseCase } from "../../use-case/api/UpdateSessionUseCase";
 import { SessionB2VConverter } from "./converter/SessionB2VConverter";
 import { map } from "rxjs/operators";
 
