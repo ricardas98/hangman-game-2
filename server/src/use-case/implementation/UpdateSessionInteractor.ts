@@ -13,7 +13,7 @@ export default class UpdateSessionInteractor implements UpdateSessionUseCase {
   update(data: BoundaryUpdateSessionInput): BoundarySessionOutput {
     const session = this.sessionGateway.findById(data.getSessionId());
 
-    session.handleGuess(data.getGuess());
+    session.handleGuess(data.getGuess().toLowerCase());
     this.sessionGateway.delete(data.getSessionId());
     this.sessionGateway.save(session);
 
