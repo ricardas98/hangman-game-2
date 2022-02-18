@@ -29,6 +29,11 @@ describe("Session boundary to view converter", () => {
     expect(viewModel.resultWord).toEqual("ab");
   });
 
+  it("converts delete response data to view model", () => {
+    expect(converter.processStatus(true)).toBeTruthy();
+    expect(converter.processStatus(false)).toBeFalsy();
+  });
+
   function initConverter() {
     converter = new SessionB2VConverter();
   }

@@ -11,4 +11,8 @@ export class SessionD2BConverter {
       data.resultWord
     );
   }
+
+  processResponse(status: number): boolean {
+    return status === 204 ? true : false;
+  }
 }
