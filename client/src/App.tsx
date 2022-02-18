@@ -1,10 +1,10 @@
-import { HomePage } from "./view/container/homeWindow/HomePage";
+import { MainWindow } from "./view/container/mainWindow/MainWindow";
 
 function App() {
 
   return (
     <div className="App">
-      <HomePage/>
+      <MainWindow/>
     </div>
   );
 }

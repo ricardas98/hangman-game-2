@@ -59,10 +59,14 @@ describe("Game entity", () => {
 
     expect(res).toEqual(
       new Map<number, string>([
+        [0, "e"],
+        [1, "_"],
+        [2, "e"],
+        [3, "_"],
+        [4, "_"],
+        [5, "_"],
         [6, "n"],
         [7, "t"],
-        [0, "e"],
-        [2, "e"],
       ])
     );
   });
@@ -74,7 +78,13 @@ describe("Game entity", () => {
     expect(res.getMatches()).toEqual(["a"]);
     expect(res.getMisses()).toEqual([]);
 
-    expect(resultWord).toEqual(new Map<number, string>([[1, "a"]]));
+    expect(resultWord).toEqual(
+      new Map<number, string>([
+        [0, "_"],
+        [1, "a"],
+        [2, "_"],
+      ])
+    );
   });
 
   it("handles already guessed letters", () => {
@@ -86,7 +96,13 @@ describe("Game entity", () => {
     expect(res1.getMatches()).toEqual(["a"]);
     expect(res.getMisses()).toEqual([]);
 
-    expect(resultWord).toEqual(new Map<number, string>([[1, "a"]]));
+    expect(resultWord).toEqual(
+      new Map<number, string>([
+        [0, "_"],
+        [1, "a"],
+        [2, "_"],
+      ])
+    );
   });
 
   it("handles already missed letter", () => {
@@ -98,11 +114,17 @@ describe("Game entity", () => {
     expect(res1.getMatches()).toEqual([]);
     expect(res.getMisses()).toEqual(["x"]);
 
-    expect(resultWord).toEqual(new Map<number, string>([]));
+    expect(resultWord).toEqual(
+      new Map<number, string>([
+        [0, "_"],
+        [1, "_"],
+        [2, "_"],
+      ])
+    );
   });
 
   it("handles game state after word has been guessed", () => {
-    ["a", "t", "c"].forEach((letter) => (game = game.guess(letter)));
+    ["a", "t", "c"].forEach(letter => (game = game.guess(letter)));
 
     const resultWord = game.getResultWord();
 
@@ -118,9 +140,9 @@ describe("Game entity", () => {
     );
   });
 
-  it("handles game state after word has been guessed", () => {
+  it("handles game state after word has not been guessed", () => {
     ["x", "q", "e", "r", "y", "u", "i", "o", "p", "z"].forEach(
-      (letter) => (game = game.guess(letter))
+      letter => (game = game.guess(letter))
     );
 
     const resultWord = game.getResultWord();
@@ -139,11 +161,17 @@ describe("Game entity", () => {
       "p",
       "z",
     ]);
-    expect(resultWord).toEqual(new Map<number, string>([]));
+    expect(resultWord).toEqual(
+      new Map<number, string>([
+        [0, "_"],
+        [1, "_"],
+        [2, "_"],
+      ])
+    );
   });
 
   it("sets game to lost when there are 10 misses", () => {
-    ["x", "y", "z", "q", "r", "u", "o", "p", "b", "n"].forEach((l) => {
+    ["x", "y", "z", "q", "r", "u", "o", "p", "b", "n"].forEach(l => {
       game = game.guess(l);
     });
 
@@ -163,7 +191,7 @@ describe("Game entity", () => {
   });
 
   it("sets game to won the word is guessed", () => {
-    ["t", "c", "a"].forEach((l) => {
+    ["t", "c", "a"].forEach(l => {
       game = game.guess(l);
     });
 

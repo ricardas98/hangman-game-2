@@ -5,14 +5,8 @@ import { RestSessionGateway } from "./gateway/implementation/RestSessionGateway"
 import { SessionD2BConverter } from "./use-case/implementation/converter/SessionD2BConverter";
 import { CreateSessionInteractor } from "./use-case/implementation/CreateSessionInteractor";
 
-let url;
-if (process.env.REACT_APP_SERVER_URL === undefined) {
-  throw new Error();
-} else {
-  url = process.env.REACT_APP_SERVER_URL;
-}
-
-const client = new RestClient(url);
+// @ts-ignore
+const client = new RestClient(process.env.REACT_APP_SERVER_URL);
 const sessionGateway = new RestSessionGateway(client);
 
 const sessionD2BConverter = new SessionD2BConverter();

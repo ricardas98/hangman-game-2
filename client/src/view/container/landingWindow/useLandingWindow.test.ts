@@ -2,15 +2,16 @@
  * @jest-environment jsdom
  */
 import { CreateSessionController } from "../../../controller/implementation/CreateSessionController";
-import { useHomePage } from "./useHomePage";
+import { useLandingWindow } from "./useLandingWindow";
 import { renderHook } from "@testing-library/react-hooks";
 import { mock, MockProxy } from "jest-mock-extended";
 import { ViewSession } from "../../../controller/model/ViewSession";
 import { of } from "rxjs";
-import { GameState } from "../../../controller/model/GameState";
+import { act } from "react-dom/test-utils";
 
 describe("Home page hook", () => {
   let controller: MockProxy<CreateSessionController>;
+  const setSession = jest.fn();
   let viewSession = new ViewSession(
     "123",
     2,
@@ -24,21 +25,30 @@ describe("Home page hook", () => {
 
   beforeEach(() => {
     initController();
+    mockUseState();
   });
 
   it("creates game", () => {
     controller.create.mockReturnValue(of(viewSession));
-    const { result } = renderHook(() => useHomePage(controller));
 
-    expect(result.current?.id).toBe("123");
-    expect(result.current?.state).toEqual(GameState.Lost);
-    expect(result.current?.matches).toEqual(["a", "b"]);
-    expect(result.current?.misses).toEqual(["x", "y", "z"]);
-    expect(result.current?.resultWord).toEqual([
-      [0, "a"],
-      [5, "b"],
-    ]);
+    const { result } = renderHook(() =>
+      useLandingWindow(controller, setSession)
+    );
+
+    act(() => {
+      result.current();
+    });
+
+    expect(setSession).toHaveBeenCalledWith(viewSession);
   });
+
+  function mockUseState() {
+    jest.mock("react", () => ({
+      ...jest.requireActual("react"),
+      useState: jest.fn(),
+    }));
+  }
+
   function initController() {
     controller = mock<CreateSessionController>();
   }
