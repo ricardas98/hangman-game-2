@@ -10,8 +10,6 @@ export const LandingWindow = ({setSession} : LandingWindowProps) => {
     const createSession = useLandingWindow(createSessionController, setSession);
 
     return(
-        <div>
-            <button data-testid="start-button" onClick={() => createSession()}>start</button>
-        </div> 
+        <button onClick={createSession}>start</button>
     );
 }

@@ -11,7 +11,6 @@ import { act } from "react-dom/test-utils";
 
 describe("Game window hook", () => {
   let controller: MockProxy<UpdateSessionController>;
-  const setSession = jest.fn();
   let viewSession = new ViewSession(
     "123",
     2,
@@ -19,31 +18,20 @@ describe("Game window hook", () => {
     ["x", "y", "z"],
     "ab"
   );
+  const setSession = jest.fn();
 
-  beforeEach(() => {
-    initController();
-    mockUseState();
-  });
+  beforeEach(initController);
 
   it("updates game", () => {
     controller.update.mockReturnValue(of(viewSession));
     const { result } = renderHook(() => useGameWindow(controller, setSession));
 
-    act(() => {
-      result.current("123", "a");
-    });
+    act(() => result.current("123", "a"));
 
     expect(setSession).toHaveBeenCalledWith(viewSession);
   });
 
   function initController() {
     controller = mock<UpdateSessionController>();
-  }
-
-  function mockUseState() {
-    jest.mock("react", () => ({
-      ...jest.requireActual("react"),
-      useState: jest.fn(),
-    }));
   }
 });
