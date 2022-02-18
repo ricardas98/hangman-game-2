@@ -6,12 +6,12 @@ import { SessionB2VConverter } from "./converter/SessionB2VConverter";
 import { UpdateSessionController } from "./UpdateSessionController";
 import { of } from "rxjs";
 
-describe("Update sesion converte", () => {
+describe("Update sesion converter", () => {
   let controller: UpdateSessionController;
   let useCase: MockProxy<UpdateSessionUseCase>;
 
   beforeEach(() => {
-    mockInteractor();
+    mockUseCase();
     initController();
   });
 
@@ -32,7 +32,7 @@ describe("Update sesion converte", () => {
     });
   });
 
-  function mockInteractor() {
+  function mockUseCase() {
     useCase = mock<UpdateSessionUseCase>();
   }
 

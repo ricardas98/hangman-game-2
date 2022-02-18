@@ -11,7 +11,7 @@ describe("Create session controller", () => {
   let useCase: MockProxy<CreateSessionUseCase>;
 
   beforeEach(() => {
-    mockInteractor();
+    mockUseCase();
     initController();
   });
 
@@ -35,7 +35,7 @@ describe("Create session controller", () => {
     );
   }
 
-  function mockInteractor() {
+  function mockUseCase() {
     useCase = mock<CreateSessionUseCase>();
   }
 });
