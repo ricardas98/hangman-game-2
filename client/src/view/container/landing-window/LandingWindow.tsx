@@ -9,5 +9,5 @@ interface LandingWindowProps {
 export const LandingWindow = ({setSession} : LandingWindowProps) => {
     const createSession = useLandingWindow(createSessionController, setSession);
 
-    return <button onClick={createSession}>start</button>
+    return <button data-testid="start-button" onClick={createSession}>start</button>
 }
