@@ -22,7 +22,7 @@ describe("Create session interactor", () => {
     );
 
     const res: BoundarySessionOutput = interactor.update(
-      new BoundaryUpdateSessionInput("1", "a")
+      new BoundaryUpdateSessionInput("1", "A")
     );
 
     expect(res.getSessionId()).toBe("1");
