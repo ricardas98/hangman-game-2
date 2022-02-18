@@ -18,13 +18,17 @@ export class RestSessionGateway implements SessionGateway {
 
   update(id: string, guess: string): Observable<Session> {
     return this.client.put(
-      SESSIONS_PATH + "/" + id,
+      this.buildPathWithId(id),
       JSON.stringify({ guess: guess }),
       REQUEST_HEADERS
     );
   }
-  //TODO
-  delete(id: string): Observable<Session> {
-    return new Observable<Session>();
+
+  delete(id: string): Observable<number> {
+    return this.client.delete(this.buildPathWithId(id));
+  }
+
+  private buildPathWithId(id: string): string {
+    return SESSIONS_PATH + "/" + id;
   }
 }
