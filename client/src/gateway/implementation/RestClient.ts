@@ -28,4 +28,10 @@ export class RestClient implements Client {
       .put<T>(this.serverURL + url, body, headers)
       .pipe(map(res => res.response));
   }
+
+  delete<T>(url: string, headers?: Record<string, string>): Observable<number> {
+    return ajax
+      .delete<T>(this.serverURL + url, headers)
+      .pipe(map(res => res.status));
+  }
 }
