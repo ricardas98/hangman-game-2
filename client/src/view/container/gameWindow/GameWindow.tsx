@@ -22,8 +22,14 @@ export const GameWindow = ({session, setSession}: GameWindowProps) => {
         return session.misses.concat(session.matches).includes(k) ? true : false
     }
 
-    function renderKey(k: string, index: number): JSX.Element {
-        return <button key={index} disabled={shouldBeDisabled(k)} onClick={() => updateGame(session.id, k)}>{k}</button>
+    function renderKeys(row: string[], index: number): JSX.Element {
+        return (                
+            <div key={index}>
+                {row.map((k, index) => 
+                    <button key={index} disabled={shouldBeDisabled(k)} onClick={() => updateGame(session.id, k)}>{k}</button>
+                )}
+            </div>
+        )
     }
 
     return (
@@ -32,11 +38,7 @@ export const GameWindow = ({session, setSession}: GameWindowProps) => {
         <h1>{session.resultWord}</h1>
         <div className="keyboard">
             {keyboard.map((row, index) =>
-                <div key={index}>
-                    {row.map((k, index) => 
-                        renderKey(k, index)
-                    )}
-                </div>
+                renderKeys(row, index)
             )}
         </div>
     </div>)
