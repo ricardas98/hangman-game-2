@@ -1,11 +1,12 @@
+import { ThemeProvider } from "@mui/material";
+import { theme } from "MaterialUiTheme";
 import { MainWindow } from "./view/container/main-window/MainWindow";
 
 function App() {
-
   return (
-    <div className="App">
-      <MainWindow/>
-    </div>
+    <ThemeProvider theme={theme}>
+      <MainWindow />
+    </ThemeProvider>
   );
 }
 
