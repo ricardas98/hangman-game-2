@@ -12,7 +12,7 @@ describe("Delete session window", () => {
 
         render(<DeleteSessionWindow id="123" setSession={setSession} />);
 
-        expect(screen.getByTestId("delete-button")).toBeInTheDocument();
+        expect(screen.getByTestId("DeleteButton")).toBeInTheDocument();
     })
 
     it("calls setSession when the button is clicked", () => {
@@ -20,7 +20,7 @@ describe("Delete session window", () => {
         jest.spyOn(useDeleteSessionWindow, "useDeleteSessionWindow").mockReturnValue(setSession);
         render(<DeleteSessionWindow id="123" setSession={setSession} />);
 
-        fireEvent.click(screen.getByTestId("delete-button"))
+        fireEvent.click(screen.getByTestId("DeleteButton"))
 
         expect(setSession).toBeCalled();
     })
