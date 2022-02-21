@@ -11,5 +11,5 @@ export const DeleteSessionWindow = ({id, setSession} : DeleteSessionWindowProps)
 
     const deleteSession = useDeleteSessionWindow(deleteSessionController, setSession)
 
-    return <button onClick={() => {deleteSession(id)}}>Quit</button>
+    return <button data-testid="deleteButton" onClick={() => {deleteSession(id)}}>Quit</button>
 }
