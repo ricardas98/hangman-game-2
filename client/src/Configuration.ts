@@ -42,6 +42,5 @@ export const updateSessionController = new UpdateSessionController(
 );
 
 export const deleteSessionController = new DeleteSessionController(
-  deleteSessionInteractor,
-  sessionB2VConverter
+  deleteSessionInteractor
 );
