@@ -24,7 +24,7 @@ export const GameWindow = ({session, setSession}: GameWindowProps) => {
         return (                
             <div key={index}>
                 {row.map((k, index) => 
-                    <button key={index} disabled={shouldBeDisabled(k)} onClick={() => updateGame(session.id, k)}>{k}</button>
+                    <button data-testid= {`${k}Key`} key={index} disabled={shouldBeDisabled(k)} onClick={() => updateGame(session.id, k)}>{k}</button>
                 )}
             </div>
         )
@@ -32,8 +32,8 @@ export const GameWindow = ({session, setSession}: GameWindowProps) => {
 
     return (
     <div>
-        <p>{session.id}</p>
-        <h1>{session.resultWord}</h1>
+        <p data-testid="sessionId">{session.id}</p>
+        <h1 data-testid="sessionResultWord">{session.resultWord}</h1>
         <div className="keyboard">
             {keyboard.map((row, index) => renderKeys(row, index))}
         </div>
