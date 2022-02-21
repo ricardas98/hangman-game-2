@@ -7,7 +7,7 @@ export const MainWindow = () => {
     const [session, setSession] = useState<ViewSession | undefined>(undefined);
 
     return(
-        session === undefined 
+        session === undefined
         ? <LandingWindow setSession={setSession}/>
         : <GameWindow session={session} setSession={setSession}/>
     );

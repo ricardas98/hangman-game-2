@@ -1,5 +1,6 @@
 import { updateSessionController } from "Configuration";
 import { ViewSession } from "../../../controller/model/ViewSession"
+import { DeleteSessionWindow } from "../session-delete-window/DeleteSessionWindow";
 import { useGameWindow } from "./useGameWindow";
 
 interface GameWindowProps {
@@ -36,5 +37,6 @@ export const GameWindow = ({session, setSession}: GameWindowProps) => {
         <div className="keyboard">
             {keyboard.map((row, index) => renderKeys(row, index))}
         </div>
+        <DeleteSessionWindow id={session.id} setSession={setSession}/>
     </div>)
 }

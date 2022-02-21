@@ -12,4 +12,6 @@ export interface Client {
     body?: any,
     headers?: Record<string, string>
   ): Observable<T>;
+
+  delete<T>(url: string, headers?: Record<string, string>): Observable<number>;
 }

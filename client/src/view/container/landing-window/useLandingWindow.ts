@@ -5,9 +5,9 @@ export function useLandingWindow(
   controller: CreateSessionController,
   setSession: (session: ViewSession | undefined) => void
 ): () => void {
-  const createGame = () => {
+  const createSession = () => {
     controller.create().subscribe(setSession);
   };
 
-  return createGame;
+  return createSession;
 }

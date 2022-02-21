@@ -1,4 +1,6 @@
+import { DeleteSessionController } from "controller/implementation/DeleteSessionController";
 import { UpdateSessionController } from "controller/implementation/UpdateSessionController";
+import { DeleteSessionInteractor } from "use-case/implementation/DeleteSessionInteractor";
 import { UpdateSessionInteractor } from "use-case/implementation/UpdateSessionInteractor";
 import { SessionB2VConverter } from "./controller/implementation/converter/SessionB2VConverter";
 import { CreateSessionController } from "./controller/implementation/CreateSessionController";
@@ -24,6 +26,11 @@ const updateSessionInteractor = new UpdateSessionInteractor(
   sessionD2BConverter
 );
 
+const deleteSessionInteractor = new DeleteSessionInteractor(
+  sessionGateway,
+  sessionD2BConverter
+);
+
 export const createSessionController = new CreateSessionController(
   createSessionInteractor,
   sessionB2VConverter
@@ -31,5 +38,10 @@ export const createSessionController = new CreateSessionController(
 
 export const updateSessionController = new UpdateSessionController(
   updateSessionInteractor,
+  sessionB2VConverter
+);
+
+export const deleteSessionController = new DeleteSessionController(
+  deleteSessionInteractor,
   sessionB2VConverter
 );
