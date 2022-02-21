@@ -1,5 +1,5 @@
 import { SessionGateway } from "../api/SessionGateway";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { Session } from "../../domain/Session";
 import { Client } from "../api/Client";
 import { SESSIONS_PATH } from "../../PathConsts";
@@ -24,11 +24,17 @@ export class RestSessionGateway implements SessionGateway {
     );
   }
 
-  delete(id: string): Observable<number> {
-    return this.client.delete(this.buildPathWithId(id));
+  delete(id: string): Observable<boolean> {
+    return this.client
+      .delete(this.buildPathWithId(id))
+      .pipe(map(status => this.isDeleteSuccessful(status)));
   }
 
   private buildPathWithId(id: string): string {
     return SESSIONS_PATH + "/" + id;
+  }
+
+  private isDeleteSuccessful(status: number): boolean {
+    return status === 204;
   }
 }

@@ -11,8 +11,4 @@ export class SessionB2VConverter {
       data.resultWord
     );
   }
-
-  processStatus(status: boolean): boolean {
-    return status;
-  }
 }

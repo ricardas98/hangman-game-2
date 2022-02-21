@@ -14,7 +14,7 @@ describe("Delete session interactor", () => {
   });
 
   it("deletes session", () => {
-    gateway.delete.mockReturnValue(of(204));
+    gateway.delete.mockReturnValue(of(true));
 
     interactor.delete("1").subscribe(res => expect(res).toBeTruthy());
   });

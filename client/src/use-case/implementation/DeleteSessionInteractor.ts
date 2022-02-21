@@ -14,8 +14,6 @@ export class DeleteSessionInteractor implements DeleteSessionUseCase {
   }
 
   delete(id: string): Observable<boolean> {
-    return this.gateway
-      .delete(id)
-      .pipe(map(s => this.converter.processResponse(s)));
+    return this.gateway.delete(id);
   }
 }
