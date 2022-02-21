@@ -19,9 +19,9 @@ describe("Game window", () => {
 
         expect(screen.getByTestId("sessionId").textContent).toBe("123");
         expect(screen.getByTestId("sessionResultWord").textContent).toBe("____")
-        expect(screen.getByTestId("qKey").textContent).toBe("q");
-        expect(screen.getByTestId("aKey").textContent).toBe("a");
-        expect(screen.getByTestId("zKey").textContent).toBe("z");
+        expect(screen.getByTestId("Key-q").textContent).toBe("q");
+        expect(screen.getByTestId("Key-a").textContent).toBe("a");
+        expect(screen.getByTestId("Key-z").textContent).toBe("z");
         expect(screen.getByTestId("DeleteSessionWindow")).toBeInTheDocument();
     })
 
@@ -29,7 +29,7 @@ describe("Game window", () => {
         jest.spyOn(useGameWindow, "useGameWindow").mockReturnValue(setSession);
         render(<GameWindow session={session} setSession={setSession}/>);
 
-        fireEvent.click(screen.getByTestId("qKey"))
+        fireEvent.click(screen.getByTestId("Key-q"))
 
         expect(setSession).toBeCalled();
     })
@@ -40,6 +40,7 @@ describe("Game window", () => {
 })
 
 jest.mock("../session-delete-window/DeleteSessionWindow", () => ({
+
     DeleteSessionWindow: () => <div data-testid="DeleteSessionWindow"/>
 }));
 

@@ -22,9 +22,9 @@ export const GameWindow = ({session, setSession}: GameWindowProps) => {
 
     function renderKeys(row: string[], index: number): JSX.Element {
         return (                
-            <div key={index}>
+            <div data-testid= {`Row-${index}`} key={index}>
                 {row.map((k, index) => 
-                    <button data-testid= {`${k}Key`} key={index} disabled={shouldBeDisabled(k)} onClick={() => updateGame(session.id, k)}>{k}</button>
+                    <button data-testid= {`Key-${k}`} key={index} disabled={shouldBeDisabled(k)} onClick={() => updateGame(session.id, k)}>{k}</button>
                 )}
             </div>
         )
@@ -32,9 +32,9 @@ export const GameWindow = ({session, setSession}: GameWindowProps) => {
 
     return (
     <div>
-        <p data-testid="sessionId">{session.id}</p>
-        <h1 data-testid="sessionResultWord">{session.resultWord}</h1>
-        <div className="keyboard">
+        <p data-testid="SessionId">{session.id}</p>
+        <h1 data-testid="SessionResultWord">{session.resultWord}</h1>
+        <div className="Keyboard">
             {keyboard.map((row, index) => renderKeys(row, index))}
         </div>
         <DeleteSessionWindow id={session.id} setSession={setSession}/>
