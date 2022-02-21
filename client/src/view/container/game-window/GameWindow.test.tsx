@@ -17,8 +17,8 @@ describe("Game window", () => {
     it("renders game window", () => {
         render(<GameWindow session={session} setSession={setSession}/>);
 
-        expect(screen.getByTestId("sessionId").textContent).toBe("123");
-        expect(screen.getByTestId("sessionResultWord").textContent).toBe("____")
+        expect(screen.getByTestId("SessionId").textContent).toBe("123");
+        expect(screen.getByTestId("SessionResultWord").textContent).toBe("____")
         expect(screen.getByTestId("Key-q").textContent).toBe("q");
         expect(screen.getByTestId("Key-a").textContent).toBe("a");
         expect(screen.getByTestId("Key-z").textContent).toBe("z");
