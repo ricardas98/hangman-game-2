@@ -4,7 +4,7 @@
 import React from "react"
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import {MainWindow} from "./MainWindow"
+import { MainWindow } from "./MainWindow"
 import { ViewSession } from "../../../controller/model/ViewSession";
 
 describe("Main window", () => {
