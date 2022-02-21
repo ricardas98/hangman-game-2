@@ -8,7 +8,7 @@ export const MainWindow = () => {
 
     return(
         session === undefined
-        ? <LandingWindow data-testid="LandingWindow" setSession={setSession}/>
-        : <GameWindow data-testid="GameWindow" session={session} setSession={setSession}/>
+        ? <LandingWindow setSession={setSession}/>
+        : <GameWindow session={session} setSession={setSession}/>
     );
 }
