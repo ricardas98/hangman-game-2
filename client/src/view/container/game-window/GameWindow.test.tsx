@@ -40,7 +40,6 @@ describe("Game window", () => {
 })
 
 jest.mock("../session-delete-window/DeleteSessionWindow", () => ({
-    __esModule: true,
     DeleteSessionWindow: () => <div data-testid="DeleteSessionWindow"/>
 }));
 
