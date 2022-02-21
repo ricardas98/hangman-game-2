@@ -12,7 +12,7 @@ describe("Landing window", () => {
 
     render(<LandingWindow setSession={setSession}/>);
 
-    expect(screen.getByTestId("StartButton")).toBeInTheDocument();
+    expect(screen.getByTestId("startButton")).toBeInTheDocument();
   });
 
   it("calls setSession when the button is clicked", () => {
@@ -20,7 +20,7 @@ describe("Landing window", () => {
     jest.spyOn(useLandingWindow, "useLandingWindow").mockReturnValue(setSession);
     render(<LandingWindow setSession={setSession}/>);
 
-    fireEvent.click(screen.getByTestId("StartButton"))
+    fireEvent.click(screen.getByTestId("startButton"))
 
     expect(setSession).toBeCalled()
   })
