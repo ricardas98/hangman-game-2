@@ -1,4 +1,4 @@
-import { updateSessionController } from "Configuration";
+import { updateSessionController } from "../../../Configuration";
 import { ViewSession } from "../../../controller/model/ViewSession"
 import { DeleteSessionWindow } from "../session-delete-window/DeleteSessionWindow";
 import { useGameWindow } from "./useGameWindow";
