@@ -29,16 +29,6 @@ describe("Session domain to boundary converter", () => {
     expect(boundaryModel.resultWord).toEqual("ab");
   });
 
-  it("converts delete response data to boundary (204)", () => {
-    expect(converter.processResponse(204)).toBeTruthy();
-  });
-
-  it("converts delete response data to boundary (not 204)", () => {
-    expect(converter.processResponse(404)).toBeFalsy();
-    expect(converter.processResponse(400)).toBeFalsy();
-    expect(converter.processResponse(500)).toBeFalsy();
-  });
-
   function initConverter() {
     converter = new SessionD2BConverter();
   }

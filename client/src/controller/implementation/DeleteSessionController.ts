@@ -1,6 +1,5 @@
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { DeleteSessionUseCase } from "../../use-case/api/DeleteSessionUseCase";
+import { DeleteSessionUseCase } from "use-case/api/DeleteSessionUseCase";
 import { SessionB2VConverter } from "./converter/SessionB2VConverter";
 
 export class DeleteSessionController {
@@ -13,8 +12,6 @@ export class DeleteSessionController {
   }
 
   delete(id: string): Observable<boolean> {
-    return this.useCase
-      .delete(id)
-      .pipe(map(s => this.converter.processStatus(s)));
+    return this.useCase.delete(id);
   }
 }
