@@ -1,4 +1,5 @@
-import { Button, Box } from "@mui/material";
+import { Button, Box, Grid, Typography } from "@mui/material";
+import { CardWindow } from "view/component/CardWindow";
 import { updateSessionController } from "../../../Configuration";
 import { ViewSession } from "../../../controller/model/ViewSession";
 import { DeleteSessionWindow } from "../session-delete-window/DeleteSessionWindow";
@@ -21,34 +22,86 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
     return session.misses.concat(session.matches).includes(k);
   }
 
+  function getBorderColor(k: string): string {
+    const initialStyle = "";
+    if (session.matches.includes(k.toLowerCase()))
+      return initialStyle + "green";
+    else if (session.misses.includes(k.toLowerCase()))
+      return initialStyle + "red";
+    return initialStyle + "black";
+  }
+
+  function getHangmanImageUrl() {
+    return `hangman-illustration/${session.misses.length}.svg`;
+  }
+
   function renderKeys(row: string[], index: number): JSX.Element {
     return (
-      <div data-testid={`Row-${index}`} key={`Row-${index}`}>
+      <Grid
+        item
+        container
+        justifyContent="center"
+        alignItems="center"
+        data-testid={`Row-${index}`}
+        mb={1}
+      >
         {row.map(k => (
           <Button
             data-testid={`Key-${k}`}
             key={`Key-${k}`}
             disabled={shouldBeDisabled(k)}
-            onClick={() => updateGame(session.id, k)}
+            onClick={() => {
+              console.log(session.matches);
+              console.log(getBorderColor(k));
+              updateGame(session.id, k);
+            }}
+            sx={{ border: `1px solid ${getBorderColor(k)}` }}
+            variant="contained"
+            color="inherit"
           >
-            <Box width="50px" height="50px">
-              {k}
-            </Box>
+            <Typography>{k}</Typography>
           </Button>
         ))}
-      </div>
+      </Grid>
     );
   }
 
   return (
-    <div>
-      <p data-testid="SessionId">{session.id}</p>
-      <h1 data-testid="SessionResultWord">{session.resultWord}</h1>
-
-      <div data-testid="Keyboard">
-        {keyboard.map((row, index) => renderKeys(row, index))}
-      </div>
-      <DeleteSessionWindow id={session.id} setSession={setSession} />
-    </div>
+    <Box
+      px={4}
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "background.default",
+      }}
+    >
+      <CardWindow>
+        <Grid container alignItems="center" justifyContent="center">
+          <Grid item xs={12} container justifyContent="space-between">
+            <p data-testid="SessionId">{session.id}</p>
+            <DeleteSessionWindow id={session.id} setSession={setSession} />
+          </Grid>
+          <Grid item xs={12}>
+            <Box margin="auto" width={{ xs: "50%", md: "30%" }}>
+              <img
+                src={getHangmanImageUrl()}
+                alt="hangman"
+                style={{ objectFit: "contain" }}
+              ></img>
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
+            <h1 data-testid="SessionResultWord">{session.resultWord}</h1>
+          </Grid>
+          <Grid item xs={12}>
+            <Box data-testid="Keyboard">
+              {keyboard.map((row, index) => renderKeys(row, index))}
+            </Box>
+          </Grid>
+        </Grid>
+      </CardWindow>
+    </Box>
   );
 };
