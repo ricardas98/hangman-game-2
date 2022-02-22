@@ -5,42 +5,39 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { GameWindow } from "./GameWindow";
 import { ViewSession } from "../../../controller/model/ViewSession";
-import * as useGameWindow  from "./useGameWindow"
-
+import * as useGameWindow from "./useGameWindow";
 
 describe("Game window", () => {
-    const session = new ViewSession("123", 0, [], [], "____");
-    let setSession: jest.Mock<any, any>; 
+  const session = new ViewSession("123", 0, [], [], "____");
+  let setSession: jest.Mock<any, any>;
 
-    beforeEach(mockSetSession)
+  beforeEach(mockSetSession);
 
-    it("renders game window", () => {
-        render(<GameWindow session={session} setSession={setSession}/>);
+  it("renders game window", () => {
+    render(<GameWindow session={session} setSession={setSession} />);
 
-        expect(screen.getByTestId("SessionId").textContent).toBe("123");
-        expect(screen.getByTestId("SessionResultWord").textContent).toBe("____")
-        expect(screen.getByTestId("Key-q").textContent).toBe("q");
-        expect(screen.getByTestId("Key-a").textContent).toBe("a");
-        expect(screen.getByTestId("Key-z").textContent).toBe("z");
-        expect(screen.getByTestId("DeleteSessionWindow")).toBeInTheDocument();
-    })
+    expect(screen.getByTestId("SessionId").textContent).toBe("123");
+    expect(screen.getByTestId("SessionResultWord").textContent).toBe("____");
+    expect(screen.getByTestId("Key-Q").textContent).toBe("Q");
+    expect(screen.getByTestId("Key-A").textContent).toBe("A");
+    expect(screen.getByTestId("Key-Z").textContent).toBe("Z");
+    expect(screen.getByTestId("DeleteSessionWindow")).toBeInTheDocument();
+  });
 
-    it("calls setSession when keyboard button is clicked", () => {
-        jest.spyOn(useGameWindow, "useGameWindow").mockReturnValue(setSession);
-        render(<GameWindow session={session} setSession={setSession}/>);
+  it("calls setSession when keyboard button is clicked", () => {
+    jest.spyOn(useGameWindow, "useGameWindow").mockReturnValue(setSession);
+    render(<GameWindow session={session} setSession={setSession} />);
 
-        fireEvent.click(screen.getByTestId("Key-q"))
+    fireEvent.click(screen.getByTestId("Key-Q"));
 
-        expect(setSession).toBeCalled();
-    })
+    expect(setSession).toBeCalled();
+  });
 
-    function mockSetSession () {
-        setSession = jest.fn();
-    }
-})
+  function mockSetSession() {
+    setSession = jest.fn();
+  }
+});
 
 jest.mock("../session-delete-window/DeleteSessionWindow", () => ({
-
-    DeleteSessionWindow: () => <div data-testid="DeleteSessionWindow"/>
+  DeleteSessionWindow: () => <div data-testid="DeleteSessionWindow" />,
 }));
-

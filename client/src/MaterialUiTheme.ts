@@ -69,7 +69,6 @@ export const theme = createTheme({
       fontFamily: "Stick",
       fontWeight: 800,
       fontSize: "1.1rem",
-      textTransform: "lowercase",
     },
   },
   shape: {
