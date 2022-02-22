@@ -1,9 +1,10 @@
-import { Box, Button, Grid, Link, Typography } from "@mui/material";
+import { Box, Grid, Link, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
 export const Footer = () => {
   return (
     <Box
+      data-testid="Footer"
       px={4}
       mt={4}
       sx={{
