@@ -6,16 +6,17 @@ export const theme = createTheme({
     mode: "light",
     primary: {
       main: "#f05523",
+      dark: "#de451b",
     },
     secondary: {
-      main: "#f5f6f8",
+      main: "#231f20",
     },
     background: {
       paper: "#ffffff",
-      default: "#f5f6f8",
+      default: "#edeef0",
     },
     text: {
-      primary: "#212b36",
+      primary: "#231f20",
       secondary: "#f5f6f8",
       disabled: "#8d9297",
     },
@@ -25,31 +26,54 @@ export const theme = createTheme({
     h1: {
       fontFamily: "Stick",
       fontWeight: 700,
+      fontSize: "5.5rem",
     },
-    h4: {
-      fontWeight: 500,
+    h2: {
+      fontSize: "4rem",
+      fontFamily: "Stick",
+      fontWeight: 700,
     },
     h3: {
-      fontFamily: "Stick",
-      fontWeight: 500,
+      fontFamily: "McLaren",
+      fontWeight: 700,
+      fontSize: "2rem",
+    },
+    h4: {
+      fontSize: "1.4rem",
+      fontFamily: "McLaren",
+      fontWeight: 400,
     },
     h5: {
+      fontSize: "1.3rem",
+      fontFamily: "Biryani",
       fontWeight: 400,
     },
     subtitle1: {
       fontWeight: 400,
+      fontFamily: "Biryani",
+      fontSize: "1.2rem",
+      letterSpacing: "0rem",
+    },
+    subtitle2: {
+      fontWeight: 400,
+      fontFamily: "Biryani",
+      fontSize: "1.1rem",
+      letterSpacing: "0.2rem",
+    },
+    caption: {
+      fontSize: "1rem",
+      letterSpacing: "0.2rem",
+      textTransform: "uppercase",
     },
     button: {
       fontFamily: "Stick",
       fontWeight: 800,
-      fontSize: "1.2rem",
-    },
-    h2: {
-      fontFamily: "Stick",
+      fontSize: "1.1rem",
+      textTransform: "lowercase",
     },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 10,
   },
   shadows: Array(25).fill("none") as Shadows,
 });
