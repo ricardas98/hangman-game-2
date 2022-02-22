@@ -17,7 +17,7 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
   ];
 
   function shouldBeDisabled(k: string): boolean {
-    return session.misses.concat(session.matches).includes(k) ? true : false;
+    return session.misses.concat(session.matches).includes(k);
   }
 
   function renderKeys(row: string[], index: number): JSX.Element {
