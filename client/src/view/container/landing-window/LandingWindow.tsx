@@ -1,17 +1,7 @@
 import { createSessionController } from "../../../Configuration";
 import { useLandingWindow } from "./useLandingWindow";
 import { ViewSession } from "../../../controller/model/ViewSession";
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
-import { minHeight, minWidth } from "@mui/system";
-//import Hangman from "../../../hangman-illustration/10.svg";
+import { Box, Button, Grid, Typography } from "@mui/material";
 
 interface LandingWindowProps {
   setSession: (session: ViewSession | undefined) => void;
@@ -22,53 +12,61 @@ export const LandingWindow = ({ setSession }: LandingWindowProps) => {
 
   return (
     <Box
+      px={4}
       sx={{
-        backgroundColor: "red",
-        minWidth: "100vw",
         minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "background.default",
       }}
     >
-      <Box style={{ backgroundColor: "blue", width: "35%" }} p={8}>
-        <Grid container alignItems="center" justifyContent="center" spacing={8}>
-          <Grid
-            item
-            xs={6}
-            container
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Grid
-              container
-              direction="column"
-              spacing={8}
-              justifyContent="center"
-              alignItems="flex-left"
-            >
-              <Grid item xs={12}>
-                <Typography variant="h1" align="left">
-                  Hangman Game
-                </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  data-testid="startButton"
-                  onClick={createSession}
-                  variant="contained"
-                >
-                  <Typography variant="h4">Start</Typography>
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={6} container justifyContent="center">
-            <Typography variant="h4">
+      <Box
+        sx={{
+          maxWidth: "960px",
+          display: "flex",
+          backgroundColor: "background.paper",
+          borderRadius: "2.5rem",
+        }}
+        py={10}
+        px={14}
+      >
+        <Grid
+          container
+          direction={{ xs: "row", md: "row-reverse" }}
+          alignItems="center"
+          justifyContent="center"
+          spacing={4}
+        >
+          <Grid item xs={12} md={5}>
+            <Box margin="auto" width={{ xs: "50%", md: "100%" }}>
               <img
-                src="https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/001/955/original/hangman.png"
+                src="hangman-illustration/10.svg"
                 alt="hangman"
-                width="250px"
+                style={{ objectFit: "contain" }}
               ></img>
-            </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={7} container direction="column">
+            <Box textAlign={{ xs: "center", md: "left" }}>
+              <Typography variant="h1" color="text.primary" mb={4}>
+                Hangman Game
+              </Typography>
+              <Typography variant="h4" color="text.disabled" mb={8} paragraph>
+                A simple hangman game created with Node.js Express and React.
+              </Typography>
+              <Button
+                data-testid="startButton"
+                onClick={createSession}
+                variant="contained"
+                disableRipple
+                sx={{ maxWidth: "300px" }}
+              >
+                <Box pt={1} pb={1.5} px={2}>
+                  <Typography variant="h3">start game</Typography>
+                </Box>
+              </Button>
+            </Box>
           </Grid>
         </Grid>
       </Box>
