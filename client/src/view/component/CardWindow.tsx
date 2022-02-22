@@ -9,7 +9,7 @@ export const CardWindow = ({ children }: CardWindowProps) => {
     <Box
       sx={{
         maxWidth: "960px",
-        display: "flex",
+        display: "flex-inline",
         backgroundColor: "background.paper",
         borderRadius: "2.5rem",
       }}
