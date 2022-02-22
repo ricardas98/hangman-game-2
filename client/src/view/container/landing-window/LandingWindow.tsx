@@ -60,7 +60,7 @@ export const LandingWindow = ({ setSession }: LandingWindowProps) => {
                 onClick={createSession}
                 variant="contained"
                 disableRipple
-                sx={{ maxWidth: "300px" }}
+                sx={{ maxWidth: "300px", textTransform: "lowercase" }}
               >
                 <Box pt={1} pb={1.5} px={2}>
                   <Typography variant="h3">start game</Typography>
