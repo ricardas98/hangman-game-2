@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { SessionGateway } from "gateway/api/SessionGateway";
 import { SessionD2BConverter } from "./converter/SessionD2BConverter";
 import { map } from "rxjs/operators";
+import BoundaryUpdateSessionInput from "use-case/api/entity/BoundarySessionUpdateInput";
 
 export class UpdateSessionInteractor implements UpdateSessionUseCase {
   private readonly gateway: SessionGateway;
@@ -14,9 +15,9 @@ export class UpdateSessionInteractor implements UpdateSessionUseCase {
     this.converter = converter;
   }
 
-  update(id: string, guess: string): Observable<BoundarySessionOutput> {
+  update(data: BoundaryUpdateSessionInput): Observable<BoundarySessionOutput> {
     return this.gateway
-      .update(id, guess)
+      .update(data.getSessionId(), data.getGuess())
       .pipe(map(s => this.converter.processData(s)));
   }
 }

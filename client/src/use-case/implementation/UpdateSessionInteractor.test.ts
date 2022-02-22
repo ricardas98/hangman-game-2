@@ -6,6 +6,7 @@ import { UpdateSessionInteractor } from "./UpdateSessionInteractor";
 import { SessionD2BConverter } from "./converter/SessionD2BConverter";
 import { of } from "rxjs";
 import { BoundarySessionOutput } from "../../use-case/api/entity/BoundarySessionOutput";
+import BoundaryUpdateSessionInput from "../../use-case/api/entity/BoundarySessionUpdateInput";
 
 describe("Update session interactor", () => {
   let interactor: UpdateSessionUseCase;
@@ -27,10 +28,12 @@ describe("Update session interactor", () => {
     );
     gateway.update.mockReturnValue(of(session));
 
-    interactor.update("123", "a").subscribe(s => {
-      expect(s).toEqual(boundarySession);
-      done();
-    });
+    interactor
+      .update(new BoundaryUpdateSessionInput("123", "a"))
+      .subscribe(s => {
+        expect(s).toEqual(boundarySession);
+        done();
+      });
   });
 
   function mockGateway() {
