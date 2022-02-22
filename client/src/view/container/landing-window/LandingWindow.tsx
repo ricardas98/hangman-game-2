@@ -56,7 +56,7 @@ export const LandingWindow = ({ setSession }: LandingWindowProps) => {
                 A simple hangman game created with Node.js Express and React.
               </Typography>
               <Button
-                data-testid="startButton"
+                data-testid="StartButton"
                 onClick={createSession}
                 variant="contained"
                 disableRipple
