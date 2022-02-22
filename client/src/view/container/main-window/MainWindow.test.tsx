@@ -28,11 +28,9 @@ describe("Main window", () => {
 })
 
 jest.mock('../landing-window/LandingWindow', () => ({
-    __esModule: true,
     LandingWindow: () => <div data-testid="LandingWindow" />
 }));
 
 jest.mock('../game-window/GameWindow', () => ({
-    __esModule: true,
     GameWindow: () => <div data-testid="GameWindow" />
 }));
