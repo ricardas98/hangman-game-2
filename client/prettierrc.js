@@ -5,4 +5,5 @@ module.exports = {
   bracketSpacing: false,
   arrowParens: "avoid",
   jsxBracketSameLine: true,
+  semi: true,
 };

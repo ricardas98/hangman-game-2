@@ -1,6 +1,6 @@
-import { deleteSessionController } from "Configuration"
+import { deleteSessionController } from "../../../Configuration"
 import { ViewSession } from "controller/model/ViewSession"
-import { useDeleteSessionWindow } from "./useDeleteSessionWindow"
+import { useDeleteSessionWindow } from "./useSessionDeleteWindow"
 
 interface DeleteSessionWindowProps {
     id: string,
@@ -11,5 +11,5 @@ export const DeleteSessionWindow = ({id, setSession} : DeleteSessionWindowProps)
 
     const deleteSession = useDeleteSessionWindow(deleteSessionController, setSession)
 
-    return <button onClick={() => {deleteSession(id)}}>Quit</button>
+    return <button data-testid="DeleteButton" onClick={() => {deleteSession(id)}}>Quit</button>
 }

@@ -27,9 +27,6 @@ describe("Delete session controller", () => {
   }
 
   function initController() {
-    controller = new DeleteSessionController(
-      useCase,
-      new SessionB2VConverter()
-    );
+    controller = new DeleteSessionController(useCase);
   }
 });
