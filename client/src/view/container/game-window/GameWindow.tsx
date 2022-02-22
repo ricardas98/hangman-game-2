@@ -23,7 +23,7 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
   function renderKeys(row: string[], index: number): JSX.Element {
     return (
       <div data-testid={`Row-${index}`} key={`Row-${index}`}>
-        {row.map((k, index) => (
+        {row.map(k => (
           <button
             data-testid={`Key-${k}`}
             key={`Key-${k}`}
