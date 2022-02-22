@@ -17,16 +17,16 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
   ];
 
   function shouldBeDisabled(k: string): boolean {
-    return session.misses.concat(session.matches).includes(k) ? true : false;
+    return session.misses.concat(session.matches).includes(k);
   }
 
   function renderKeys(row: string[], index: number): JSX.Element {
     return (
-      <div key={index}>
-        {row.map((k, index) => (
+      <div data-testid={`Row-${index}`} key={`Row-${index}`}>
+        {row.map(k => (
           <button
-            data-testid={`${k}Key`}
-            key={index}
+            data-testid={`Key-${k}`}
+            key={`Key-${k}`}
             disabled={shouldBeDisabled(k)}
             onClick={() => updateGame(session.id, k)}
           >
@@ -39,9 +39,9 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
 
   return (
     <div>
-      <p data-testid="sessionId">{session.id}</p>
-      <h1 data-testid="sessionResultWord">{session.resultWord}</h1>
-      <div className="keyboard">
+      <p data-testid="SessionId">{session.id}</p>
+      <h1 data-testid="SessionResultWord">{session.resultWord}</h1>
+      <div className="Keyboard">
         {keyboard.map((row, index) => renderKeys(row, index))}
       </div>
       <DeleteSessionWindow id={session.id} setSession={setSession} />
