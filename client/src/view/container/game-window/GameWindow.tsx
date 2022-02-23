@@ -4,7 +4,7 @@ import { updateSessionController } from "../../../Configuration";
 import { ViewSession } from "../../../controller/model/ViewSession";
 import { DeleteSessionWindow } from "../session-delete-window/DeleteSessionWindow";
 import { useGameWindow } from "./useGameWindow";
-import { grey } from "@mui/material/colors";
+
 import { useState } from "react";
 import { ModalWindow } from "view/component/ModalWindow";
 
@@ -41,15 +41,15 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
   function renderKeys(row: string[], index: number): JSX.Element {
     return (
       <Grid
+        data-testid={`Row-${index}`}
         item
         container
         justifyContent="center"
         alignItems="center"
-        data-testid={`Row-${index}`}
-        mb={1}
+        spacing={0.8}
       >
         {row.map(k => (
-          <Box key={`Key-${k}`} mx={0.5}>
+          <Grid item key={`Key-${k}`}>
             <Button
               data-testid={`Key-${k}`}
               onClick={() => {
@@ -63,7 +63,7 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
                 <Typography variant="h4">{k}</Typography>
               </Box>
             </Button>
-          </Box>
+          </Grid>
         ))}
       </Grid>
     );
@@ -114,7 +114,7 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
     return (
       <Typography
         data-testid="SessionResultWord"
-        variant="h2"
+        variant="h3"
         textAlign={"center"}
         letterSpacing="1rem"
         textTransform={"uppercase"}
@@ -127,13 +127,22 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
 
   function renderSessionId(): JSX.Element {
     return (
-      <Typography
-        data-testid="SessionId"
-        color="text.disabled"
-        variant="caption"
-      >
-        Session ID: {session.id}
-      </Typography>
+      <Box display="flex" flexDirection="column">
+        <Typography
+          data-testid="SessionId"
+          color="text.disabled"
+          variant="caption"
+        >
+          Session ID:
+        </Typography>
+        <Typography
+          data-testid="SessionId"
+          color="text.disabled"
+          variant="caption"
+        >
+          {session.id}
+        </Typography>
+      </Box>
     );
   }
 
@@ -173,57 +182,47 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
   }
 
   return (
-    <Box
-      px={4}
-      sx={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "background.default",
-      }}
-    >
-      <Box width="100%">
-        <Grid container alignItems="center" justifyContent="center" spacing={2}>
-          <Grid item xs={12}>
-            <CardWindow borderRadius={1} py={3} px={3}>
-              <Grid
-                container
-                alignItems={"center"}
-                justifyContent="space-between"
-              >
-                <Grid item xs="auto" container spacing={2}>
-                  <Grid item>{renderRestartBtn()}</Grid>
-                  <Grid item>{renderQuitBtn()}</Grid>
-                </Grid>
-                <Grid item xs="auto">
-                  {renderSessionId()}
-                </Grid>
-              </Grid>
-            </CardWindow>
-          </Grid>
-          <Grid item xs={12}>
-            <CardWindow borderRadius={1} py={6} px={3}>
-              <Grid container>
-                <Grid item xs={12}>
-                  {renderHangmanIllustration()}
-                </Grid>
-                <Grid item xs={12} container spacing={4}>
-                  <Grid item xs={12}>
-                    <Box>{renderResultWord()}</Box>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Box data-testid="Keyboard">
-                      {keyboard.map((row, index) => renderKeys(row, index))}
-                    </Box>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </CardWindow>
-          </Grid>
+    <Grid container alignItems="center" justifyContent="center" spacing={2}>
+      <Grid item xs={12} container spacing={2} direction="row-reverse">
+        <Grid item xs={12} md={4}>
+          <CardWindow borderRadius={1} py={3} px={3}>
+            {renderSessionId()}
+          </CardWindow>
         </Grid>
-        {getQuitModal()}
-      </Box>
-    </Box>
+        <Grid item xs={12} md={8}>
+          <CardWindow borderRadius={1} py={3} px={3}>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item>{renderRestartBtn()}</Grid>
+              <Grid item>{renderQuitBtn()}</Grid>
+            </Grid>
+          </CardWindow>
+        </Grid>
+      </Grid>
+      <Grid item xs={12}>
+        <CardWindow borderRadius={1} py={6} px={3}>
+          <Grid container>
+            <Grid item xs={12}>
+              {renderHangmanIllustration()}
+            </Grid>
+            <Grid item xs={12} container spacing={4}>
+              <Grid item xs={12}>
+                <Box>{renderResultWord()}</Box>
+              </Grid>
+              <Grid
+                data-testid="Keyboard"
+                item
+                xs={12}
+                container
+                justifyContent="center"
+                spacing={1.2}
+              >
+                {keyboard.map((row, index) => renderKeys(row, index))}
+              </Grid>
+            </Grid>
+          </Grid>
+        </CardWindow>
+      </Grid>
+      {getQuitModal()}
+    </Grid>
   );
 };
