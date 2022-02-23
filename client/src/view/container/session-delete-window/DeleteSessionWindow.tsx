@@ -36,7 +36,7 @@ export const DeleteSessionWindow = ({
             data-testid="DeleteButton"
             onClick={() => closeModal()}
             variant="contained"
-            color="info"
+            color="secondary"
           >
             Resume
           </Button>

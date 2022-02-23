@@ -15,18 +15,22 @@ export const CardWindow = ({
 }: CardWindowProps) => {
   return (
     <Box
-      width={"100%"}
-      m="auto"
+      maxWidth="960px"
+      width="100%"
+      margin="auto"
       sx={{
-        maxWidth: "960px",
+        flexWrap: "wrap",
         display: "flex-inline",
         backgroundColor: "background.paper",
         borderRadius: `${borderRadius?.toString() || 2.5}rem`,
       }}
-      py={{ xs: py || 5 / 2, md: py || 10 }}
-      px={{ xs: px || 7 / 2, md: px || 14 }}
     >
-      {children}
+      <Box
+        py={{ xs: py || 5 / 2, md: py || 10 }}
+        px={{ xs: px || 7 / 2, md: px || 14 }}
+      >
+        {children}
+      </Box>
     </Box>
   );
 };

@@ -6,7 +6,7 @@ export const Footer = () => {
     <Box
       data-testid="Footer"
       px={4}
-      mt={4}
+      width="100vw"
       sx={{
         minHeight: "150px",
         display: "flex",
@@ -15,7 +15,7 @@ export const Footer = () => {
         backgroundColor: "text.primary",
       }}
     >
-      <Box width="960px">
+      <Box maxWidth="960px" width="100%">
         <Grid container justifyContent="space-between" alignItems="flex-start">
           <Grid item>
             <Typography color="text.disabled">Hangman Game</Typography>

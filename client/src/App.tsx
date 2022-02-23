@@ -7,7 +7,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <MainWindow />
-      <Footer />
+      {/* <Footer /> */}
     </ThemeProvider>
   );
 }
