@@ -12,14 +12,14 @@ export const Footer = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "secondary.main",
+        backgroundColor: "text.primary",
       }}
     >
       <Box width="960px">
         <Grid container justifyContent="space-between" alignItems="flex-start">
           <Grid item>
-            <Typography color="secondary.light">Hangman Game</Typography>
-            <Typography color="secondary.light">Ricardas, 2022</Typography>
+            <Typography color="text.disabled">Hangman Game</Typography>
+            <Typography color="text.disabled">Ricardas, 2022</Typography>
           </Grid>
           <Grid item>
             <Link
