@@ -11,25 +11,6 @@ interface LandingWindowProps {
 export const LandingWindow = ({ setSession }: LandingWindowProps) => {
   const createSession = useLandingWindow(createSessionController, setSession);
 
-  function getCardContents(): JSX.Element {
-    return (
-      <Grid
-        container
-        direction={{ xs: "row", md: "row-reverse" }}
-        alignItems="center"
-        justifyContent="center"
-        spacing={4}
-      >
-        <Grid item xs={12} md={5}>
-          {getHangmanImage()}
-        </Grid>
-        <Grid item xs={12} md={7} container direction="column">
-          {getPageInfo()}
-        </Grid>
-      </Grid>
-    );
-  }
-
   function getHangmanImage(): JSX.Element {
     return (
       <Box margin="auto" width={{ xs: "50%", md: "100%" }}>
@@ -85,17 +66,21 @@ export const LandingWindow = ({ setSession }: LandingWindowProps) => {
   }
 
   return (
-    <Box
-      px={4}
-      sx={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "background.default",
-      }}
-    >
-      <CardWindow>{getCardContents()}</CardWindow>
-    </Box>
+    <CardWindow>
+      <Grid
+        container
+        direction={{ xs: "row", md: "row-reverse" }}
+        alignItems="center"
+        justifyContent="center"
+        spacing={4}
+      >
+        <Grid item xs={12} md={5}>
+          {getHangmanImage()}
+        </Grid>
+        <Grid item xs={12} md={7} container direction="column">
+          {getPageInfo()}
+        </Grid>
+      </Grid>
+    </CardWindow>
   );
 };
