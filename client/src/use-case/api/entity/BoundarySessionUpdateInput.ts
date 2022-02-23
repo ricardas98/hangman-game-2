@@ -1,6 +1,6 @@
 export default class BoundaryUpdateSessionInput {
-  private sessionId: string;
-  private guess: string;
+  private readonly sessionId: string;
+  private readonly guess: string;
 
   constructor(sessionId: string, guess: string) {
     this.sessionId = sessionId;
