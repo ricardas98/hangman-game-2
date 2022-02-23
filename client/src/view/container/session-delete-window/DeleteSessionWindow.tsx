@@ -20,6 +20,34 @@ export const DeleteSessionWindow = ({
     setSession
   );
 
+  function renderResumeButton(): JSX.Element {
+    return (
+      <Button
+        data-testid="DeleteButton"
+        onClick={() => closeModal()}
+        variant="contained"
+        color="secondary"
+      >
+        Resume
+      </Button>
+    );
+  }
+
+  function renderQuitButton(): JSX.Element {
+    return (
+      <Button
+        data-testid="DeleteButton"
+        onClick={() => {
+          deleteSession(id);
+        }}
+        variant="contained"
+        color="error"
+      >
+        Quit
+      </Button>
+    );
+  }
+
   return (
     <Box>
       <Typography variant="h3" mb={4}>
@@ -31,28 +59,8 @@ export const DeleteSessionWindow = ({
         alignItems={"center"}
         spacing={2}
       >
-        <Grid item>
-          <Button
-            data-testid="DeleteButton"
-            onClick={() => closeModal()}
-            variant="contained"
-            color="secondary"
-          >
-            Resume
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button
-            data-testid="DeleteButton"
-            onClick={() => {
-              deleteSession(id);
-            }}
-            variant="contained"
-            color="error"
-          >
-            Quit
-          </Button>
-        </Grid>
+        <Grid item>{renderResumeButton()}</Grid>
+        <Grid item>{renderQuitButton()}</Grid>
       </Grid>
     </Box>
   );
