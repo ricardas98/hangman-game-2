@@ -2,7 +2,7 @@ import { createSessionController } from "../../../Configuration";
 import { useLandingWindow } from "./useLandingWindow";
 import { ViewSession } from "../../../controller/model/ViewSession";
 import { Box, Button, Grid, Typography } from "@mui/material";
-import { CardWindow } from "view/component/CardWindow";
+import { CardWindow } from "../../component/CardWindow";
 
 interface LandingWindowProps {
   setSession: (session: ViewSession | undefined) => void;

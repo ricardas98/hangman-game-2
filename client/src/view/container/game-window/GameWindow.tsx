@@ -1,5 +1,5 @@
 import { Button, Box, Grid, Typography } from "@mui/material";
-import { CardWindow } from "view/component/CardWindow";
+import { CardWindow } from "../../component/CardWindow";
 import { updateSessionController } from "../../../Configuration";
 import { ViewSession } from "../../../controller/model/ViewSession";
 import { DeleteSessionWindow } from "../session-delete-window/DeleteSessionWindow";
