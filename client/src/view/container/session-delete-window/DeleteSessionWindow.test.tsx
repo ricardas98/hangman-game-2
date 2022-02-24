@@ -33,9 +33,6 @@ describe("Delete session window", () => {
   });
 
   it("calls closeModal when the resume button is clicked" , () => {
-      jest
-      .spyOn(useDeleteSessionWindow, "useDeleteSessionWindow")
-      .mockReturnValue(setSession);
     render(
       <DeleteSessionWindow
         id="123"
