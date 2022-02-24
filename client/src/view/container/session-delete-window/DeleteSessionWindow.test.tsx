@@ -4,7 +4,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { DeleteSessionWindow } from "./DeleteSessionWindow";
-import * as useDeleteSessionWindow from "./useSessionDeleteWindow";
+import * as useDeleteSessionWindow from "./useDeleteSessionWindow";
 
 describe("Delete session window", () => {
   let setSession: jest.Mock;

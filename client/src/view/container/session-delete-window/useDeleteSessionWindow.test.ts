@@ -5,7 +5,7 @@ import { DeleteSessionController } from "controller/implementation/DeleteSession
 import { mock, MockProxy } from "jest-mock-extended";
 import { of } from "rxjs";
 import { renderHook } from "@testing-library/react-hooks";
-import { useDeleteSessionWindow } from "./useSessionDeleteWindow";
+import { useDeleteSessionWindow } from "./useDeleteSessionWindow";
 import { act } from "react-dom/test-utils";
 
 describe("Session delete window", () => {
