@@ -7,9 +7,15 @@ import { DeleteSessionWindow } from "./DeleteSessionWindow";
 import * as useDeleteSessionWindow from "./useSessionDeleteWindow";
 
 describe("Delete session window", () => {
-  it("displays button", () => {
-    const setSession = jest.fn();
-    const closeModal = jest.fn();
+  let setSession: jest.Mock;
+  let closeModal: jest.Mock;
+
+  beforeEach(()=>{
+     setSession = jest.fn();
+     closeModal = jest.fn();
+  })
+
+  it("displays buttons", () => {
 
     render(
       <DeleteSessionWindow
@@ -23,9 +29,7 @@ describe("Delete session window", () => {
     expect(screen.getByTestId("ResumeButton")).toBeInTheDocument();
   });
 
-  it("calls setSession when the button is clicked", () => {
-    const setSession = jest.fn();
-    const closeModal = jest.fn();
+  it("calls setSession when the quit button is clicked", () => {
     jest
       .spyOn(useDeleteSessionWindow, "useDeleteSessionWindow")
       .mockReturnValue(setSession);
@@ -41,4 +45,22 @@ describe("Delete session window", () => {
 
     expect(setSession).toBeCalled();
   });
+
+  it("calls closeModal when the resume button is clicked" , () => {
+      jest
+      .spyOn(useDeleteSessionWindow, "useDeleteSessionWindow")
+      .mockReturnValue(setSession);
+    render(
+      <DeleteSessionWindow
+        id="123"
+        setSession={setSession}
+        closeModal={closeModal}
+      />
+    );
+
+    fireEvent.click(screen.getByTestId("ResumeButton"));
+
+    expect(closeModal).toBeCalled();
+  });
+
 });
