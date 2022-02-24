@@ -15,20 +15,6 @@ describe("Delete session window", () => {
      closeModal = jest.fn();
   })
 
-  it("displays buttons", () => {
-
-    render(
-      <DeleteSessionWindow
-        id="123"
-        setSession={setSession}
-        closeModal={closeModal}
-      />
-    );
-
-    expect(screen.getByTestId("QuitButton")).toBeInTheDocument();
-    expect(screen.getByTestId("ResumeButton")).toBeInTheDocument();
-  });
-
   it("calls setSession when the quit button is clicked", () => {
     jest
       .spyOn(useDeleteSessionWindow, "useDeleteSessionWindow")
