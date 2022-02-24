@@ -1,14 +1,30 @@
+import { Box } from "@mui/material";
 import { useState } from "react";
 import { ViewSession } from "../../../controller/model/ViewSession";
 import { GameWindow } from "../game-window/GameWindow";
 import { LandingWindow } from "../landing-window/LandingWindow";
 
 export const MainWindow = () => {
-    const [session, setSession] = useState<ViewSession | undefined>(undefined);
+  const [session, setSession] = useState<ViewSession | undefined>(undefined);
 
-    return(
-        session === undefined
-        ? <LandingWindow setSession={setSession}/>
-        : <GameWindow session={session} setSession={setSession}/>
-    );
-}
+  return (
+    <Box
+      sx={{
+        minHeight: "100vh",
+        maxWidth: "960px",
+        margin: "auto",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "background.default",
+      }}
+      px={2}
+    >
+      {session === undefined ? (
+        <LandingWindow setSession={setSession} />
+      ) : (
+        <GameWindow session={session} setSession={setSession} />
+      )}
+    </Box>
+  );
+};

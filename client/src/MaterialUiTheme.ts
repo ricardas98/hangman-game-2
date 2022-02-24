@@ -9,7 +9,7 @@ export const theme = createTheme({
       dark: "#de451b",
     },
     secondary: {
-      main: "#231f20",
+      main: "#dcdde0",
     },
     background: {
       paper: "#ffffff",
@@ -19,6 +19,14 @@ export const theme = createTheme({
       primary: "#231f20",
       secondary: "#f5f6f8",
       disabled: "#8d9297",
+    },
+    error: {
+      main: "#ed382b",
+      dark: "#e0372b",
+    },
+    success: {
+      main: "#86e043",
+      dark: "#80cc47",
     },
     divider: "#8d9297",
   },
@@ -61,19 +69,25 @@ export const theme = createTheme({
       letterSpacing: "0.2rem",
     },
     caption: {
-      fontSize: "1rem",
-      letterSpacing: "0.2rem",
+      fontSize: "0.8rem",
+      letterSpacing: "0.1rem",
       textTransform: "uppercase",
     },
     button: {
       fontFamily: "Stick",
       fontWeight: 800,
       fontSize: "1.1rem",
-      textTransform: "lowercase",
     },
   },
   shape: {
     borderRadius: 10,
   },
   shadows: Array(25).fill("none") as Shadows,
+  components: {
+    MuiButton: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
+  },
 });

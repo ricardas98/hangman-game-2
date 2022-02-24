@@ -2,7 +2,7 @@ import { createSessionController } from "../../../Configuration";
 import { useLandingWindow } from "./useLandingWindow";
 import { ViewSession } from "../../../controller/model/ViewSession";
 import { Box, Button, Grid, Typography } from "@mui/material";
-import { CardWindow } from "view/component/CardWindow";
+import { CardWindow } from "../../component/CardWindow";
 
 interface LandingWindowProps {
   setSession: (session: ViewSession | undefined) => void;
@@ -11,26 +11,7 @@ interface LandingWindowProps {
 export const LandingWindow = ({ setSession }: LandingWindowProps) => {
   const createSession = useLandingWindow(createSessionController, setSession);
 
-  function getCardContents(): JSX.Element {
-    return (
-      <Grid
-        container
-        direction={{ xs: "row", md: "row-reverse" }}
-        alignItems="center"
-        justifyContent="center"
-        spacing={4}
-      >
-        <Grid item xs={12} md={5}>
-          {getHangmanImage()}
-        </Grid>
-        <Grid item xs={12} md={7} container direction="column">
-          {getPageInfo()}
-        </Grid>
-      </Grid>
-    );
-  }
-
-  function getHangmanImage(): JSX.Element {
+  function renderHangmanImage(): JSX.Element {
     return (
       <Box margin="auto" width={{ xs: "50%", md: "100%" }}>
         <img
@@ -42,17 +23,17 @@ export const LandingWindow = ({ setSession }: LandingWindowProps) => {
     );
   }
 
-  function getPageInfo(): JSX.Element {
+  function renderPageInfo(): JSX.Element {
     return (
       <Box textAlign={{ xs: "center", md: "left" }}>
-        {getTitle()}
-        {getSubtitle()}
-        {getButton()}
+        {renderTitle()}
+        {renderSubtitle()}
+        {renderButton()}
       </Box>
     );
   }
 
-  function getTitle(): JSX.Element {
+  function renderTitle(): JSX.Element {
     return (
       <Typography variant="h1" color="text.primary" mb={4}>
         Hangman Game
@@ -60,7 +41,7 @@ export const LandingWindow = ({ setSession }: LandingWindowProps) => {
     );
   }
 
-  function getSubtitle(): JSX.Element {
+  function renderSubtitle(): JSX.Element {
     return (
       <Typography variant="h4" color="text.disabled" mb={8} paragraph>
         A simple hangman game created with Node.js Express and React.
@@ -68,7 +49,7 @@ export const LandingWindow = ({ setSession }: LandingWindowProps) => {
     );
   }
 
-  function getButton(): JSX.Element {
+  function renderButton(): JSX.Element {
     return (
       <Button
         data-testid="StartButton"
@@ -85,17 +66,21 @@ export const LandingWindow = ({ setSession }: LandingWindowProps) => {
   }
 
   return (
-    <Box
-      px={4}
-      sx={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "background.default",
-      }}
-    >
-      <CardWindow>{getCardContents()}</CardWindow>
-    </Box>
+    <CardWindow>
+      <Grid
+        container
+        direction={{ xs: "row", md: "row-reverse" }}
+        alignItems="center"
+        justifyContent="center"
+        spacing={4}
+      >
+        <Grid item xs={12} md={5}>
+          {renderHangmanImage()}
+        </Grid>
+        <Grid item xs={12} md={7} container direction="column">
+          {renderPageInfo()}
+        </Grid>
+      </Grid>
+    </CardWindow>
   );
 };
