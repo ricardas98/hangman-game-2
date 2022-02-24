@@ -38,7 +38,53 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
     return session.misses.includes(k.toLowerCase()) ? "error" : "secondary";
   }
 
-  function renderKeys(row: string[], index: number): JSX.Element {
+  function renderIdCard(): JSX.Element {
+    return(
+      <CardWindow borderRadius={1} py={3} px={3}>
+        {renderSessionId()}
+      </CardWindow>
+    )
+  }
+
+  function renderMenuCard(): JSX.Element {
+    return(          
+    <CardWindow borderRadius={1} py={3} px={3}>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item>{renderRestartBtn()}</Grid>
+        <Grid item>{renderQuitBtn()}</Grid>
+      </Grid>
+    </CardWindow>
+    )
+  }
+
+  function renderGameCard(): JSX.Element {
+    return (
+      <CardWindow borderRadius={1} py={6} px={3}>
+          <Grid container>
+            <Grid item xs={12}>
+              {renderHangmanIllustration()}
+            </Grid>
+            <Grid item xs={12} container spacing={4}>
+              <Grid item xs={12}>
+                <Box>{renderResultWord()}</Box>
+              </Grid>
+              <Grid
+                data-testid="Keyboard"
+                item
+                xs={12}
+                container
+                justifyContent="center"
+                spacing={1.2}
+              >
+                {keyboard.map((row, index) => renderKeyboardRow(row, index))}
+              </Grid>
+            </Grid>
+          </Grid>
+        </CardWindow>
+    )
+  }
+
+  function renderKeyboardRow(row: string[], index: number): JSX.Element {
     return (
       <Grid
         data-testid={`Row-${index}`}
@@ -51,23 +97,29 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
       >
         {row.map(k => (
           <Grid item key={`Key-${k}`}>
-            <Button
-              data-testid={`Key-${k}`}
-              onClick={() => {
-                isAbleToSendRequest(k) && updateGame(session.id, k);
-              }}
-              color={getColor(k)}
-              variant="contained"
-              size="small"
-            >
-              <Box py={1}>
-                <Typography variant="h4">{k}</Typography>
-              </Box>
-            </Button>
+            {renderKey(k)}
           </Grid>
         ))}
       </Grid>
     );
+  }
+
+  function renderKey(key: string): JSX.Element{
+    return (
+      <Button
+      data-testid={`Key-${key}`}
+      onClick={() => {
+        isAbleToSendRequest(key) && updateGame(session.id, key);
+      }}
+      color={getColor(key)}
+      variant="contained"
+      size="small"
+    >
+      <Box py={1}>
+        <Typography variant="h4">{key}</Typography>
+      </Box>
+    </Button>
+    )
   }
 
   function renderRestartBtn(): JSX.Element {
@@ -137,7 +189,6 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
           Session ID:
         </Typography>
         <Typography
-          
           color="text.disabled"
           variant="caption"
         >
@@ -154,7 +205,7 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
   const handleQuitModalOpen = () => setOpenQuitModal(true);
   const handleQuitModalClose = () => setOpenQuitModal(false);
 
-  function getQuitModal(): JSX.Element {
+  function getModal(): JSX.Element {
     return (
       <Modal
         open={openQuitModal}
@@ -186,44 +237,16 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
     <Grid container alignItems="center" justifyContent="center" spacing={2}>
       <Grid item xs={12} container spacing={2} direction="row-reverse">
         <Grid item xs={12} md={4}>
-          <CardWindow borderRadius={1} py={3} px={3}>
-            {renderSessionId()}
-          </CardWindow>
+          {renderIdCard()}
         </Grid>
         <Grid item xs={12} md={8}>
-          <CardWindow borderRadius={1} py={3} px={3}>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item>{renderRestartBtn()}</Grid>
-              <Grid item>{renderQuitBtn()}</Grid>
-            </Grid>
-          </CardWindow>
+          {renderMenuCard()}
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <CardWindow borderRadius={1} py={6} px={3}>
-          <Grid container>
-            <Grid item xs={12}>
-              {renderHangmanIllustration()}
-            </Grid>
-            <Grid item xs={12} container spacing={4}>
-              <Grid item xs={12}>
-                <Box>{renderResultWord()}</Box>
-              </Grid>
-              <Grid
-                data-testid="Keyboard"
-                item
-                xs={12}
-                container
-                justifyContent="center"
-                spacing={1.2}
-              >
-                {keyboard.map((row, index) => renderKeys(row, index))}
-              </Grid>
-            </Grid>
-          </Grid>
-        </CardWindow>
+        {renderGameCard()}
       </Grid>
-      {getQuitModal()}
+      {getModal()}
     </Grid>
   );
 };
