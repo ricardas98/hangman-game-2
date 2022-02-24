@@ -6,7 +6,7 @@ import { DeleteSessionWindow } from "../session-delete-window/DeleteSessionWindo
 import { useGameWindow } from "./useGameWindow";
 
 import { useState } from "react";
-import { ModalWindow } from "view/component/ModalWindow";
+import { ModalWindow } from "../../component/ModalWindow";
 
 interface GameWindowProps {
   session: ViewSession;
@@ -42,6 +42,7 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
     return (
       <Grid
         data-testid={`Row-${index}`}
+        key={`Row-${index}`}
         item
         container
         justifyContent="center"
@@ -72,7 +73,7 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
   function renderRestartBtn(): JSX.Element {
     return (
       //TODO ONCLICK
-      <Button variant="contained" color="inherit">
+      <Button data-testid="RestartButton" variant="contained" color="inherit">
         Restart
       </Button>
     );
@@ -81,6 +82,7 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
   function renderQuitBtn(): JSX.Element {
     return (
       <Button
+        data-testid="QuitButton"
         variant="contained"
         onClick={() => {
           handleQuitModalOpen();
@@ -127,16 +129,15 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
 
   function renderSessionId(): JSX.Element {
     return (
-      <Box display="flex" flexDirection="column">
+      <Box data-testid="SessionId" display="flex" flexDirection="column">
         <Typography
-          data-testid="SessionId"
           color="text.disabled"
           variant="caption"
         >
           Session ID:
         </Typography>
         <Typography
-          data-testid="SessionId"
+          
           color="text.disabled"
           variant="caption"
         >

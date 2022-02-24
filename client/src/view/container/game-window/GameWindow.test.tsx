@@ -16,12 +16,13 @@ describe("Game window", () => {
   it("renders game window", () => {
     render(<GameWindow session={session} setSession={setSession} />);
 
-    expect(screen.getByTestId("SessionId").textContent).toBe("123");
+    expect(screen.getByTestId("SessionId").textContent).toBe("Session ID:123");
     expect(screen.getByTestId("SessionResultWord").textContent).toBe("____");
     expect(screen.getByTestId("Key-Q").textContent).toBe("Q");
     expect(screen.getByTestId("Key-A").textContent).toBe("A");
     expect(screen.getByTestId("Key-Z").textContent).toBe("Z");
-    expect(screen.getByTestId("DeleteSessionWindow")).toBeInTheDocument();
+    expect(screen.getByTestId("QuitButton")).toBeInTheDocument();
+    expect(screen.getByTestId("RestartButton")).toBeInTheDocument();
   });
 
   it("calls setSession when keyboard button is clicked", () => {

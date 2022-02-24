@@ -2,7 +2,6 @@ import { deleteSessionController } from "../../../Configuration";
 import { ViewSession } from "controller/model/ViewSession";
 import { useDeleteSessionWindow } from "./useSessionDeleteWindow";
 import { Box, Button, Grid, Typography } from "@mui/material";
-import { CardWindow } from "view/component/CardWindow";
 
 interface DeleteSessionWindowProps {
   id: string;
@@ -23,7 +22,7 @@ export const DeleteSessionWindow = ({
   function renderResumeButton(): JSX.Element {
     return (
       <Button
-        data-testid="DeleteButton"
+        data-testid="ResumeButton"
         onClick={() => closeModal()}
         variant="contained"
         color="secondary"
@@ -36,7 +35,7 @@ export const DeleteSessionWindow = ({
   function renderQuitButton(): JSX.Element {
     return (
       <Button
-        data-testid="DeleteButton"
+        data-testid="QuitButton"
         onClick={() => {
           deleteSession(id);
         }}

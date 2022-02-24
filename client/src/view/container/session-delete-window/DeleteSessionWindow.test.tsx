@@ -19,7 +19,8 @@ describe("Delete session window", () => {
       />
     );
 
-    expect(screen.getByTestId("DeleteButton")).toBeInTheDocument();
+    expect(screen.getByTestId("QuitButton")).toBeInTheDocument();
+    expect(screen.getByTestId("ResumeButton")).toBeInTheDocument();
   });
 
   it("calls setSession when the button is clicked", () => {
@@ -36,7 +37,7 @@ describe("Delete session window", () => {
       />
     );
 
-    fireEvent.click(screen.getByTestId("DeleteButton"));
+    fireEvent.click(screen.getByTestId("QuitButton"));
 
     expect(setSession).toBeCalled();
   });
