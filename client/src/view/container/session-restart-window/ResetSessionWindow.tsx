@@ -3,21 +3,21 @@ import { ViewSession } from "controller/model/ViewSession";
 import { useResetSessionWindow } from "./useResetSessionWindow";
 
 interface ResetSessionWindowProps {
-    id: string,
+    session: ViewSession,
     setSession: (session: ViewSession | undefined) => void,
     closeModal: () => void
 }
 
 
 
-export const ResetSessionWindow = ({id, setSession, closeModal} : ResetSessionWindowProps) => {
-    const resetSession = useResetSessionWindow(deleteSessionController, createSessionController, setSession)
+export const ResetSessionWindow = ({session, setSession, closeModal} : ResetSessionWindowProps) => {
+    const resetSession = useResetSessionWindow(deleteSessionController, createSessionController, session, setSession)
 
     return(
         //TODO DESIGN
         <div>
             <button data-testid="ResumeButton" onClick={() => closeModal()}>Resume</button>
-            <button data-testid="RestartButton" onClick={() => resetSession(id)}>Restart</button>
+            <button data-testid="RestartButton" onClick={() => resetSession(session.id)}>Restart</button>
         </div>
     )
 }
