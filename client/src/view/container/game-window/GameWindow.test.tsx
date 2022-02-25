@@ -9,7 +9,7 @@ import * as useGameWindow from "./useGameWindow";
 
 describe("Game window", () => {
   const session = new ViewSession("123", 0, [], [], "____");
-  let setSession: jest.Mock<any, any>;
+  let setSession: jest.Mock;
 
   beforeEach(mockSetSession);
 
@@ -38,7 +38,3 @@ describe("Game window", () => {
     setSession = jest.fn();
   }
 });
-
-jest.mock("../session-delete-window/DeleteSessionWindow", () => ({
-  DeleteSessionWindow: () => <div data-testid="DeleteSessionWindow" />,
-}));

@@ -5,10 +5,10 @@ import { DeleteSessionController } from "controller/implementation/DeleteSession
 import { mock, MockProxy } from "jest-mock-extended";
 import { of } from "rxjs";
 import { renderHook } from "@testing-library/react-hooks";
-import { useDeleteSessionWindow } from "./useDeleteSessionWindow";
+import { useDeleteSessionButton } from "./useDeleteSessionButton";
 import { act } from "react-dom/test-utils";
 
-describe("Session delete window", () => {
+describe("Session delete button hook", () => {
   let controller: MockProxy<DeleteSessionController>;
   let setSession: jest.Mock;
 
@@ -20,7 +20,7 @@ describe("Session delete window", () => {
   it("deletes session", () => {
     controller.delete.mockReturnValue(of(true));
     const { result } = renderHook(() =>
-      useDeleteSessionWindow(controller, setSession)
+    useDeleteSessionButton(controller, setSession)
     );
 
     act(() => result.current("1"));
