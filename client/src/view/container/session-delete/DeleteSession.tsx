@@ -1,21 +1,15 @@
 import { deleteSessionController } from "../../../Configuration";
 import { ViewSession } from "controller/model/ViewSession";
-import { useDeleteSessionButton } from "./useDeleteSessionButton";
+import { useDeleteSession } from "./useDeleteSession";
 import { Button } from "@mui/material";
 
-interface DeleteSessionButtonProps {
+interface DeleteSessionProps {
   id: string;
   setSession: (session: ViewSession | undefined) => void;
 }
 
-export const DeleteSessionButton = ({
-  id,
-  setSession,
-}: DeleteSessionButtonProps) => {
-  const deleteSession = useDeleteSessionButton(
-    deleteSessionController,
-    setSession
-  );
+export const DeleteSession = ({ id, setSession }: DeleteSessionProps) => {
+  const deleteSession = useDeleteSession(deleteSessionController, setSession);
 
   return (
     <Button

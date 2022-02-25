@@ -1,7 +1,7 @@
 import { DeleteSessionController } from "controller/implementation/DeleteSessionController";
 import { ViewSession } from "controller/model/ViewSession";
 
-export function useDeleteSessionButton(
+export function useDeleteSession(
   controller: DeleteSessionController,
   setSession: (session: ViewSession | undefined) => void
 ): (id: string) => void {

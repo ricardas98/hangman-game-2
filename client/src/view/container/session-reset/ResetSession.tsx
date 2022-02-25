@@ -3,8 +3,8 @@ import {
   deleteSessionController,
 } from "../../../Configuration";
 import { ViewSession } from "controller/model/ViewSession";
-import { useResetSession } from "./useResetSession";
 import { Button } from "@mui/material";
+import { useResetSession } from "./useResetSession";
 
 interface ResetSessionProps {
   session: ViewSession;

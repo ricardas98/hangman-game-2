@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
+import { DeleteSession } from "../container/session-delete/DeleteSession";
 import { ViewSession } from "../../controller/model/ViewSession";
 import { ResumeButton } from "./ResumeButton";
-import { DeleteSessionButton } from "../container/session-delete-button/DeleteSessionButton";
 
 interface DeleteSessionDialogProps {
   id: string;
@@ -29,7 +29,7 @@ export const DeleteSessionDialog = ({
           <ResumeButton closeModal={closeModal} />
         </Grid>
         <Grid item>
-          <DeleteSessionButton id={id} setSession={setSession} />
+          <DeleteSession id={id} setSession={setSession} />
         </Grid>
       </Grid>
     </Box>

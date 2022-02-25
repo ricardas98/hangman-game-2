@@ -3,10 +3,10 @@
  */
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { DeleteSessionButton } from "./DeleteSessionButton";
-import * as useDeleteSessionButton from "./useDeleteSessionButton";
+import { DeleteSession } from "./DeleteSession";
+import * as useDeleteSession from "./useDeleteSession";
 
-describe("Delete session button", () => {
+describe("Delete session", () => {
   let setSession: jest.Mock;
 
   beforeEach(() => {
@@ -15,9 +15,9 @@ describe("Delete session button", () => {
 
   it("calls setSession when the quit button is clicked", () => {
     jest
-      .spyOn(useDeleteSessionButton, "useDeleteSessionButton")
+      .spyOn(useDeleteSession, "useDeleteSession")
       .mockReturnValue(setSession);
-    render(<DeleteSessionButton id="123" setSession={setSession} />);
+    render(<DeleteSession id="123" setSession={setSession} />);
 
     fireEvent.click(screen.getByTestId("QuitButton"));
 
