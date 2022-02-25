@@ -3,7 +3,7 @@ import { CreateSessionController } from "../../../controller/implementation/Crea
 import { DeleteSessionController } from "../../../controller/implementation/DeleteSessionController";
 import { ViewSession } from "../../../controller/model/ViewSession";
 
-export function useResetSessionButton (
+export function useResetSession (
     deleteController: DeleteSessionController,
     createController: CreateSessionController,
     session: ViewSession | undefined,

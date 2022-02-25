@@ -1,12 +1,12 @@
 /**
  * @jest-environment jsdom
  */
-import { ResetSessionButton } from "./ResetSessionButton";
-import * as useResetSessionButton from "./useResetSessionButton";
+import { ResetSession } from "./ResetSession";
+import * as useResetSession from "./useResetSession";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { ViewSession } from "../../../controller/model/ViewSession";
 
-describe("Reset session button", () => {
+describe("Reset session", () => {
   let setSession: jest.Mock;
   const session = new ViewSession("123", 0, [], [], "_____");
 
@@ -15,11 +15,9 @@ describe("Reset session button", () => {
   });
 
   it("displays component", () => {
-    jest
-      .spyOn(useResetSessionButton, "useResetSessionButton")
-      .mockReturnValue(setSession);
+    jest.spyOn(useResetSession, "useResetSession").mockReturnValue(setSession);
     render(
-      <ResetSessionButton
+      <ResetSession
         session={session}
         setSession={setSession}
         closeModal={jest.fn()}

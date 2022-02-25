@@ -1,5 +1,5 @@
 import { Grid, Box, Typography } from "@mui/material";
-import { ResetSessionButton } from "../container/session-reset-button/ResetSessionButton";
+import { ResetSession } from "../container/session-reset/ResetSession";
 import { ViewSession } from "../../controller/model/ViewSession";
 import { ResumeButton } from "./ResumeButton";
 
@@ -29,7 +29,7 @@ export const ResetSessionDialog = ({
           <ResumeButton closeModal={closeModal} />
         </Grid>
         <Grid item>
-          <ResetSessionButton
+          <ResetSession
             session={session}
             setSession={setSession}
             closeModal={closeModal}

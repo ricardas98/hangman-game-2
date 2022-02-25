@@ -3,31 +3,26 @@ import {
   deleteSessionController,
 } from "../../../Configuration";
 import { ViewSession } from "controller/model/ViewSession";
-import { useResetSessionButton } from "./useResetSessionButton";
-import { ResumeButton } from "../../component/ResumeButton";
+import { useResetSession } from "./useResetSession";
 import { Button } from "@mui/material";
 
-interface ResetSessionButtonProps {
+interface ResetSessionProps {
   session: ViewSession;
   setSession: (session: ViewSession | undefined) => void;
   closeModal: () => void;
 }
 
-export const ResetSessionButton = ({
+export const ResetSession = ({
   session,
   setSession,
   closeModal,
-}: ResetSessionButtonProps) => {
-  const resetSession = useResetSessionButton(
+}: ResetSessionProps) => {
+  const resetSession = useResetSession(
     deleteSessionController,
     createSessionController,
     session,
     setSession
   );
-
-  function renderResumeButton() {
-    return <ResumeButton closeModal={closeModal} />;
-  }
 
   return (
     <Button

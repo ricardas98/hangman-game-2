@@ -7,10 +7,10 @@ import { ViewSession } from "../../../controller/model/ViewSession";
 import { mock, MockProxy } from "jest-mock-extended"
 import { renderHook } from "@testing-library/react-hooks";
 import { of } from "rxjs";
-import { useResetSessionButton } from "./useResetSessionButton";
+import { useResetSession } from "./useResetSession";
 import { act } from "react-dom/test-utils";
 
-describe("Session reset button hook", () => {
+describe("Session reset hook", () => {
     let deleteController: MockProxy<DeleteSessionController>;
     let createController: MockProxy<CreateSessionController>;
     let setSession: jest.Mock;
@@ -27,7 +27,7 @@ describe("Session reset button hook", () => {
         deleteController.delete.mockReturnValue(of(true));
         createController.create.mockReturnValue(of(session));
         const { result } = renderHook(() =>
-        useResetSessionButton(deleteController, createController, oldSession, setSession)
+        useResetSession(deleteController, createController, oldSession, setSession)
         );
 
         act(()=> result.current("123"));
@@ -42,7 +42,7 @@ describe("Session reset button hook", () => {
         deleteController.delete.mockReturnValue(of(false));
         createController.create.mockReturnValue(of(session));
         const { result } = renderHook(() =>
-        useResetSessionButton(deleteController, createController, oldSession, setSession)
+        useResetSession(deleteController, createController, oldSession, setSession)
         );
 
         act(()=> result.current("123"));
