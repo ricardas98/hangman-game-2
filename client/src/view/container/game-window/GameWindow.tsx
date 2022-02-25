@@ -5,8 +5,9 @@ import { ViewSession } from "../../../controller/model/ViewSession";
 import { useGameWindow } from "./useGameWindow";
 import { useState } from "react";
 import { ModalWindow } from "../../component/ModalWindow";
-import { DeleteSessionDialog } from "../../component/DeleteSessionDialog";
-import { ResetSessionDialog } from "../../component/ResetSessionDialog";
+import { SessionDialog } from "../../component/SessionDialog";
+import { DeleteSession } from "../session-delete/DeleteSession";
+import { ResetSession } from "../session-reset/ResetSession";
 
 interface GameWindowProps {
   session: ViewSession;
@@ -131,9 +132,15 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
         onClick={() => {
           handleModalOpen();
           setModalComponent(
-            <ResetSessionDialog
-              session={session}
-              setSession={setSession}
+            <SessionDialog
+              title="Do you really want to restart?"
+              OK={
+                <ResetSession
+                  session={session}
+                  setSession={setSession}
+                  closeModal={handleModalClose}
+                />
+              }
               closeModal={handleModalClose}
             />
           );
@@ -152,9 +159,9 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
         onClick={() => {
           handleModalOpen();
           setModalComponent(
-            <DeleteSessionDialog
-              id={session.id}
-              setSession={setSession}
+            <SessionDialog
+              title="Do you really want to quit?"
+              OK={<DeleteSession id={session.id} setSession={setSession} />}
               closeModal={handleModalClose}
             />
           );

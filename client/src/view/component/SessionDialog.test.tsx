@@ -3,14 +3,14 @@
  */
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { DeleteSessionDialog } from "./DeleteSessionDialog";
+import { SessionDialog } from "./SessionDialog";
 
-describe("Delete session dialog", () => {
-  it("render button components", () => {
+describe("Session dialog", () => {
+  it("render button components (QuitButton)", () => {
     render(
-      <DeleteSessionDialog
-        id="123"
-        setSession={jest.fn()}
+      <SessionDialog
+        title="Do"
+        OK={getDeleteSession()}
         closeModal={jest.fn()}
       />
     );
@@ -18,4 +18,8 @@ describe("Delete session dialog", () => {
     expect(screen.getByTestId("ResumeButton")).toBeInTheDocument();
     expect(screen.getByTestId("QuitButton")).toBeInTheDocument();
   });
+
+  function getDeleteSession(): JSX.Element {
+    return <button data-testid="QuitButton"></button>;
+  }
 });
