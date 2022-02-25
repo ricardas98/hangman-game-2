@@ -1,6 +1,6 @@
 import { deleteSessionController } from "../../../Configuration";
 import { ViewSession } from "controller/model/ViewSession";
-import { useDeleteSessionWindow } from "./useSessionDeleteWindow";
+import { useDeleteSessionWindow } from "./useDeleteSessionWindow";
 import { Box, Button, Grid, Typography } from "@mui/material";
 
 interface DeleteSessionWindowProps {
