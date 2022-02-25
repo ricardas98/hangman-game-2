@@ -220,22 +220,13 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box
-          sx={{
-            minHeight: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <ModalWindow>
-            {modalComponent ? (
-              modalComponent
-            ) : (
-              <Typography variant="h6">failed to load modal</Typography>
-            )}
-          </ModalWindow>
-        </Box>
+        <ModalWindow>
+          {modalComponent ? (
+            modalComponent
+          ) : (
+            <Typography variant="h6">failed to load modal</Typography>
+          )}
+        </ModalWindow>
       </Modal>
     );
   }
