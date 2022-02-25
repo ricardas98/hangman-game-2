@@ -217,16 +217,18 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
       <Modal
         open={openModal}
         onClose={handleModalClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="modal-modal-dialog"
+        aria-describedby="modal-modal-game-dialog"
       >
-        <ModalWindow>
-          {modalComponent ? (
-            modalComponent
-          ) : (
-            <Typography variant="h6">failed to load modal</Typography>
-          )}
-        </ModalWindow>
+        <Box>
+          <ModalWindow>
+            {modalComponent ? (
+              modalComponent
+            ) : (
+              <Typography variant="h6">failed to load modal</Typography>
+            )}
+          </ModalWindow>
+        </Box>
       </Modal>
     );
   }
