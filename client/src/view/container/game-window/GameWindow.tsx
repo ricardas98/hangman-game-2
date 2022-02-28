@@ -2,11 +2,12 @@ import { Button, Box, Grid, Typography, Modal } from "@mui/material";
 import { CardWindow } from "../../component/CardWindow";
 import { updateSessionController } from "../../../Configuration";
 import { ViewSession } from "../../../controller/model/ViewSession";
-import { DeleteSessionWindow } from "../session-delete-window/DeleteSessionWindow";
 import { useGameWindow } from "./useGameWindow";
-
 import { useState } from "react";
 import { ModalWindow } from "../../component/ModalWindow";
+import { SessionDialog } from "../../component/SessionDialog";
+import { DeleteSession } from "../session-delete/DeleteSession";
+import { ResetSession } from "../session-reset/ResetSession";
 
 interface GameWindowProps {
   session: ViewSession;
@@ -39,49 +40,49 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
   }
 
   function renderIdCard(): JSX.Element {
-    return(
+    return (
       <CardWindow borderRadius={1} py={3} px={3}>
         {renderSessionId()}
       </CardWindow>
-    )
+    );
   }
 
   function renderMenuCard(): JSX.Element {
-    return(          
-    <CardWindow borderRadius={1} py={3} px={3}>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item>{renderRestartBtn()}</Grid>
-        <Grid item>{renderQuitBtn()}</Grid>
-      </Grid>
-    </CardWindow>
-    )
+    return (
+      <CardWindow borderRadius={1} py={3} px={3}>
+        <Grid container spacing={2} alignItems="center">
+          <Grid item>{renderRestartBtn()}</Grid>
+          <Grid item>{renderQuitBtn()}</Grid>
+        </Grid>
+      </CardWindow>
+    );
   }
 
   function renderGameCard(): JSX.Element {
     return (
       <CardWindow borderRadius={1} py={6} px={3}>
-          <Grid container>
+        <Grid container>
+          <Grid item xs={12}>
+            {renderHangmanIllustration()}
+          </Grid>
+          <Grid item xs={12} container spacing={4}>
             <Grid item xs={12}>
-              {renderHangmanIllustration()}
+              <Box>{renderResultWord()}</Box>
             </Grid>
-            <Grid item xs={12} container spacing={4}>
-              <Grid item xs={12}>
-                <Box>{renderResultWord()}</Box>
-              </Grid>
-              <Grid
-                data-testid="Keyboard"
-                item
-                xs={12}
-                container
-                justifyContent="center"
-                spacing={1.2}
-              >
-                {keyboard.map((row, index) => renderKeyboardRow(row, index))}
-              </Grid>
+            <Grid
+              data-testid="Keyboard"
+              item
+              xs={12}
+              container
+              justifyContent="center"
+              spacing={1.2}
+            >
+              {keyboard.map((row, index) => renderKeyboardRow(row, index))}
             </Grid>
           </Grid>
-        </CardWindow>
-    )
+        </Grid>
+      </CardWindow>
+    );
   }
 
   function renderKeyboardRow(row: string[], index: number): JSX.Element {
@@ -104,28 +105,47 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
     );
   }
 
-  function renderKey(key: string): JSX.Element{
+  function renderKey(key: string): JSX.Element {
     return (
       <Button
-      data-testid={`Key-${key}`}
-      onClick={() => {
-        isAbleToSendRequest(key) && updateGame(session.id, key);
-      }}
-      color={getColor(key)}
-      variant="contained"
-      size="small"
-    >
-      <Box py={1}>
-        <Typography variant="h4">{key}</Typography>
-      </Box>
-    </Button>
-    )
+        data-testid={`Key-${key}`}
+        onClick={() => {
+          isAbleToSendRequest(key) && updateGame(session.id, key);
+        }}
+        color={getColor(key)}
+        variant="contained"
+        size="small"
+      >
+        <Box py={1}>
+          <Typography variant="h4">{key}</Typography>
+        </Box>
+      </Button>
+    );
   }
 
   function renderRestartBtn(): JSX.Element {
     return (
-      //TODO ONCLICK
-      <Button data-testid="RestartButton" variant="contained" color="inherit">
+      <Button
+        data-testid="RestartButton"
+        variant="contained"
+        color="inherit"
+        onClick={() => {
+          handleModalOpen();
+          setModalComponent(
+            <SessionDialog
+              title="Do you really want to restart?"
+              confirmButton={
+                <ResetSession
+                  session={session}
+                  setSession={setSession}
+                  closeModal={handleModalClose}
+                />
+              }
+              closeModal={handleModalClose}
+            />
+          );
+        }}
+      >
         Restart
       </Button>
     );
@@ -137,12 +157,14 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
         data-testid="QuitButton"
         variant="contained"
         onClick={() => {
-          handleQuitModalOpen();
+          handleModalOpen();
           setModalComponent(
-            <DeleteSessionWindow
-              id={session.id}
-              setSession={setSession}
-              closeModal={handleQuitModalClose}
+            <SessionDialog
+              title="Do you really want to quit?"
+              confirmButton={
+                <DeleteSession id={session.id} setSession={setSession} />
+              }
+              closeModal={handleModalClose}
             />
           );
         }}
@@ -182,16 +204,10 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
   function renderSessionId(): JSX.Element {
     return (
       <Box data-testid="SessionId" display="flex" flexDirection="column">
-        <Typography
-          color="text.disabled"
-          variant="caption"
-        >
+        <Typography color="text.disabled" variant="caption">
           Session ID:
         </Typography>
-        <Typography
-          color="text.disabled"
-          variant="caption"
-        >
+        <Typography color="text.disabled" variant="caption">
           {session.id}
         </Typography>
       </Box>
@@ -201,26 +217,19 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
   const [modalComponent, setModalComponent] = useState<JSX.Element | undefined>(
     undefined
   );
-  const [openQuitModal, setOpenQuitModal] = useState(false);
-  const handleQuitModalOpen = () => setOpenQuitModal(true);
-  const handleQuitModalClose = () => setOpenQuitModal(false);
+  const [openModal, setOpenModal] = useState(false);
+  const handleModalOpen = () => setOpenModal(true);
+  const handleModalClose = () => setOpenModal(false);
 
   function getModal(): JSX.Element {
     return (
       <Modal
-        open={openQuitModal}
-        onClose={handleQuitModalClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        open={openModal}
+        onClose={handleModalClose}
+        aria-labelledby="modal-modal-dialog"
+        aria-describedby="modal-modal-game-dialog"
       >
-        <Box
-          sx={{
-            minHeight: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box>
           <ModalWindow>
             {modalComponent ? (
               modalComponent

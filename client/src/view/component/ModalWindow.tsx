@@ -8,15 +8,24 @@ export const ModalWindow = ({ children }: CardWindowProps) => {
   return (
     <Box
       sx={{
-        maxWidth: "960px",
-        display: "flex-inline",
-        backgroundColor: "background.paper",
-        borderRadius: "1.5rem",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
-      py={{ xs: 2, md: 5 }}
-      px={{ xs: 3, md: 7 }}
     >
-      {children}
+      <Box
+        sx={{
+          maxWidth: "960px",
+          display: "flex-inline",
+          backgroundColor: "background.paper",
+          borderRadius: "1.5rem",
+        }}
+        py={{ xs: 2, md: 5 }}
+        px={{ xs: 3, md: 7 }}
+      >
+        {children}
+      </Box>
     </Box>
   );
 };
