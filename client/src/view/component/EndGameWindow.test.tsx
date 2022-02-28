@@ -18,7 +18,7 @@ describe("End game window", () => {
 
     render(<EndGameWindow session={session1} setSession={jest.fn()} />);
 
-    expect(screen.getByTestId("EndGameTitle").textContent).toBe("You've Won!");
+    expect(screen.getByTestId("EndGameTitle").textContent).toBe("You Won!");
     expect(screen.getByTestId("EndGameWonSubtitle")).toBeInTheDocument();
     expect(screen.getByTestId("RestartButton")).toBeInTheDocument();
     expect(screen.getByTestId("QuitButton")).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe("End game window", () => {
 
     render(<EndGameWindow session={session1} setSession={jest.fn()} />);
 
-    expect(screen.getByTestId("EndGameTitle").textContent).toBe("You've Lost");
+    expect(screen.getByTestId("EndGameTitle").textContent).toBe("You Lost");
     expect(screen.getByTestId("EndGameWonSubtitle")).toBeInTheDocument();
     expect(screen.getByTestId("RestartButton")).toBeInTheDocument();
     expect(screen.getByTestId("QuitButton")).toBeInTheDocument();
