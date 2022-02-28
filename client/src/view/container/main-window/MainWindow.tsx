@@ -8,6 +8,14 @@ import { LandingWindow } from "../landing-window/LandingWindow";
 export const MainWindow = () => {
   const [session, setSession] = useState<ViewSession | undefined>(undefined);
 
+  function renderGameWindowBasedOnState(session: ViewSession): JSX.Element {
+    return session.state === 0 ? (
+      <GameWindow session={session} setSession={setSession} />
+    ) : (
+      <EndGameWindow session={session} setSession={setSession} />
+    );
+  }
+
   return (
     <Box
       sx={{
@@ -23,10 +31,8 @@ export const MainWindow = () => {
     >
       {session === undefined ? (
         <LandingWindow setSession={setSession} />
-      ) : session.state === 0 ? (
-        <GameWindow session={session} setSession={setSession} />
       ) : (
-        <EndGameWindow session={session} setSession={setSession} />
+        renderGameWindowBasedOnState(session)
       )}
     </Box>
   );
