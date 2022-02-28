@@ -10,7 +10,7 @@ describe("Session dialog", () => {
     render(
       <SessionDialog
         title="Do"
-        OK={getDeleteSession()}
+        confirmButton={getDeleteSession()}
         closeModal={jest.fn()}
       />
     );

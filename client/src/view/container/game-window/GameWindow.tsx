@@ -96,7 +96,7 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
         alignItems="center"
         spacing={0.8}
       >
-        {row.map((k) => (
+        {row.map(k => (
           <Grid item key={`Key-${k}`}>
             {renderKey(k)}
           </Grid>
@@ -134,7 +134,7 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
           setModalComponent(
             <SessionDialog
               title="Do you really want to restart?"
-              OK={
+              confirmButton={
                 <ResetSession
                   session={session}
                   setSession={setSession}
@@ -161,7 +161,9 @@ export const GameWindow = ({ session, setSession }: GameWindowProps) => {
           setModalComponent(
             <SessionDialog
               title="Do you really want to quit?"
-              OK={<DeleteSession id={session.id} setSession={setSession} />}
+              confirmButton={
+                <DeleteSession id={session.id} setSession={setSession} />
+              }
               closeModal={handleModalClose}
             />
           );

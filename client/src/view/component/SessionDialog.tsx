@@ -3,13 +3,13 @@ import { ResumeButton } from "./ResumeButton";
 
 interface SessionDialogProps {
   title: string;
-  OK: JSX.Element;
+  confirmButton: JSX.Element;
   closeModal: () => void;
 }
 
 export const SessionDialog = ({
   title,
-  OK,
+  confirmButton,
   closeModal,
 }: SessionDialogProps) => {
   return (
@@ -26,7 +26,7 @@ export const SessionDialog = ({
         <Grid item>
           <ResumeButton closeModal={closeModal} />
         </Grid>
-        <Grid item>{OK}</Grid>
+        <Grid item>{confirmButton}</Grid>
       </Grid>
     </Box>
   );
