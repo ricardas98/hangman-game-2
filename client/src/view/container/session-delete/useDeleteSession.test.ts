@@ -7,6 +7,7 @@ import { of } from "rxjs";
 import { renderHook } from "@testing-library/react-hooks";
 import { useDeleteSession } from "./useDeleteSession";
 import { act } from "react-dom/test-utils";
+import * as Snackbar from "notistack";
 
 describe("Session delete button hook", () => {
   let controller: MockProxy<DeleteSessionController>;
@@ -20,7 +21,7 @@ describe("Session delete button hook", () => {
   it("deletes session", () => {
     controller.delete.mockReturnValue(of(true));
     const { result } = renderHook(() =>
-    useDeleteSession(controller, setSession)
+      useDeleteSession(controller, setSession)
     );
 
     act(() => result.current("1"));
@@ -33,3 +34,7 @@ describe("Session delete button hook", () => {
     controller = mock<DeleteSessionController>();
   }
 });
+
+jest
+  .spyOn(Snackbar, "useSnackbar")
+  .mockReturnValue(mock<Snackbar.ProviderContext>());

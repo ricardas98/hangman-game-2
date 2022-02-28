@@ -41,3 +41,11 @@ describe("End game window", () => {
     expect(screen.getByTestId("QuitButton")).toBeInTheDocument();
   });
 });
+
+jest.mock("../container/session-reset/ResetSession", () => ({
+  ResetSession: () => <div data-testid="RestartButton" />,
+}));
+
+jest.mock("../container/session-delete/DeleteSession", () => ({
+  DeleteSession: () => <div data-testid="QuitButton" />,
+}));

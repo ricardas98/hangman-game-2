@@ -5,17 +5,12 @@ export function useObserver<T>(callback: (params: T) => void): Observer<T> {
   const { enqueueSnackbar } = useSnackbar();
 
   return {
-    next: (params: T) => {
-      callback(params);
-      console.log("callback invoked");
-    },
-    error: (err: Error) => {
+    next: (params: T) => callback(params),
+    error: () =>
       enqueueSnackbar("Internal server error", {
         preventDuplicate: true,
         variant: "error",
-      });
-      console.log("error invoked");
-    },
-    complete: () => console.log("Observer got a complete notification"),
+      }),
+    complete: () => {},
   };
 }
