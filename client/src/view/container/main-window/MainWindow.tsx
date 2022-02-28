@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import { useState } from "react";
+import { EndGameWindow } from "../../component/EndGameWindow";
 import { ViewSession } from "../../../controller/model/ViewSession";
 import { GameWindow } from "../game-window/GameWindow";
 import { LandingWindow } from "../landing-window/LandingWindow";
@@ -22,8 +23,10 @@ export const MainWindow = () => {
     >
       {session === undefined ? (
         <LandingWindow setSession={setSession} />
-      ) : (
+      ) : session.state === 0 ? (
         <GameWindow session={session} setSession={setSession} />
+      ) : (
+        <EndGameWindow session={session} setSession={setSession} />
       )}
     </Box>
   );
