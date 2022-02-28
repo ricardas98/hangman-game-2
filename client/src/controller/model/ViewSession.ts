@@ -9,7 +9,7 @@ export class ViewSession {
 
   constructor(
     id: string,
-    state: number,
+    state: GameState,
     matches: string[],
     misses: string[],
     resultWord: string
