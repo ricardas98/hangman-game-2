@@ -45,11 +45,7 @@ function renderButtons(
       spacing={4}
     >
       <Grid item>
-        <ResetSession
-          session={session}
-          setSession={setSession}
-          closeModal={() => {}}
-        />
+        <ResetSession session={session} setSession={setSession} />
       </Grid>
       <Grid item>
         <DeleteSession id={session.id} setSession={setSession} />

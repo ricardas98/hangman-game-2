@@ -9,7 +9,7 @@ import { useResetSession } from "./useResetSession";
 interface ResetSessionProps {
   session: ViewSession;
   setSession: (session: ViewSession | undefined) => void;
-  closeModal: () => void;
+  closeModal?: () => void;
 }
 
 export const ResetSession = ({
@@ -29,7 +29,7 @@ export const ResetSession = ({
       data-testid="RestartButton"
       onClick={() => {
         resetSession(session.id);
-        closeModal();
+        closeModal && closeModal();
       }}
       variant="contained"
       color="primary"
