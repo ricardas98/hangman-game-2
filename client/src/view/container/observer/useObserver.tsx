@@ -12,14 +12,13 @@ export function useObserver<T>(callback: (params: T) => void): Observer<T> {
   };
 
   function handleError(err: AjaxError) {
-    if (err.status === 500)
-      enqueueSnackbar("Internal server error", {
+    if (err.status === 404)
+      enqueueSnackbar("Session error", {
         preventDuplicate: true,
         variant: "error",
       });
-
-    if (err.status === 404)
-      enqueueSnackbar("Session error", {
+    else
+      enqueueSnackbar("Internal server error", {
         preventDuplicate: true,
         variant: "error",
       });
