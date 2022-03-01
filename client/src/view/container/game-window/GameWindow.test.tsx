@@ -14,6 +14,7 @@ describe("Game window", () => {
   beforeEach(mockSetSession);
 
   it("renders game window", () => {
+    jest.spyOn(useGameWindow, "useGameWindow").mockReturnValue(setSession);
     render(<GameWindow session={session} setSession={setSession} />);
 
     expect(screen.getByTestId("SessionId").textContent).toBe("Session ID:123");

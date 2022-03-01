@@ -20,7 +20,6 @@ export const ResetSession = ({
   const resetSession = useResetSession(
     deleteSessionController,
     createSessionController,
-    session,
     setSession
   );
 

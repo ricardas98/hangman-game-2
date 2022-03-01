@@ -6,7 +6,7 @@ export const Footer = () => {
     <Box
       data-testid="Footer"
       px={4}
-      width="100vw"
+      maxWidth="100vw"
       sx={{
         minHeight: "150px",
         display: "flex",

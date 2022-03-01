@@ -8,6 +8,7 @@ import { of } from "rxjs";
 import { renderHook } from "@testing-library/react-hooks";
 import { useGameWindow } from "./useGameWindow";
 import { act } from "react-dom/test-utils";
+import * as Snackbar from "notistack";
 
 describe("Game window hook", () => {
   let controller: MockProxy<UpdateSessionController>;
@@ -35,3 +36,7 @@ describe("Game window hook", () => {
     controller = mock<UpdateSessionController>();
   }
 });
+
+jest
+  .spyOn(Snackbar, "useSnackbar")
+  .mockReturnValue(mock<Snackbar.ProviderContext>());
