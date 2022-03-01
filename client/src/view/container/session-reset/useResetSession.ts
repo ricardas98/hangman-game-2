@@ -3,8 +3,6 @@ import { CreateSessionController } from "../../../controller/implementation/Crea
 import { DeleteSessionController } from "../../../controller/implementation/DeleteSessionController";
 import { ViewSession } from "../../../controller/model/ViewSession";
 import { useObserver } from "../observer/useObserver";
-import * as Snackbar from "notistack";
-import { mock } from "jest-mock-extended";
 
 export function useResetSession(
   deleteController: DeleteSessionController,
@@ -30,7 +28,3 @@ export function useResetSession(
   };
   return resetSession;
 }
-
-jest
-  .spyOn(Snackbar, "useSnackbar")
-  .mockReturnValue(mock<Snackbar.ProviderContext>());
