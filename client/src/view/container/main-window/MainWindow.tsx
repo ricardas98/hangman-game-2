@@ -28,7 +28,7 @@ export const MainWindow = () => {
         alignItems: "center",
         backgroundColor: "background.default",
       }}
-      px={2}
+      p={2}
     >
       {session === undefined ? (
         <LandingWindow setSession={setSession} />

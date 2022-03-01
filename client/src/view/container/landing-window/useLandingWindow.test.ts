@@ -8,6 +8,7 @@ import { mock, MockProxy } from "jest-mock-extended";
 import { ViewSession } from "../../../controller/model/ViewSession";
 import { of } from "rxjs";
 import { act } from "react-dom/test-utils";
+import * as Snackbar from "notistack";
 
 describe("Landing window hook", () => {
   let controller: MockProxy<CreateSessionController>;
@@ -37,3 +38,7 @@ describe("Landing window hook", () => {
     controller = mock<CreateSessionController>();
   }
 });
+
+jest
+  .spyOn(Snackbar, "useSnackbar")
+  .mockReturnValue(mock<Snackbar.ProviderContext>());
